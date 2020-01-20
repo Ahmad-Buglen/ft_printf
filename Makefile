@@ -12,26 +12,22 @@
 
 .PHONY: all clean fclean re
 
-SRC = draw.c keyboard.c init_cl.c mouse.c fractal.c
+SRC = ft_printf.c
 
 OBJ = $(SRC:.c=.o)
 
-NAME = fractal
+NAME = ft_printf
 
 LIB = libft/libft.a
 
-MLX = ./mlx/libmlx.a
-
-HEADER = ./includes/fractal.h
+HEADER = ./includes/ft_printf.h
 
 all: $(LIB) $(NAME)
 
 $(LIB):
 	make -C ./libft
-$(MLX):
-	make -C ./mlx
-$(NAME): $(MLX) $(OBJ) includes/fractal.h
-	gcc -Wall -Wextra -Werror -o $(NAME) -I $(HEADER) $(LIB) $(MLX) -lmlx -framework OpenGL -framework AppKit -framework OpenCL $(OBJ)
+$(NAME): $(OBJ) includes/ft_printf.h
+	gcc -Wall -Wextra -Werror -o $(NAME) -I $(HEADER) $(LIB) -lmlx $(OBJ)
 %.o: sources/%.c $(HEADER)
 	gcc -c $<
 clean:

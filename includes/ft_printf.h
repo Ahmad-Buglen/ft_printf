@@ -15,14 +15,19 @@ typedef struct s_printf
 {
   char        data[BUFF];
   int         i;
-  size_t      print_size;
+  int         print_size;
   t_bool      f_minus;
   t_bool      f_plus;
   t_bool      f_space;
   t_bool      f_lattice;
   t_bool      f_zero;
+  t_bool      format;
+  t_bool      f_prec;
+  t_bool      f_width;
   size_t      width;
   size_t      precision;
+  va_list     argptr
 }             t_printf;
+
 
 #endif
