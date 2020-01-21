@@ -15,122 +15,128 @@ void printf_init(t_printf *p)
 
 void print_c(t_printf *p)
 {
-  char c;
+  char  c;
+  char   buf;
 
-  c = va_arg(p->argptr, char);
-  // data release ? 
-  if (p->f_width)
+  c = (char)va_arg(p->argptr, int);
+  buf = (p->f_zero) ? '0' : ' ';
+  p->data[p->i++] = (p->f_minus) ? c : buf;
+  --p->width;
+  while (--p->width)
   {
-    if (p->f_minus)
-      p->data[p->i] = c;
-      p->i += 1;
-    while (p->f_width > 1)
-    {
-      p->data[p->i] = (p->f_zero) ? '0' : ' ';
-      p->i += 1;
-      p->f_width -= 1;
-    }
-    p->data[p->i] = (p->f_minus) ? p->data[p->i - 1] : c;
+    p->data[p->i] = buf;
+    ++p->i;
   }
-
+  p->data[p->i] = (p->f_minus) ? buf : c;
+  ++p->i;
 }
 
-int data_release(t_printf *p)
+void data_release(t_printf *p)
 {
-  p->print_size += p->i;
-  write(1, p->data, p->i);
-  p->i = 0;
+  if (p->i)
+  {
+    p->print_size += p->i;
+    write(1, p->data, p->i);
+    p->i = 0;
+  }
 }
 
-int  data_record(t_printf *p, char c)
+int  distribution(t_printf *p, char c)
 {
-  if (p->format)
-  {
-    if ('c' == c)
-      print_c(p);
-  }
-  else 
-  {
-    if (BUFF <= p->i + 1) // ?
-      data_release(p);
-    p->data[p->i] = c;
-    p->i += 1;
-  }
+  // c = \0 ?
+  if ('c' == c)
+    print_c(p);
+  if ('p' == c)
+    print_c(p);
   return 1;
 }
-
-int flags_check(t_printf *p, char *str, int *i)
+void  data_record(t_printf *p, char *str)
 {
-  while (('-' == str[*i]) || ('+' == str[*i]) || (' ' == str[*i]) ||
-                ('#' == str[*i]) || ('0' == str[*i]))
+  size_t length;
+
+  length = ft_strlen(str);
+  if (BUFF <= p->i + length) // ?
   {
-    if ('-' == str[*i]) 
-      p->f_minus = true;
-    if ('+' == str[*i]) 
-      p->f_plus = true;
-    if (' ' == str[*i]) 
-      p->f_space = true;
-    if ('#' == str[*i]) 
-      p->f_lattice = true;
-    if ('0' == str[*i]) 
-      p->f_zero = true;
-    ++(*i);
+    data_release(p);
+    if (BUFF < length)
+    {
+      write(1, str, length);
+      p->print_size += length;
+    }
+    else
+    {
+      ft_strcpy(p->data, str);
+      p->i += length;
+    }
   }
-  ft_putstr("flags_check\n");
-  ft_putnbr(*i);
-  write(1, "\n", 1);
+  else
+  {
+    ft_strcpy(p->data[p->i], str);
+    p->i += length;
+  }
 }
 
-int wid_and_prec_check(t_printf *p, char *str, int *i)
+void flags_check(t_printf *p, char *str)
 {
-  if (('0' >= str[*i]) && ('9' <= str[*i]))
+  while (('-' == str[p->j]) || ('+' == str[p->j]) ||
+    (' ' == str[p->j]) || ('#' == str[p->j]) || ('0' == str[p->j]))
   {
-    p->width = ft_atoi(str[*i]); // как обработать? 
+    p->f_minus = ('-' == str[p->j]) ? true : p->f_minus; 
+    p->f_plus = ('+' == str[p->j]) ? true : p->f_plus;
+    p->f_space = (' ' == str[p->j]) ? true : p->f_space;
+    p->f_lattice = ('#' == str[p->j]) ? true : p->f_lattice;
+    p->f_zero = ('0' == str[p->j]) ? true : p->f_zero;
+    ++p->j;
+  }
+  // ft_putstr("flags_check\n");
+  // ft_putnbr(p->j);
+  // write(1, "\n", 1);
+}
+
+void wid_and_prec_check(t_printf *p, char *str)
+{
+  if (('0' <= *(str + p->j)) && (*(str + p->j) <= '9'))
+  {
+    p->width = ft_atoi(str + p->j); // как обработать? 
     p->f_width = true;
-    while (('0' >= str[*i]) && ('9' <= str[*i]))
-      ++(*i);
+    while (('0' <= str[p->j]) && (str[p->j] <= '9'))
+      ++p->j;
   }
-  if ('.' == str[*i])
+  if ('.' == str[p->j])
   {
-    ++(*i);
-    p->precision = ft_atoi(str[*i]); // как обработать?
+    ++p->j;
+    p->precision = ft_atoi(str + p->j); // как обработать?
     p->f_prec = true;
-    while (('0' >= str[*i]) && ('9' <= str[*i]))
-      ++(*i);
+    while (('0' <= str[p->j]) && (str[p->j] <= '9'))
+      ++p->j;
   }
-  ft_putstr("wid_and_prec_check\n");
-  ft_putnbr(*i);
-  write(1, "\n", 1);
 }
 
-size_t parser(char *str, t_printf *p)
+void parser(char *str, t_printf *p)
 {
   size_t i;
 
-  i = 0;
+  p->j = 0;
   p->i = 0;
-  while (str[i])
+  while (str[p->j])
   {
-    if ('%' == str[i])
+    if ('%' == str[p->j])
     {
-      ft_putstr("parser 1 \n");
-      ft_putnbr(i);
-      write(1, "\n", 1);
-      flags_check(p, str, &i);
-      wid_and_prec_check(p, str, &i);
-      ft_putstr("parser 2 \n");
-      ft_putnbr(i);
-      write(1, "\n", 1);
+      ++p->j;
+      flags_check(p, str);
+      wid_and_prec_check(p, str);
       p->format = true;
+      distribution(p, (str[p->j]));
+      printf_init(p);
     }
-    data_record(p, (char )(str[i]));
-    printf_init(&p);
-    ++i;
+    else
+      data_record(p, str[p->j]);
+    ++p->j;
   }
 }
 
 
-int ft_printf(const char * format, ...)
+int ft_printf(char * format, ...)
 {
   t_printf p;
 
@@ -150,9 +156,13 @@ int ft_printf(const char * format, ...)
 
 int main(int ac, char **av)
 {
-  char c = 'c';
+  int c = 0;
   //ft_printf("%c %s %% ", 't', "strint");
-  // printf("1 %10c\n", c);
+  printf("%10.10000d\n", 10);
+   printf("%10.10f\n", 10.10);
+    printf("%10.10ld\n", 99999999999);
+     printf("%10.10s\n", "asdfasfasfasfasfasdfasdf");
+ // ft_printf("%1000000c\n", &c);
   // printf("2 %09c\n", c);
   // printf("3 %-7c\n", c);
   // printf("4 %+3c\n", c);
@@ -165,21 +175,21 @@ int main(int ac, char **av)
   // printf("11 %+021c\n", c);
   // printf("12 %#-23c\n", c);
 
-  // printf("---");
-  ft_printf("---");
+  //printf("---");
+  //ft_printf("---");
 
-  ft_printf("1 %10c\n", c);
-  ft_printf("2 %09c\n", c);
-  ft_printf("3 %-7c\n", c);
-  ft_printf("4 %+3c\n", c);
-  ft_printf("5 % 12c\n", c);
-  ft_printf("6 %#13c\n", c);
-  ft_printf("7 %033c\n", c);
-  ft_printf("8 %+-6c\n", c);
-  ft_printf("9 % #9c\n", c);
-  ft_printf("10 %0-10c\n", c);
-  ft_printf("11 %+021c\n", c);
-  ft_printf("12 %#-23c\n", c);
+  // ft_printf("1 %10c\n", c);
+  // ft_printf("2 %09c\n", c);
+  // ft_printf("3 %-7c\n", c);
+  // ft_printf("4 %+3c\n", c);
+  // ft_printf("5 % 12c\n", c);
+  // ft_printf("6 %#13c\n", c);
+  // ft_printf("7 %033c\n", c);
+  // ft_printf("8 %+-6c\n", c);
+  // ft_printf("9 % #9c\n", c);
+  // ft_printf("10 %0-10c\n", c);
+  // ft_printf("11 %+021c\n", c);
+  // ft_printf("12 %#-23c\n", c);
 
   return 0;
 }
