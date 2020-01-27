@@ -4,7 +4,7 @@
 # include <stdarg.h>
 # include "../libft/libft.h"
 
-# define BUFF 128
+# define BUFF 65536
 
 typedef enum  s_bool
 {
@@ -15,9 +15,11 @@ typedef enum  s_bool
 typedef struct s_printf
 {
   char        data[BUFF];
-  int         i;
-  int         j;
-  int         print_size;
+  char        temp[BUFF];
+  size_t      di;
+  size_t      ti;
+  size_t      fi;
+  size_t      print_size;
   t_bool      f_minus;
   t_bool      f_plus;
   t_bool      f_space;
