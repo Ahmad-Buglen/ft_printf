@@ -26,16 +26,17 @@ LIB = libft/libft.a
 
 HEADER = ./includes/ft_printf.h
 
-all: $(LIB) $(NAME) $(PFT) $(MAIN)
+all: $(LIB) $(NAME) $(MAIN)
 
 $(LIB):
 	make -C ./libft
-$(NAME): $(OBJ) $(LIB) includes/ft_printf.h
+$(NAME): $(OBJ) $(LIB)
 	ar rc $(NAME) $(OBJ)
 	make -C ./pft
-$(MAIN): $(NAME) includes/ft_printf.h 
+#libft/*.o
+$(MAIN): $(NAME) $(OBJ1)
 	gcc sources/main.c -o $(MAIN) $(LIB) -lmlx $(NAME)
-	./pft/test c 
+	./pft/test s
 	gcc -g sources/main.c sources/ft_printf.c -o ft_printf -lmlx  libft/libft.a libftprintf.a
 #-Wall -Wextra -Werror
 %.o: sources/%.c $(HEADER)

@@ -12,27 +12,34 @@ int main()//int ac, char **av)
 //      printf("%10.10s\n", "asdfasfasfasfasfasdfasdf");
 //  ft_printf("%1000000c\n", &c);
 
-    // printf("1 %10c\n", c);
-    // printf("2 %09c\n", c);
-    // printf("3 %-7c\n", c);
-    // printf("4 %+3c\n", c);
-    // printf("5 % 12c\n", c);
-    // printf("6 %#13c\n", c);
-    // printf("7 %033c\n", c);
-    // printf("8 %+-6c\n", c);
-    // printf("9 % #9c\n", c);
-    // printf("10 %0-10c\n", c);
-    // printf("11 %+021c\n", c);
-    // printf("12 %#-23c\n", c);
+    // fix it !
+    // printf("%-5c\n", c);
+    // ft_printf("%-5c\n", c);
+
 int i = 0;
+    ft_printf("%32s", "abc");
+
+    // printf("1 %10p\n", &c);
+    // printf("2 %09p\n", &c);
+    // printf("3 %-7p\n", &c);
+    // printf("4 %+3p\n", &c);
+    // printf("5 % 12p\n", &c);
+    // printf("6 %#13p\n", &c);
+    // printf("7 %033p\n", &c);
+    // printf("8 %+-6p\n", &c);
+    // printf("9 % #9p\n", &c);
+    // printf("10 %0-10p\n", &c);
+    // printf("11 %+021p\n", &c);
+    // printf("12 %#-23p\n", &c);
+
   //printf("---");
   // while (i < 100)
   // {
   //   printf("%p ", &l[i]);
   //   ++i;
-  // }
-  
-    printf("%d ", sizeof(int));  
+  // // }
+  //   printf("%p\n", &c);
+
   //ft_printf("%-2c%-3c%-4c%-1c%-2c%-3c", c, c, c, c, c, c);
   // printf("%+5c\n", c);
   // ft_printf("%-5c\n", c);

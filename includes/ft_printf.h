@@ -12,6 +12,7 @@ typedef enum  s_bool
               true = 1
 }             t_bool;
 
+
 typedef struct s_printf
 {
   char        data[BUFF];

@@ -45,6 +45,40 @@ void  data_record(t_printf *p)
 }
 
 
+
+
+ void print_s(t_printf *p)
+ {
+  char *str;
+  int  buf;
+  int length;
+
+  str = va_arg(p->argptr, char *);
+  length = ft_strlen(str);
+  p->width = (p->f_width) ? p->width : length ;
+  if ((p->f_prec) && (p->precision) && (p->f_width) && (p->precision > p->f_width))
+  {
+    p->width = length;
+    p->f_prec = false;
+  }
+  else if ((p->f_prec) && (p->precision))
+    length = p->precision;
+
+
+  if ((p->f_width) && (p->width > length) && (!p->f_minus))
+    while(p->width - (length + p->ti))
+      p->temp[p->ti++] = ' ';
+
+  ft_strncpy(p->temp + p->ti, str, length);
+  p->ti += length;
+
+  if ((p->f_width) && (p->width > length) && (p->f_minus)) //ti
+    while(p->width < p->ti)
+      p->temp[p->ti++] = ' ';
+  data_record(p);
+ }
+
+
 int ft_power(int n, int power)
 {
 	int rez;
@@ -74,9 +108,106 @@ int ft_ret(char c)
 	return(0);
 }
 
+static int			ft_count_p(long long c, int base)
+{
+	int				q;
+
+	q = 1;
+	while (c / base)
+	{
+		c = c / base;
+		q++;
+	}
+	return (q);
+}
+
 void ft_itoa_base(t_printf *p, long long n, int base)
 {
+  char *a;
+  int length;
+  int buf;
+ // char *A;
+
+  a = "0123456789abcdef";
+ // A = "0123456789ABCDEF";
+
+  if (n < 0)
+    p->temp[p->ti++] = '-';
+  length = ft_count_p(n, base);
+  buf = length--;
+  while (length >= 0)
+	{
+		p->temp[p->ti + length--] = a[(n % base)];
+		n /= base;
+	}
+  p->ti += buf;
 }
+
+
+void print_p(t_printf *p)
+{
+  long long n;
+  int  buf;
+  int width;
+
+  n = va_arg(p->argptr, long long);
+  width = (0 == n) ? 3 : 12;
+  if ((p->f_width) && (p->width > width) && (!p->f_minus))
+    while(p->width - (width + p->ti))
+      p->temp[p->ti++] = ' ';
+  p->temp[p->ti++] = '0';
+  p->temp[p->ti++] = 'x';
+  ft_itoa_base(p, n, 16);
+  if ((p->f_width) && (p->width > 12) && (p->f_minus))
+    while(p->width < p->ti)
+      p->temp[p->ti++] = ' ';
+  data_record(p);
+}
+
+void print_per(t_printf *p)
+{
+  char  c;
+  char  buf;
+
+  c = '%';
+  buf = (p->f_zero && !p->f_minus) ? '0' : ' ';
+  p->width = (p->f_width) ? p->width : 1;
+  if (1 == p->width)
+    p->temp[p->ti++] = c;
+  else
+    p->temp[p->ti++] = (p->f_minus) ? c : buf;
+  if (p->width > 1)
+  {
+    --p->width;
+    while (--p->width)
+      p->temp[p->ti++] = buf;
+    p->temp[p->ti++] = (p->f_minus) ? buf : c;
+  }
+  data_record(p);
+}
+
+// char				*ft_itoa_p(int n)
+// {
+// 	int				len;
+// 	unsigned int	q;
+// 	char			*res;
+
+// 	len = ft_count_p(n);
+// 	len = (n < 0 ? len + 1 : len);
+// 	q = (n < 0 ? -n : n);
+// 	if (!(res = (char *)malloc(sizeof(char) * len + 1)))
+// 		return (NULL);
+// 	res[len--] = '\0';
+// 	while (len >= 0)
+// 	{
+// 		res[len--] = (q % 10) + '0';
+// 		q /= 10;
+// 	}
+// 	if (res[0] == '0' && res[1] != '\0')
+// 		res[0] = '-';
+// 	return (res);
+// }
+
 
 int	ft_atoi_base(const char *nbr, unsigned int base)
 {
@@ -122,7 +253,7 @@ void print_c(t_printf *p)
   char  buf;
 
   c = (char)va_arg(p->argptr, int);
-  buf = (p->f_zero) ? '0' : ' ';
+  buf = (p->f_zero && !p->f_minus) ? '0' : ' ';
   p->width = (p->f_width) ? p->width : 1;
   if (1 == p->width)
     p->temp[p->ti++] = c;
@@ -136,16 +267,16 @@ void print_c(t_printf *p)
       while (--p->width)
         p->temp[p->ti++] = buf;
     }
-    else
-    { // ? 
-      data_release(p);
-      while (--p->width)
-      {
-        p->data[p->di++] = buf;
-        if (BUFF == p->di)
-          data_release(p);
-      }
-    }
+    // else
+    // { // ? 
+    //   data_release(p);
+    //   while (--p->width)
+    //   {
+    //     p->data[p->di++] = buf;
+    //     if (BUFF == p->di)
+    //       data_release(p);
+    //   }
+    // }
     p->temp[p->ti++] = (p->f_minus) ? buf : c;
   }
  // p->temp[p->ti] = '\0';
@@ -154,15 +285,6 @@ void print_c(t_printf *p)
 
 
 
-int  distribution(t_printf *p, char c)
-{
-  // c = \0 ?
-  if ('c' == c)
-    print_c(p);
-  if ('p' == c)
-    print_c(p);
-  return 1;
-}
 
 
 void flags_check(t_printf *p, char *str)
@@ -201,6 +323,20 @@ void wid_and_prec_check(t_printf *p, char *str)
   }
 }
 
+int  distribution(t_printf *p, char c)
+{
+  // c = \0 ?
+  if ('c' == c)
+    print_c(p);
+  else if ('p' == c)
+    print_p(p);
+  else if ('%' == c)
+    print_per(p);
+  else if ('s' == c)
+    print_s(p);
+  return 1;
+}
+
 void parser(char *str, t_printf *p)
 {
   size_t i;
@@ -227,6 +363,8 @@ void parser(char *str, t_printf *p)
     ++p->fi;
   }
 }
+
+
 
 
 int ft_printf(char * format, ...)
