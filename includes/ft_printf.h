@@ -21,16 +21,20 @@ typedef struct s_printf
   size_t      ti;
   size_t      fi;
   size_t      print_size;
+  t_bool      format;
   t_bool      f_minus;
   t_bool      f_plus;
   t_bool      f_space;
   t_bool      f_lattice;
   t_bool      f_zero;
-  t_bool      format;
   t_bool      f_prec;
   t_bool      f_width;
+  t_bool      f_h;
+  t_bool      f_hh;
+  t_bool      f_l;
+  t_bool      f_ll;
   int         width;
-  int         precision;
+  int         prec;
   va_list     argptr;
 }             t_printf;
 

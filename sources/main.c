@@ -17,20 +17,27 @@ int main()//int ac, char **av)
     // ft_printf("%-5c\n", c);
 
 int i = 0;
-    ft_printf("%32s", "abc");
+    //printf("%7.5s\n", NULL);
 
-    // printf("1 %10p\n", &c);
-    // printf("2 %09p\n", &c);
-    // printf("3 %-7p\n", &c);
-    // printf("4 %+3p\n", &c);
-    // printf("5 % 12p\n", &c);
-    // printf("6 %#13p\n", &c);
-    // printf("7 %033p\n", &c);
-    // printf("8 %+-6p\n", &c);
-    // printf("9 % #9p\n", &c);
-    // printf("10 %0-10p\n", &c);
-    // printf("11 %+021p\n", &c);
-    // printf("12 %#-23p\n", &c);
+    // printf("1 %10s\n", NULL);
+    // printf("2 %09s\n", NULL);
+    // printf("3 %-7s\n", NULL);
+    // printf("4 %+3s\n", NULL);
+    // printf("5 % 12s\n", NULL);
+    // printf("6 %#13s\n", NULL);
+    // printf("7 %033s\n", NULL);
+    // printf("8 %+-6s\n", NULL);
+    // printf("9 % #9s\n", NULL);
+    // printf("10 %0-10s\n", NULL);
+    // printf("11 %+021s\n", NULL);
+    // printf("12 %#-23s\n", NULL);
+    // printf("13 %#13.0s\n", NULL);
+    // printf("14 %033.109s\n", NULL);
+    // printf("15 %+-6.8s\n", NULL);
+    // printf("16 % #9.2s\n", NULL);
+    // printf("17 %0-10.3s\n", NULL);
+    // printf("18 %+021.6s\n", NULL);
+    // printf("19 %#-23.s\n", NULL);
 
   //printf("---");
   // while (i < 100)

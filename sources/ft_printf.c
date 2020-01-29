@@ -50,34 +50,71 @@ void  data_record(t_printf *p)
  void print_s(t_printf *p)
  {
   char *str;
-  int  buf;
   int length;
 
   str = va_arg(p->argptr, char *);
+  if (NULL == str)
+    str = "(null)";
   length = ft_strlen(str);
   p->width = (p->f_width) ? p->width : length ;
-  if ((p->f_prec) && (p->precision) && (p->f_width) && (p->precision > p->f_width))
+  if ((p->f_prec) && (p->prec) && (p->f_width) && (p->prec > p->width))
   {
     p->width = length;
     p->f_prec = false;
   }
-  else if ((p->f_prec) && (p->precision))
-    length = p->precision;
-
-
+  else if ((p->f_prec) && (p->prec))
+    length = (p->prec > length) ? length : p->prec;
+  else if ((p->f_prec) && ((!p->prec) || (0 == p->prec)))
+    length = 0;
   if ((p->f_width) && (p->width > length) && (!p->f_minus))
     while(p->width - (length + p->ti))
       p->temp[p->ti++] = ' ';
-
   ft_strncpy(p->temp + p->ti, str, length);
   p->ti += length;
-
   if ((p->f_width) && (p->width > length) && (p->f_minus)) //ti
-    while(p->width < p->ti)
+    while(p->width > p->ti)
       p->temp[p->ti++] = ' ';
   data_record(p);
  }
 
+void print_d(t_printf *p)
+ {
+    char *str;
+    int length;
+    int n;
+    char buf;
+    char  flag;
+
+    n = va_arg(p->argptr, int);
+    flag = n < 0 ? 1 : 0;
+    str = ft_itoa(n < 0 ? -n : n);
+    length = ft_strlen(str);
+    buf = (p->f_zero) ? '0' : ' ';
+    p->prec = ((p->f_prec && p->prec) && (flag || p->f_plus)) ? p->prec + 1 : p->prec;
+    
+    if ((p->f_plus || flag) && (p->f_zero))
+      p->temp[p->ti++] = flag ? '-' : '+';
+
+    if ((p->f_width) && (p->width > length) && (!p->f_minus))
+      while(p->width - (length + p->ti + ((flag || p->f_plus) ? 1 : 0)))
+        p->temp[p->ti++] = buf;
+    if ((p->f_plus || flag) && (!p->f_zero))
+      p->temp[p->ti++] = flag ? '-' : '+';
+
+    if (p->f_prec && p->prec && p->prec > length)
+      while((p->prec + ((p->f_zero) ? 1 : 0)) - (length + p->ti))
+          p->temp[p->ti++] = '0';
+
+   // length = (p->f_plus && n >= 0)  ? length - 1 : length;
+    ft_strncpy(p->temp + p->ti, str, length);
+    p->ti += length;
+
+    if ((p->f_width) && (p->width > length) && (p->f_minus)) //ti
+      while(p->width > p->ti)
+        p->temp[p->ti++] = buf;
+
+    data_record(p);
+ }
 
 int ft_power(int n, int power)
 {
@@ -245,6 +282,12 @@ void printf_init(t_printf *p)
   p->f_prec = false;
   p->ti = 0;
   ft_bzero(p->temp, BUFF);
+
+  //      format;
+  p->f_h = false;
+  p->f_hh = false;
+  p->f_l = false;
+  p->f_ll = false;
 }
 
 void print_c(t_printf *p)
@@ -285,7 +328,29 @@ void print_c(t_printf *p)
 
 
 
-
+void modif_check(t_printf *p, char *str)
+{
+  if (('h' == str[p->fi]) && ('h' == str[p->fi + 1]))
+  {
+    p->f_hh = true;
+    p->fi += 2;
+  }
+  else if ('h' == str[p->fi])
+  {
+    p->f_h = true;
+    ++p->fi;
+  }
+  else if (('l' == str[p->fi]) && ('l' == str[p->fi + 1]))
+  {
+    p->f_ll = true;
+    p->fi += 2;
+  }
+  else if ('l' == str[p->fi])
+  {
+    p->f_l = true;
+    ++p->fi;
+  }
+}
 
 void flags_check(t_printf *p, char *str)
 {
@@ -299,9 +364,6 @@ void flags_check(t_printf *p, char *str)
     p->f_zero = ('0' == str[p->fi]) ? true : p->f_zero;
     ++p->fi;
   }
-  // ft_putstr("flags_check\n");
-  // ft_putnbr(p->fi);
-  // write(1, "\n", 1);
 }
 
 void wid_and_prec_check(t_printf *p, char *str)
@@ -316,7 +378,7 @@ void wid_and_prec_check(t_printf *p, char *str)
   if ('.' == str[p->fi])
   {
     ++p->fi;
-    p->precision = ft_atoi(str + p->fi); // как обработать?
+    p->prec = ft_atoi(str + p->fi); // как обработать?
     p->f_prec = true;
     while (('0' <= str[p->fi]) && (str[p->fi] <= '9'))
       ++p->fi;
@@ -334,6 +396,8 @@ int  distribution(t_printf *p, char c)
     print_per(p);
   else if ('s' == c)
     print_s(p);
+  else if ('d' == c)
+    print_d(p);
   return 1;
 }
 
@@ -350,6 +414,7 @@ void parser(char *str, t_printf *p)
       ++p->fi;
       flags_check(p, str);
       wid_and_prec_check(p, str);
+      modif_check(p, str);
       p->format = true;
       distribution(p, (str[p->fi]));
       printf_init(p);

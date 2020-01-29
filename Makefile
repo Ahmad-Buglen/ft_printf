@@ -36,14 +36,14 @@ $(NAME): $(OBJ) $(LIB)
 #libft/*.o
 $(MAIN): $(NAME) $(OBJ1)
 	gcc sources/main.c -o $(MAIN) $(LIB) -lmlx $(NAME)
-	./pft/test s
+	./pft/test d
 	gcc -g sources/main.c sources/ft_printf.c -o ft_printf -lmlx  libft/libft.a libftprintf.a
 #-Wall -Wextra -Werror
 %.o: sources/%.c $(HEADER)
 	gcc -c $<
 clean:
 	make clean -C ./libft
-	rm -rf $(OBJ) $(OBJ1)
+	rm -rf $(OBJ) $(OBJ1) ft_printf
 fclean: clean
 	make fclean -C ./libft
 	rm -rf $(NAME) $(MAIN)
