@@ -14,7 +14,7 @@ int main()//int ac, char **av)
 
     // fix it !
     // printf("%-5c\n", c);
-    // ft_printf("%-5c\n", c);
+     ft_printf("%8.5o", 34);
 
 int i = 0;
     //printf("%7.5s\n", NULL);

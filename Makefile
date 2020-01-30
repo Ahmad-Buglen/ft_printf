@@ -36,7 +36,7 @@ $(NAME): $(OBJ) $(LIB)
 #libft/*.o
 $(MAIN): $(NAME) $(OBJ1)
 	gcc sources/main.c -o $(MAIN) $(LIB) -lmlx $(NAME)
-	./pft/test d
+	./pft/test o
 	gcc -g sources/main.c sources/ft_printf.c -o ft_printf -lmlx  libft/libft.a libftprintf.a
 #-Wall -Wextra -Werror
 %.o: sources/%.c $(HEADER)
