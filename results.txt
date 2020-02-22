@@ -1,51 +1,3 @@
-Test 1171 (o_prec_width_fit_fit_pos) : FAILED.
-    First line of code: {return test("%8.5o", 34);}
-    SEGFAULT
-
-Test 1172 (o_prec_width_fit_fit_zero) : FAILED.
-    First line of code: {return test("%8.5o", 0);}
-    SEGFAULT
-
-Test 1173 (o_prec_width_nofit_fit_pos) : FAILED.
-    First line of code: {return test("%8.3o", 8375);}
-    SEGFAULT
-
-Test 1176 (o_prec_width_fit_fit_pos_lj) : FAILED.
-    First line of code: {return test("%-8.5o", 34);}
-    SEGFAULT
-
-Test 1177 (o_prec_width_fit_fit_zero_lj) : FAILED.
-    First line of code: {return test("%-8.5o", 0);}
-    SEGFAULT
-
-Test 1178 (o_prec_width_nofit_fit_pos_lj) : FAILED.
-    First line of code: {return test("%-8.3o", 8375);}
-    SEGFAULT
-
-Test 1181 (o_prec_width_ff_pos_zp) : FAILED.
-    First line of code: {return test("%08.5o", 34);}
-    SEGFAULT
-
-Test 1182 (o_prec_width_ff_zero_zp) : FAILED.
-    First line of code: {return test("%08.5o", 0);}
-    SEGFAULT
-
-Test 1183 (o_prec_width_nf_pos_zp) : FAILED.
-    First line of code: {return test("%08.3o", 8375);}
-    SEGFAULT
-
-Test 1186 (o_prec_width_ff_pos_ljzp_ignoreflag) : FAILED.
-    First line of code: {return test("%0-8.5o", 34);}
-    SEGFAULT
-
-Test 1187 (o_prec_width_ff_zero_ljzp_ignoreflag) : FAILED.
-    First line of code: {return test("%0-8.5o", 0);}
-    SEGFAULT
-
-Test 1188 (o_prec_width_nf_pos_ljzp_ignoreflag) : FAILED.
-    First line of code: {return test("%0-8.3o", 8375);}
-    SEGFAULT
-
 Test 1207 (o_size_ll_hh_ll) : FAILED.
     First line of code: {return test("%llu%hhu%llo", ull_pos_1, uch_pos_1, ull_pos_1);}
       expected output : "22337203685477100505031105644145"
@@ -80,117 +32,6 @@ Test 1211 (o_size_ll_n_l) : FAILED.
       your output     : "505031105644145"
       expected (nonprintable as hex) : "22337203685477878023505031105644145"
       actual   (nonprintable as hex) : "505031105644145"
-
-Test 1216 (o_width_pos_fits_af) : FAILED.
-    First line of code: {return test("%#7o", 33);}
-      expected output : "    041"
-      your output     : "     041"
-      expected (nonprintable as hex) : "    041"
-      actual   (nonprintable as hex) : "     041"
-
-Test 1224 (o_prec_fits_pos_af) : FAILED.
-    First line of code: {return test("%#.5o", 21);}
-      expected output : "00025"
-      your output     : "000025"
-      expected (nonprintable as hex) : "00025"
-      actual   (nonprintable as hex) : "000025"
-
-Test 1228 (o_zp_pos_fits_af) : FAILED.
-    First line of code: {return test("%#05o", 43);}
-      expected output : "00053"
-      your output     : "000053"
-      expected (nonprintable as hex) : "00053"
-      actual   (nonprintable as hex) : "000053"
-
-Test 1231 (o_prec_width_fit_fit_pos_af) : FAILED.
-    First line of code: {return test("%#8.5o", 34);}
-    SEGFAULT
-
-Test 1232 (o_prec_width_fit_fit_zero_af) : FAILED.
-    First line of code: {return test("%#8.5o", 0);}
-    SEGFAULT
-
-Test 1233 (o_prec_width_nofit_fit_pos_af) : FAILED.
-    First line of code: {return test("%#8.3o", 8375);}
-    SEGFAULT
-
-Test 1234 (o_prec_width_fit_nofit_pos_af) : FAILED.
-    First line of code: {return test("%#2.7o", 3267);}
-      expected output : "0006303"
-      your output     : "00006303"
-      expected (nonprintable as hex) : "0006303"
-      actual   (nonprintable as hex) : "00006303"
-
-Test 1236 (o_prec_width_fit_fit_pos_lj_af) : FAILED.
-    First line of code: {return test("%#-8.5o", 34);}
-    SEGFAULT
-
-Test 1237 (o_prec_width_fit_fit_zero_lj_af) : FAILED.
-    First line of code: {return test("%#-8.5o", 0);}
-    SEGFAULT
-
-Test 1238 (o_prec_width_nofit_fit_pos_lj_af) : FAILED.
-    First line of code: {return test("%#-8.3o", 8375);}
-    SEGFAULT
-
-Test 1239 (o_prec_width_fit_nofit_pos_lj_af) : FAILED.
-    First line of code: {return test("%#-2.7o", 3267);}
-      expected output : "0006303"
-      your output     : "00006303"
-      expected (nonprintable as hex) : "0006303"
-      actual   (nonprintable as hex) : "00006303"
-
-Test 1241 (o_prec_width_ff_pos_zp_af) : FAILED.
-    First line of code: {return test("%#08.5o", 34);}
-    SEGFAULT
-
-Test 1242 (o_prec_width_ff_zero_zp_af) : FAILED.
-    First line of code: {return test("%#08.5o", 0);}
-    SEGFAULT
-
-Test 1243 (o_prec_width_nf_pos_zp_af) : FAILED.
-    First line of code: {return test("%#08.3o", 8375);}
-    SEGFAULT
-
-Test 1244 (o_prec_width_fn_pos_zp_af) : FAILED.
-    First line of code: {return test("%#02.7o", 3267);}
-      expected output : "0006303"
-      your output     : "00006303"
-      expected (nonprintable as hex) : "0006303"
-      actual   (nonprintable as hex) : "00006303"
-
-Test 1246 (o_prec_width_ff_pos_ljzpaf_ignoreflag) : FAILED.
-    First line of code: {return test("%#0-8.5o", 34);}
-    SEGFAULT
-
-Test 1247 (o_prec_width_ff_zero_ljzpaf_ignoreflag) : FAILED.
-    First line of code: {return test("%#0-8.5o", 0);}
-    SEGFAULT
-
-Test 1248 (o_prec_width_nf_pos_ljzpaf_ignoreflag) : FAILED.
-    First line of code: {return test("%#0-8.3o", 8375);}
-    SEGFAULT
-
-Test 1249 (o_prec_width_fn_pos_ljzpaf_ignoreflag) : FAILED.
-    First line of code: {return test("%#0-2.7o", 3267);}
-      expected output : "0006303"
-      your output     : "00006303"
-      expected (nonprintable as hex) : "0006303"
-      actual   (nonprintable as hex) : "00006303"
-
-Test 1265 (o_size_l_pos_big_zp_af) : FAILED.
-    First line of code: {return test("%#037lo", 22337203685477ul);}
-      expected output : "0000000000000000000000505031105644145"
-      your output     : "00000000000000000000000505031105644145"
-      expected (nonprintable as hex) : "0000000000000000000000505031105644145"
-      actual   (nonprintable as hex) : "00000000000000000000000505031105644145"
-
-Test 1266 (o_size_ll_pos_big_width_af) : FAILED.
-    First line of code: {return test("%#37llo", 522337203685470ull);}
-      expected output : "                   016661003336504136"
-      your output     : "                    016661003336504136"
-      expected (nonprintable as hex) : "                   016661003336504136"
-      actual   (nonprintable as hex) : "                    016661003336504136"
 
 Test 1267 (o_size_ll_hh_ll_af) : FAILED.
     First line of code: {return test("%llu%hhu%#llo", ull_pos_1, uch_pos_1, ull_pos_1);}
@@ -243,33 +84,29 @@ Test 1273 (o_prec0val0_implicit) : FAILED.
 
 Test 1274 (o_prec0val0_w) : FAILED.
     First line of code: {return test("%5.0o", 0);}
-    SEGFAULT
+      expected output : "     "
+      your output     : "    0"
+      expected (nonprintable as hex) : "     "
+      actual   (nonprintable as hex) : "    0"
 
 Test 1275 (o_prec0val0_w_impl) : FAILED.
     First line of code: {return test("%5.o", 0);}
-    SEGFAULT
+      expected output : "     "
+      your output     : "    0"
+      expected (nonprintable as hex) : "     "
+      actual   (nonprintable as hex) : "    0"
 
 Test 1276 (o_prec0val0_wlj) : FAILED.
     First line of code: {return test("%-5.0o", 0);}
-    SEGFAULT
+      expected output : "     "
+      your output     : "0    "
+      expected (nonprintable as hex) : "     "
+      actual   (nonprintable as hex) : "0    "
 
 Test 1277 (o_prec0val0_wlj_impl) : FAILED.
     First line of code: {return test("%-5.o", 0);}
-    SEGFAULT
-
-Test 1280 (o_prec0val0_waf) : FAILED.
-    First line of code: {return test("%#5.0o", 0);}
-    SEGFAULT
-
-Test 1281 (o_prec0val0_waf_impl) : FAILED.
-    First line of code: {return test("%#5.o", 0);}
-    SEGFAULT
-
-Test 1282 (o_prec0val0_waflj) : FAILED.
-    First line of code: {return test("%#-5.0o", 0);}
-    SEGFAULT
-
-Test 1283 (o_prec0val0_waflj_impl) : FAILED.
-    First line of code: {return test("%#-5.o", 0);}
-    SEGFAULT
+      expected output : "     "
+      your output     : "0    "
+      expected (nonprintable as hex) : "     "
+      actual   (nonprintable as hex) : "0    "
 

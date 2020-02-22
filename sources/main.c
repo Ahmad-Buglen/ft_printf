@@ -1,6 +1,8 @@
 
 #include "../includes/ft_printf.h"
 
+int ft_printf(char * format, ...);
+
 int main()//int ac, char **av)
 {
   char c = 't';
@@ -13,8 +15,8 @@ int main()//int ac, char **av)
 //  ft_printf("%1000000c\n", &c);
 
     // fix it !
-    // printf("%-5c\n", c);
-     ft_printf("%8.5o", 34);
+    printf("%.0o\n", 0);
+     ft_printf("%.0o", 0);
 
 int i = 0;
     //printf("%7.5s\n", NULL);

@@ -1,5 +1,6 @@
 
 #include "../includes/ft_printf.h"
+#include <stdio.h>
 
 void		ft_putnstr(char const *s, size_t n)
 {
@@ -187,43 +188,63 @@ void print_o(t_printf *p)
   long long n;
   int  buf;
   int width;
+  int prec;
 
-    int length;
-    char  flag;
+  int length;
+  char  flag;
+
+  int i;
 
 // # and n == 0
 
-    p->f_zero = (p->f_minus) ? false : p->f_zero;
-    p->f_space = (p->f_plus) ? false : p->f_space;
+  p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
+  p->f_space = (p->f_plus) ? false : p->f_space;
 
-     n = va_arg(p->argptr, long long);
-    flag = n < 0 ? 1 : 0;
-    length = ft_count_p(n, 8);
-    buf = (p->f_zero) ? '0' : ' ';
-  length = (p->f_prec && p->prec < length) ? p->prec : length;
+  n = va_arg(p->argptr, long long);
+  flag = n < 0 ? 1 : 0;
+  length = ft_count_p(n, 8);
+  buf = (p->f_zero) ? '0' : ' ';
+ // length = (p->f_prec && p->prec < length) ? p->prec : length;
+  
+  prec = (p->f_prec) ? p->prec - length - ((p->f_lattice && n != 0) ? 1 : 0) : 0;
+  prec = (prec > 0) ? prec : 0;
 
- 
+  width = (p->f_width) ? p->width - (length + ((p->f_plus || flag) ? 1 : 0))
+            - ((p->f_lattice && n != 0) ? 1 : 0) : 0;
+  width = (prec > 0) ? width - prec : width;
+  width = !(p->f_minus) ? width : 0;
 
-   if ((p->f_plus || flag) && (p->f_zero))
-      p->temp[p->ti++] = flag ? '-' : '+';
+  if ((p->f_plus || flag) && (p->f_zero))
+    p->temp[p->ti++] = flag ? '-' : '+';
 
-  if (((p->f_width) && (p->width > length) && (!p->f_minus)) ||
-        (p->f_prec && p->prec < p->width))
-    while((p->width - (length + p->ti + ((p->f_plus || flag) ? 1 : 0))) ||
-            (p->f_prec && (p->width - p->prec)))
-      p->temp[p->ti++] = buf;
+  i = width;
+  while (i-- > 0)
+    p->temp[p->ti++] = buf;
+  // if (((p->f_width) && (p->width > length) && (!p->f_minus)) ||
+  //       (p->f_prec && p->prec < p->width))
+  //   while ((0 < (p->width - (length + p->ti + ((p->f_plus || flag) ? 1 : 0)))) ||
+  //           (p->f_prec && ((p->width - p->prec) > p->ti)))
+  //     p->temp[p->ti++] = buf;
   
   if ((p->f_plus || flag) && (!p->f_zero))
       p->temp[p->ti++] = flag ? '-' : '+';
-
-  if ((p->f_prec && p->prec < p->width) ||
-        (p->f_prec && p->prec > p->ti))
-    while(p->prec > p->ti + length)
-      p->temp[p->ti++] = '0';
   
-   if (p->f_lattice && (n != 0))
+  i = prec;
+  while (i-- > 0)
+    p->temp[p->ti++] = '0';
+  // if ((p->f_prec && p->prec < p->width) ||
+  //       (p->f_prec && p->prec > p->ti))
+  //   while(p->prec > p->ti + length)
+  //     p->temp[p->ti++] = '0';
+  
+  //
+  
+   if (p->f_lattice && (n != 0) )
     p->temp[p->ti++] = '0';
 
+ // if (((p->f_prec) && ((prec > 0) || (p->f_prec == length))) || !(p->f_prec))
+  //if ((p->f_prec) && (prec > 0))
+  //if ((p->f_prec) && (n != 0))
     ft_itoa_base(p, n, 8);
     
   if ((p->f_width) && (p->width > p->ti) && p->f_minus) //ti
