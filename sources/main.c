@@ -15,8 +15,11 @@ int main()//int ac, char **av)
 //  ft_printf("%1000000c\n", &c);
 
     // fix it !
-    printf("%.0o\n", 0);
-     ft_printf("%.0o", 0);
+    printf("%7i", 33);
+
+    printf("\n");
+    
+    ft_printf("%7i", 33);
 
 int i = 0;
     //printf("%7.5s\n", NULL);
