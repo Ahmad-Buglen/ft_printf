@@ -6,7 +6,7 @@
 #    By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/09 12:34:53 by dphyliss          #+#    #+#              #
-#    Updated: 2020/02/24 20:14:16 by dphyliss         ###   ########.fr        #
+#    Updated: 2020/02/25 19:23:32 by dphyliss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(NAME): $(OBJ) $(LIB)
 #libft/*.o
 $(MAIN): $(NAME) $(OBJ1)
 	gcc sources/main.c -o $(MAIN) $(LIB) -lmlx $(NAME)
-	./pft/test i
+	./pft/test f
 	gcc -g sources/main.c sources/ft_printf.c -o ft_printf  libftprintf.a
 #-Wall -Wextra -Werror
 %.o: sources/%.c $(HEADER)

@@ -12,6 +12,16 @@ typedef enum  s_bool
               true = 1
 }             t_bool;
 
+typedef union			u_cast_d
+{
+	long double			d;
+	struct
+	{
+		unsigned long	mantisa : 64;
+		unsigned long	exponent : 15;
+		unsigned long	sign : 1;
+	}					d_parts;
+}						t_cast_d;
 
 typedef struct s_printf
 {
