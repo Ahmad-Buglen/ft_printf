@@ -15,15 +15,25 @@ int main()//int ac, char **av)
 //  ft_printf("%1000000c\n", &c);
 
     // fix it !
+//     double  n;
+//     n = 1.5;
+//     long temp;
+//     temp = n;
+//     printf("%f\n", (n - temp) * pow(10.0, 6.0));
+// // (n - n * 1.0) * pow(10, 6)
 
-    printf("%f", 573.924);
+//     printf("%d", (int)(n / 1)); //10000000000000000000.0000000000000000001
+    // printf("this %19.19f float", 10000000000000000000.0000000000000000001);
 
-    printf("\n");
+    // printf("this %.19f float\n", 0.1234567891234567891);
+    // ft_printf("this %.19f float\n", 0.1234567891234567891);
+    // printf("pow(10.0, 19) = %f", pow(10.0, 19));
+    // printf("\n");
     
-    ft_printf("%f", 573.924);
+    // ft_printf("this %19.19f float", 0.0000000000000000001);
 
-int i = 0;
-    //printf("%7.5s\n", NULL);
+// int i = 0;
+    ft_printf("this %f float", 1.5);
 
     // printf("1 %10s\n", NULL);
     // printf("2 %09s\n", NULL);
