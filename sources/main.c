@@ -33,7 +33,14 @@ int main()//int ac, char **av)
     // ft_printf("this %19.19f float", 0.0000000000000000001);
 
 // int i = 0;
-    ft_printf("this %f float", 1.5);
+
+    //printf("%ull\n %ull\n", rounding(9239999, 6), rounding(9240000, 6));
+
+    printf("%f\n", 3.9999999);
+     printf("%.19f\n", 3.9999999);
+    ft_printf("%f\n", 3.9999999);
+      ft_printf("%.19f\n", 3.9999999);
+  // ft_printf("%.19f", 573.924);
 
     // printf("1 %10s\n", NULL);
     // printf("2 %09s\n", NULL);

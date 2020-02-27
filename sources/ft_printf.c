@@ -1,6 +1,7 @@
 
 #include "../includes/ft_printf.h"
 #include <stdio.h>
+#include <math.h>
 
 void		ft_putnstr(char const *s, size_t n)
 {
@@ -234,15 +235,16 @@ void print_d(t_printf *p)
   data_record(p);
 }
 
-char				*ft_ltoa(unsigned long long n)
+char				*ft_ulltoa(unsigned long long n)
 {
 	int				len;
 	unsigned long long	q;
 	char			*res;
 
 	len = ft_count_p(n, 10);
-	len = (n < 0 ? len + 1 : len);
-	q = (n < 0 ? -n : n);
+//	len = (n < 0 ? len + 1 : len);
+//	q = (n < 0 ? -n : n);
+  q = n;
 	if (!(res = (char *)malloc(sizeof(char) * len + 1)))
 		return (NULL);
 	res[len--] = '\0';
@@ -251,8 +253,8 @@ char				*ft_ltoa(unsigned long long n)
 		res[len--] = (q % 10) + '0';
 		q /= 10;
 	}
-	if (res[0] == '0' && res[1] != '\0')
-		res[0] = '-';
+	// if (res[0] == '0' && res[1] != '\0')
+	// 	res[0] = '-';
 	return (res);
 }
 
@@ -278,6 +280,46 @@ int				ft_atoull(const char *str)
 	return (n);
 }
 
+unsigned long long rounding(unsigned long long frac, int prec,
+                              unsigned long long *whol)
+{
+  int i;
+  int j;
+  int width;
+  int digit;
+  int zero;
+  
+  if (prec >= 19)
+    prec = 19;
+  else 
+    prec += 1;
+
+    zero = ft_abs(ft_count_p(frac, 10) - 19);
+    width = prec - zero;
+    frac = frac / pow(10, ft_abs(width - (19 - zero)));
+
+  // width = ft_count_p(fract)  - prec
+  // fract = fract / pow(10, );
+  // j = 1;
+  // while ((i > 0) && !remainder)
+  // {
+    digit = frac % 10;
+    if (digit + 5 > 9)
+    {
+      frac -= digit;
+      if ((ft_count_p(frac + 10, 10) > ft_count_p(frac, 10)) && (0 == zero))
+      {
+          *whol += 1;
+          frac = 0;
+      }
+      else
+        frac += 10;
+    }
+  //   ++j;
+  //   --i;
+  // }
+  return(frac);
+}
 
 void print_f(t_printf *p)
  {
@@ -290,48 +332,46 @@ void print_f(t_printf *p)
   long double n;
   char buf;
   char  flag;
-
   int zero;
   int prec;
   int width;
-
   int i;
 
   p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
-
-
   n = va_arg(p->argptr,   double);
   flag = n < 0 ? 1 : 0;
   n = (n < 0) ? -n : n;
   p->f_space = (p->f_plus || flag) ? false : p->f_space;
-  whole = ft_ltoa(n);
-  whol = n;
-  // printf("whole = %s\n", whole);
-  long long temp = n;
+    prec = (p->f_prec) ?  p->prec : 6;
+  prec = (prec > 0) ? prec : 0;
+  
+  unsigned long long temp = n;
+    frac = (n - temp) * pow(10.0, 19);
+    whol = n;
+  frac = rounding(frac, prec, &whol);
 
-  whole_l = ft_strlen(whole);
+fract = ft_ulltoa(frac);
+  // printf("fract = %s\n", fract);
+  fract_l = ft_strlen(fract);
+
+  whole = ft_ulltoa(whol);
+  
+  // printf("whole = %s\n", whole);
+   whole_l = ft_strlen(whole);
+
+  
  
   buf = (p->f_zero) ? '0' : ' ';
 
-  prec = (p->f_prec) ?  p->prec : 6;
-  prec = (prec > 0) ? prec : 0;
-
-  fract = ft_ltoa((n - temp) * pow(10.0, 19));
-  frac = (n - temp) * pow(10.0, 19);
-  // printf("fract = %s\n", fract);
-  fract_l = ft_strlen(fract);
 
   // width = (p->f_width) ? p->width - ( whole_l + ((flag || p->f_plus) ? 1 : 0)) - ( (p->f_space) ? 1 : 0): 0;
   // width = (prec > 0) ? width - prec : width;
   // width = !(p->f_minus) ? width : 0;
   // width = (width > 0) ? width : 0;
-
   // if ((p->f_plus || flag) && (p->f_zero) &&  (!p->f_space))
   // p->temp[p->ti++] = flag ? '-' : '+';
-
   // if (p->f_space)
   // p->temp[p->ti++] = ' ';
-
   // i = width;
   // while (i-- > 0)
   // p->temp[p->ti++] = buf;
@@ -339,11 +379,9 @@ void print_f(t_printf *p)
   if ((p->f_plus || flag) && (!p->f_zero) &&  (!p->f_space))
     p->temp[p->ti++] = flag ? '-' : '+';
 
-
   // i = prec;
   // while (i-- > 0)
   // p->temp[p->ti++] = '0';
-
   // if (!(p->f_prec) ||
   // (!((0 == n) && p->f_prec && (0 == prec))))
   // {
@@ -356,12 +394,13 @@ void print_f(t_printf *p)
   
   if (ft_atoull(fract) != 0)
   {
-    zero = ft_count_p(frac, 10) - 19;
-    int z = ft_abs(zero);
+    // zero = ft_count_p(frac, 10) - 19;
+    int z = prec - (ft_count_p(frac, 10) - 1);
+    zero = z;
     while (z-- > 0)
      p->temp[p->ti++] = '0';
-    ft_strncpy(p->temp + p->ti, fract, prec - ft_abs(zero));
-    p->ti += prec - ft_abs(zero);
+    ft_strncpy(p->temp + p->ti, fract, prec - zero);
+    p->ti += prec - zero;
   }
   else
   {
@@ -370,11 +409,9 @@ void print_f(t_printf *p)
   }
   // else
   //   p->temp[p->ti++] = ' ';
-
   // if ((p->f_width) && (p->width > whole_l) && (p->f_minus)) //ti
   // while(p->width > p->ti)
   // p->temp[p->ti++] = ' ';
-
   data_record(p);
 }
 
