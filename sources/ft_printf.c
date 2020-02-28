@@ -332,12 +332,14 @@ void print_f(t_printf *p)
   long double n;
   char buf;
   char  flag;
+  char  sign;
   int zero;
   int prec;
   int width;
   int i;
+  int dot;
 
-  p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
+  p->f_zero = (p->f_minus) ? false : p->f_zero;
   n = va_arg(p->argptr,   double);
   flag = n < 0 ? 1 : 0;
   n = (n < 0) ? -n : n;
@@ -359,24 +361,28 @@ fract = ft_ulltoa(frac);
   // printf("whole = %s\n", whole);
    whole_l = ft_strlen(whole);
 
-  
- 
+  dot = (((p->f_prec) && (prec != 0)) || !(p->f_prec) || p->f_lattice) ? 1 : 0;
+  sign = (flag || p->f_plus) ? 1 : 0;
   buf = (p->f_zero) ? '0' : ' ';
 
 
-  // width = (p->f_width) ? p->width - ( whole_l + ((flag || p->f_plus) ? 1 : 0)) - ( (p->f_space) ? 1 : 0): 0;
-  // width = (prec > 0) ? width - prec : width;
-  // width = !(p->f_minus) ? width : 0;
-  // width = (width > 0) ? width : 0;
-  // if ((p->f_plus || flag) && (p->f_zero) &&  (!p->f_space))
-  // p->temp[p->ti++] = flag ? '-' : '+';
-  // if (p->f_space)
-  // p->temp[p->ti++] = ' ';
-  // i = width;
-  // while (i-- > 0)
-  // p->temp[p->ti++] = buf;
 
-  if ((p->f_plus || flag) && (!p->f_zero) &&  (!p->f_space))
+  width = (p->f_width) ? p->width - (dot + sign + whole_l + 
+                        ((p->f_space) ? 1 : 0)) : 0 ;
+              
+                // ((p->f_space) ? 1 : 0): 0;
+  width = (prec > 0) ? width - prec : width;
+  width = !(p->f_minus) ? width : 0;
+  width = (width > 0) ? width : 0;
+  if (sign && (p->f_zero))
+    p->temp[p->ti++] = flag ? '-' : '+';
+  if (p->f_space)
+    p->temp[p->ti++] = ' ';
+  i = width;
+  while (i-- > 0)
+  p->temp[p->ti++] = buf;
+
+  if (sign && (!p->f_zero))
     p->temp[p->ti++] = flag ? '-' : '+';
 
   // i = prec;
@@ -388,7 +394,7 @@ fract = ft_ulltoa(frac);
     ft_strncpy(p->temp + p->ti, whole, whole_l);
     p->ti += whole_l;
   // }
-  if (((p->f_prec) && (prec != 0)) || !(p->f_prec))
+  if (dot)
     p->temp[p->ti++] = '.';
 
   
@@ -404,14 +410,18 @@ fract = ft_ulltoa(frac);
   }
   else
   {
-    ft_strncpy(p->temp + p->ti, "000000", 6);
-     p->ti += 6;
+    i = prec;
+    while (i--)
+    {
+      ft_strncpy(p->temp + p->ti, "0", 1);
+      p->ti += 1;
+    }
   }
   // else
   //   p->temp[p->ti++] = ' ';
-  // if ((p->f_width) && (p->width > whole_l) && (p->f_minus)) //ti
-  // while(p->width > p->ti)
-  // p->temp[p->ti++] = ' ';
+  if ((p->f_width) && (p->width > whole_l) && (p->f_minus)) //ti
+    while(p->width > p->ti)
+     p->temp[p->ti++] = ' ';
   data_record(p);
 }
 
