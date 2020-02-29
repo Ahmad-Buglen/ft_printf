@@ -70,7 +70,7 @@ void ft_itoa_base(t_printf *p, long long n, int base)
   buf = length--;
   while (length >= 0)
 	{
-		p->temp[p->ti + length--] = ('x' == p->format[p->fi]) ? a[(n % base)] : A[(n % base)];
+		p->temp[p->ti + length--] = ('X' == p->format[p->fi]) ? A[(n % base)] : a[(n % base)];
 		n /= base;
 	}
   p->ti += buf;
@@ -111,36 +111,25 @@ void  data_record(t_printf *p)
   p->ti = 0;
 }
 
-
-
-
  void print_s(t_printf *p)
  {
   char *str;
   int length;
+  int space;
 
   str = va_arg(p->argptr, char *);
   if (NULL == str)
     str = "(null)";
   length = ft_strlen(str);
-  p->width = (p->f_width) ? p->width : length ;
-  if ((p->f_prec) && (p->prec) && (p->f_width) && (p->prec > p->width))
-  {
-    p->width = length;
-    p->f_prec = false;
-  }
-  else if ((p->f_prec) && (p->prec))
-    length = (p->prec > length) ? length : p->prec;
-  else if ((p->f_prec) && ((!p->prec) || (0 == p->prec)))
-    length = 0;
-  if ((p->f_width) && (p->width > length) && (!p->f_minus))
-    while(p->width - (length + p->ti))
-      p->temp[p->ti++] = ' ';
+  length = ((p->f_prec) && (p->prec < length)) ? p->prec : length;
+  space = (p->f_width) ? p->width - length : 0;
+  space = (space < 0) ? 0 : space;
+  while ((!p->f_minus) && (space-- > 0))
+    p->temp[p->ti++] = ' ';
   ft_strncpy(p->temp + p->ti, str, length);
   p->ti += length;
-  if ((p->f_width) && (p->width > length) && (p->f_minus)) //ti
-    while(p->width > p->ti)
-      p->temp[p->ti++] = ' ';
+  while ((p->f_minus) && (space-- > 0))
+    p->temp[p->ti++] = ' ';
   data_record(p);
  }
 
@@ -150,87 +139,50 @@ void print_d(t_printf *p)
   int length;
   int n;
   char buf;
-  char  flag;
-
-  // n = va_arg(p->argptr, int);
-  // flag = n < 0 ? 1 : 0;
-  // str = ft_itoa(n < 0 ? -n : n);
-  // length = ft_strlen(str);
-  // buf = (p->f_zero) ? '0' : ' ';
-  // p->prec = ((p->f_prec && p->prec) && (flag || p->f_plus)) ? p->prec + 1 : p->prec;
-
-  // if ((p->f_plus || flag) && (p->f_zero))
-  //   p->temp[p->ti++] = flag ? '-' : '+';
-
-  // if ((p->f_width) && (p->width > length) && (!p->f_minus))
-  //   while(((p->width + (p->f_zero ? 1 : 0)) > (length + p->ti + ((flag || p->f_plus || p->f_zero) ? 1 : 0))) && 
-  //           ((p->f_prec && ((p->width > p->prec) && p->ti == (p->width > p->prec))) ||
-  //           (!p->f_prec)))
-  //     p->temp[p->ti++] = buf;
-  // if ((p->f_plus || flag) && (!p->f_zero))
-  //   p->temp[p->ti++] = flag ? '-' : '+';
-
-  // if (p->f_prec && p->prec && p->prec > length + p->ti)
-  //   while((p->prec + ((p->f_zero) ? 1 : 0)) - (length + p->ti))
-  //       p->temp[p->ti++] = '0';
-
-  // length = (p->f_plus && n >= 0)  ? length - 1 : length;
-
+  int  flag;
   int prec;
   int width;
-
+  int sign;
   int i;
-
   p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
-
-
+  
   n = va_arg(p->argptr, long long);
-  flag = n < 0 ? 1 : 0;
-  p->f_space = (p->f_plus || flag) ? false : p->f_space;
-  str = ft_itoa(n < 0 ? -n : n);
+  flag = (n < 0) ? 1 : 0;
+  n = (n < 0) ? -n : n;
+  sign = (p->f_plus || flag) ? 1 : 0;
+  p->f_space = sign ? false : p->f_space;
+  str = ft_itoa(n);
   length = ft_strlen(str);
+  length = ((0 == n) && p->f_prec && (0 == p->prec)) ? 0 : length;
   buf = (p->f_zero) ? '0' : ' ';
-
   prec = (p->f_prec) ?  p->prec - length : 0;
   prec = (prec > 0) ? prec : 0;
-
-  width = (p->f_width) ? p->width - ( length + ((flag || p->f_plus) ? 1 : 0)) - ( (p->f_space) ? 1 : 0): 0;
+  width = (p->f_width) ? p->width - (length + sign + ((p->f_space) ? 1 : 0)): 0;
   width = (prec > 0) ? width - prec : width;
-  width = !(p->f_minus) ? width : 0;
+  // width = !(p->f_minus) ? width : 0;
   width = (width > 0) ? width : 0;
 
-  if ((p->f_plus || flag) && (p->f_zero) &&  (!p->f_space))
-  p->temp[p->ti++] = flag ? '-' : '+';
+  if (sign && (p->f_minus || p->f_zero))
+    p->temp[p->ti++] = flag ? '-' : '+';
 
   if (p->f_space)
-  p->temp[p->ti++] = ' ';
+    p->temp[p->ti++] = ' ';
 
-  i = width;
-  while (i-- > 0)
-  p->temp[p->ti++] = buf;
+  while (!(p->f_minus) && width-- > 0)
+    p->temp[p->ti++] = buf;
 
-  if ((p->f_plus || flag) && (!p->f_zero) &&  (!p->f_space))
-  p->temp[p->ti++] = flag ? '-' : '+';
+  if (sign && !(p->f_minus || p->f_zero))
+    p->temp[p->ti++] = flag ? '-' : '+';
 
+  while (prec-- > 0)
+    p->temp[p->ti++] = '0';
 
-  i = prec;
-  while (i-- > 0)
-  p->temp[p->ti++] = '0';
-
-
-
-  if (!(p->f_prec) ||
-  (!((0 == n) && p->f_prec && (0 == prec))))
-  {
   ft_strncpy(p->temp + p->ti, str, length);
   p->ti += length;
-  }
-  // else
-  //   p->temp[p->ti++] = ' ';
 
-  if ((p->f_width) && (p->width > length) && (p->f_minus)) //ti
-  while(p->width > p->ti)
-  p->temp[p->ti++] = ' ';
+  //if ((p->f_width) && (p->width > length) && (p->f_minus)) //ti
+  while(p->f_minus && (width-- > 0))
+    p->temp[p->ti++] = ' ';
   free(str);
   data_record(p);
 }
@@ -572,42 +524,51 @@ void print_o(t_printf *p)
 void print_p(t_printf *p)
 {
   long long n;
-  int  buf;
   int width;
+  int space;
 
   n = va_arg(p->argptr, long long);
-  width = (0 == n) ? 3 : 12;
-  if ((p->f_width) && (p->width > width) && (!p->f_minus))
-    while(p->width - (width + p->ti))
-      p->temp[p->ti++] = ' ';
+  width = (0 == n) ? 3 : 11;
+  space = (p->f_width) ? ((p->width) - width) : 0;
+  while((!p->f_minus) && (space-- > 0))
+    p->temp[p->ti++] = ' ';
   p->temp[p->ti++] = '0';
   p->temp[p->ti++] = 'x';
   ft_itoa_base(p, n, 16);
-  if ((p->f_width) && (p->width > 12) && (p->f_minus))
-    while(p->width < p->ti)
-      p->temp[p->ti++] = ' ';
+  while(p->f_minus && (space-- > 0))
+    p->temp[p->ti++] = ' ';
   data_record(p);
 }
 
 void print_per(t_printf *p)
 {
-  char  c;
-  char  buf;
+  // char  buf;
 
-  c = '%';
+  // buf = (p->f_zero && !p->f_minus) ? '0' : ' ';
+  // p->width = (p->f_width) ? p->width : 1;
+  // if (1 == p->width)
+  //   p->temp[p->ti++] = c;
+  // else
+  //   p->temp[p->ti++] = (p->f_minus) ? c : buf;
+  // if (p->width > 1)
+  // {
+  //   --p->width;
+  //   while (--p->width)
+  //     p->temp[p->ti++] = buf;
+  //   p->temp[p->ti++] = (p->f_minus) ? buf : c;
+  // }
+
+  char  buf;
+  int   custom;
+
   buf = (p->f_zero && !p->f_minus) ? '0' : ' ';
-  p->width = (p->f_width) ? p->width : 1;
-  if (1 == p->width)
-    p->temp[p->ti++] = c;
-  else
-    p->temp[p->ti++] = (p->f_minus) ? c : buf;
-  if (p->width > 1)
-  {
-    --p->width;
-    while (--p->width)
-      p->temp[p->ti++] = buf;
-    p->temp[p->ti++] = (p->f_minus) ? buf : c;
-  }
+  custom = (p->f_width) ? p->width - 1 : 0;
+  custom = (custom < 0) ? 0 : custom;
+  while ((!p->f_minus) && (custom-- > 0))
+    p->temp[p->ti++] = buf;
+  p->temp[p->ti++] = '%';
+  while ((p->f_minus) && (custom-- > 0))
+    p->temp[p->ti++] = buf;
   data_record(p);
 }
 
@@ -682,38 +643,56 @@ void print_c(t_printf *p)
 {
   char  c;
   char  buf;
+  int   custom;
 
   c = (char)va_arg(p->argptr, int);
   buf = (p->f_zero && !p->f_minus) ? '0' : ' ';
-  p->width = (p->f_width) ? p->width : 1;
-  if (1 == p->width)
-    p->temp[p->ti++] = c;
-  else
-    p->temp[p->ti++] = (p->f_minus) ? c : buf;
-  if (p->width > 1)
-  {
-    --p->width;
-    if (BUFF >= p->width)
-    {
-      while (--p->width)
-        p->temp[p->ti++] = buf;
-    }
-    // else
-    // { // ? 
-    //   data_release(p);
-    //   while (--p->width)
-    //   {
-    //     p->data[p->di++] = buf;
-    //     if (BUFF == p->di)
-    //       data_release(p);
-    //   }
-    // }
-    p->temp[p->ti++] = (p->f_minus) ? buf : c;
-  }
- // p->temp[p->ti] = '\0';
+  custom = (p->f_width) ? p->width -1 : 0;
+  custom = (custom < 0) ? 0 : custom;
+  while ((!p->f_minus) && (custom-- > 0))
+    p->temp[p->ti++] = buf;
+  p->temp[p->ti++] = c;
+  while ((p->f_minus) && (custom-- > 0))
+    p->temp[p->ti++] = buf;
   data_record(p);
 }
 
+int ft_cinstr(char const *const storage, char const *const desire)
+{
+  int i;
+  int j;
+
+  i = 0;
+  while(storage[i])
+  {
+    j = 0;
+    while(desire[j])
+    {
+      if (storage[i] == desire[j])
+        return (1);
+      ++j;
+    }
+    ++i;
+  }
+  return (0);
+}
+int print_ub(t_printf *p)
+{
+  // char *conversions; // cp%sdioxXfF
+  // p->temp[p->ti++] = 'U';
+  // p->temp[p->ti++] = 'B';
+
+  if (('\0' == p->format[p->fi + 1]) ||
+      !(ft_cinstr(&(p->format[p->fi + 1]), "cp%sdioxXfF")))
+  {
+    //ft_strncpy(p->temp, p->format[p->fi + 1], ft_strlen(&(p->format[p->fi + 1])));
+    p->temp[p->ti++] = 'U';
+    p->temp[p->ti++] = 'B';
+    data_record(p);
+    return (1);
+  }
+  return (0);
+}
 
 
 void modif_check(t_printf *p)
@@ -775,7 +754,7 @@ void wid_and_prec_check(t_printf *p)
 
 int  distribution(t_printf *p, char c)
 {
-  // c = \0 ?
+  // c = \0 ? cp%sdioxXfF
   if ('c' == c)
     print_c(p);
   else if ('p' == c)
@@ -792,6 +771,8 @@ int  distribution(t_printf *p, char c)
     print_x(p);
   else if (('f' == c) || ('F' == c))
     print_f(p);
+  // else
+  //   print_ub(p);
   return 1;
 }
 
@@ -805,6 +786,8 @@ void parser(t_printf *p)
   {
     if ('%' == p->format[p->fi])
     {
+      if (1 == print_ub(p))
+        return ;
       ++p->fi;
       flags_check(p);
       wid_and_prec_check(p);

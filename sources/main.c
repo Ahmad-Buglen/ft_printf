@@ -36,11 +36,18 @@ int main()//int ac, char **av)
 
     //printf("%ull\n %ull\n", rounding(9239999, 6), rounding(9240000, 6));
 
-    printf("%.18f\n",        0.125978548534310421);
-     printf("%.18f\n",        0.125978548534310421);
-    ft_printf("%.18f\n",        0.125978548534310421);
-      ft_printf("%.18f\n",        0.125978548534310421);
-  // ft_printf("%.19f", 573.924);
+    // printf("%.18f\n",        0.125978548534310421);
+    //  printf("%.18f\n",        0.125978548534310421);
+    // ft_printf("%.18f\n",        0.125978548534310421);
+    //   ft_printf("%.18f\n",        0.125978548534310421);
+
+  ft_printf("%-7i", 33);
+  // ft_printf("%5\n");
+  // ft_printf("%-5\n");
+  // ft_printf("%05\n");
+  // ft_printf("%999\n");
+
+  //ft_printf("%");
 
     // printf("1 %10s\n", NULL);
     // printf("2 %09s\n", NULL);

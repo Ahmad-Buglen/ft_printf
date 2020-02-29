@@ -13,6 +13,7 @@
         "ratio": "c",
         "tuple": "c",
         "utility": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "ios": "c"
     }
 }
