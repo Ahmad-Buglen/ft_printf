@@ -380,56 +380,53 @@ fract = ft_ulltoa(frac);
 
 void print_x(t_printf *p)
 {
-  long long n;
+  unsigned long long n;
   int  buf;
   int width;
   int prec;
-
   int length;
   char  flag;
-
   int i;
+  int sign;
+  int lattice;
 
   p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
   p->f_space = (p->f_plus) ? false : p->f_space;
 
-  n = va_arg(p->argptr, long long);
-  flag = n < 0 ? 1 : 0;
+  n = va_arg(p->argptr, unsigned long long);
   length = ft_count_p(n, 16);
   buf = (p->f_zero) ? '0' : ' ';
-  
-  prec = (p->f_prec) ? p->prec - length - ((p->f_lattice && n != 0) ? 2 : 0) : 0;
+  lattice = (p->f_lattice && n != 0) ? 2 : 0;
+  prec = (p->f_prec) ? p->prec - length : 0;
   prec = (prec > 0) ? prec : 0;
 
-  width = (p->f_width) ? p->width - (length + ((p->f_plus || flag) ? 1 : 0))
-            - ((p->f_lattice && n != 0) ? 2 : 0) : 0;
+  width = (p->f_width) ? p->width - (length + lattice) : 0;
+  width = ((p->f_prec) && (0 == n) && (0 == p->prec) && (p->f_width)) ? width + 1 : width;
   width = (prec > 0) ? width - prec : width;
   width = !(p->f_minus) ? width : 0;
 
-  if ((p->f_plus || flag) && (p->f_zero))
-    p->temp[p->ti++] = flag ? '-' : '+';
 
   i = width;
-  while (i-- > 0)
+  while (!(p->f_zero) &&  (i-- > 0))
     p->temp[p->ti++] = buf;
-  
-  if ((p->f_plus || flag) && (!p->f_zero))
-      p->temp[p->ti++] = flag ? '-' : '+';
-  
-  i = prec;
-  while (i-- > 0)
-    p->temp[p->ti++] = '0';
 
-  
-   if (p->f_lattice && (n != 0))
+   if (2 == lattice)
    {
     p->temp[p->ti++] = '0';
     p->temp[p->ti++] = ('x' == p->format[p->fi]) ? 'x' : 'X';
    }
 
- // if ((!((p->f_prec) && (prec <= 0))) || (prec == length))
+  while ((p->f_zero) &&  (i-- > 0))
+    p->temp[p->ti++] = buf;
+
+     i = prec;
+  while (i-- > 0)
+    p->temp[p->ti++] = '0';
+
+ if (!((0 == n) && p->f_prec && (0 == p->prec)))
     ft_itoa_base(p, n, 16);
-    
+ 
+
   if ((p->f_width) && (p->width > p->ti) && p->f_minus) //ti
       while(p->width > p->ti)
         p->temp[p->ti++] = ' ';
@@ -445,79 +442,47 @@ void print_o(t_printf *p)
   int  buf;
   int width;
   int prec;
-
   int length;
   char  flag;
-
   int i;
-
-// # and n == 0
+  int sign;
+  int lattice;
 
   p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
-  p->f_space = (p->f_plus) ? false : p->f_space;
 
   n = va_arg(p->argptr, long long);
-  flag = n < 0 ? 1 : 0;
-  length = ft_count_p(n, 8);
+  length = (n > 0) ? ft_count_p(n, 8) : 0 ;
+   
   buf = (p->f_zero) ? '0' : ' ';
- // length = (p->f_prec && p->prec < length) ? p->prec : length;
-  
-  prec = (p->f_prec) ? p->prec - length - ((p->f_lattice && n != 0) ? 1 : 0) : 0;
+  lattice = (p->f_lattice ) ? 1 : 0;
+  prec = (p->f_prec) ? p->prec - length - ((lattice || (0 == n)) ? 1 : 0) : 0;
   prec = (prec > 0) ? prec : 0;
 
-  width = (p->f_width) ? p->width - (length + ((p->f_plus || flag) ? 1 : 0))
-            - ((p->f_lattice && n != 0) ? 1 : 0) : 0;
+  width = (p->f_width) ? p->width - length - ((lattice || (0 == n)) ? 1 : 0) : 0;
+  // width = (0 == n) ? width + 1:   width;
+ // width = (p->f_prec && (0 == n) && (0 == p->prec) && p->f_width) ? width + 1 : width;
   width = (prec > 0) ? width - prec : width;
   width = !(p->f_minus) ? width : 0;
-
-  if ((p->f_plus || flag) && (p->f_zero))
-    p->temp[p->ti++] = flag ? '-' : '+';
 
   i = width;
   while (i-- > 0)
     p->temp[p->ti++] = buf;
-  // if (((p->f_width) && (p->width > length) && (!p->f_minus)) ||
-  //       (p->f_prec && p->prec < p->width))
-  //   while ((0 < (p->width - (length + p->ti + ((p->f_plus || flag) ? 1 : 0)))) ||
-  //           (p->f_prec && ((p->width - p->prec) > p->ti)))
-  //     p->temp[p->ti++] = buf;
-  
-  if ((p->f_plus || flag) && (!p->f_zero))
-      p->temp[p->ti++] = flag ? '-' : '+';
   
   i = prec;
   while (i-- > 0)
     p->temp[p->ti++] = '0';
-  // if ((p->f_prec && p->prec < p->width) ||
-  //       (p->f_prec && p->prec > p->ti))
-  //   while(p->prec > p->ti + length)
-  //     p->temp[p->ti++] = '0';
-  
-  //
-  
-   if (p->f_lattice && (n != 0) )
+
+   if (lattice )
     p->temp[p->ti++] = '0';
 
- // if (((p->f_prec) && ((prec > 0) || (p->f_prec == length))) || !(p->f_prec))
-  //if ((p->f_prec) && (prec > 0))
-  //if ((p->f_prec) && (n != 0))
-    ft_itoa_base(p, n, 8);
+//  if ((0 != n) || (p->f_prec && (0 != p->prec)) ||  (!p->f_prec || (0 == n) && (lattice != 1)))
+    if ((0 != n) || (p->f_prec && (0 != p->prec)) || (!p->f_prec && (0 == n) && !lattice ) ) 
+      ft_itoa_base(p, n, 8);
     
   if ((p->f_width) && (p->width > p->ti) && p->f_minus) //ti
       while(p->width > p->ti)
         p->temp[p->ti++] = ' ';
 
- // width = (0 == n) ? 3 : 12;
- // if ((p->f_width) && (p->width > width) && (!p->f_minus))
- //   while(p->width - (width + p->ti))
- //    p->temp[p->ti++] = ' ';
- // p->temp[p->ti++] = '0';
-  
- 
-  
-  // if ((p->f_width) && (p->width > 12) && (p->f_minus))
-  //   while(p->width < p->ti)
-  //     p->temp[p->ti++] = ' ';
   data_record(p);
 }
 
