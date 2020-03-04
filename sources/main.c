@@ -41,8 +41,8 @@ int main()//int ac, char **av)
     // ft_printf("%.18f\n",        0.125978548534310421);
     //   ft_printf("%.18f\n",        0.125978548534310421);
 
-  printf("%#3o\n", 0);
-  ft_printf("%#3o", 0);
+  printf("%#.5o", 21);
+  ft_printf("%#.5o", 21);
   // ft_printf("%5\n");
   // ft_printf("%-5\n");
   // ft_printf("%05\n");

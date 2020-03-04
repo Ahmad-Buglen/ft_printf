@@ -443,45 +443,45 @@ void print_o(t_printf *p)
   int width;
   int prec;
   int length;
-  char  flag;
   int i;
-  int sign;
   int lattice;
+  int crutch;
+  int crutch1;
+  int prec_nul;
 
   p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
 
   n = va_arg(p->argptr, long long);
-  length = (n > 0) ? ft_count_p(n, 8) : 0 ;
+  length =  ft_count_p(n, 8) ;
    
   buf = (p->f_zero) ? '0' : ' ';
-  lattice = (p->f_lattice ) ? 1 : 0;
-  prec = (p->f_prec) ? p->prec - length - ((lattice || (0 == n)) ? 1 : 0) : 0;
+  lattice = (p->f_lattice && (n != 0)) ? 1 : 0;
+
+  prec = (p->f_prec) ? p->prec - (length + lattice) : 0;
   prec = (prec > 0) ? prec : 0;
+  prec_nul = (p->f_prec && (0 == p->prec)) ? 1 : 0;
+  crutch = (p->f_lattice && prec_nul) ? 1 : 0;
+  crutch1 = ((0 == n) && prec_nul ) ? 1 : 0;
 
-  width = (p->f_width) ? p->width - length - ((lattice || (0 == n)) ? 1 : 0) : 0;
-  // width = (0 == n) ? width + 1:   width;
- // width = (p->f_prec && (0 == n) && (0 == p->prec) && p->f_width) ? width + 1 : width;
-  width = (prec > 0) ? width - prec : width;
-  width = !(p->f_minus) ? width : 0;
-
+  width = (p->f_width) ? p->width - crutch + crutch1 - (length + lattice) - prec: 0;
+ 
   i = width;
-  while (i-- > 0)
+  while ((i-- > 0) && !p->f_minus)
     p->temp[p->ti++] = buf;
   
   i = prec;
   while (i-- > 0)
     p->temp[p->ti++] = '0';
 
-   if (lattice )
+  if (lattice )
     p->temp[p->ti++] = '0';
-
-//  if ((0 != n) || (p->f_prec && (0 != p->prec)) ||  (!p->f_prec || (0 == n) && (lattice != 1)))
-    if ((0 != n) || (p->f_prec && (0 != p->prec)) || (!p->f_prec && (0 == n) && !lattice ) ) 
-      ft_itoa_base(p, n, 8);
+  
+  if (!(crutch1) || crutch)
+    ft_itoa_base(p, n, 8);
     
-  if ((p->f_width) && (p->width > p->ti) && p->f_minus) //ti
-      while(p->width > p->ti)
-        p->temp[p->ti++] = ' ';
+  i = width;
+  while ((i-- > 0) && p->f_minus)
+    p->temp[p->ti++] = ' ';
 
   data_record(p);
 }
@@ -648,7 +648,7 @@ int print_ub(t_printf *p)
   // p->temp[p->ti++] = 'B';
 
   if (('\0' == p->format[p->fi + 1]) ||
-      !(ft_cinstr(&(p->format[p->fi + 1]), "cp%sdioxXfF")))
+      !(ft_cinstr(&(p->format[p->fi + 1]), "cp%sdiouxXfF")))
   {
     //ft_strncpy(p->temp, p->format[p->fi + 1], ft_strlen(&(p->format[p->fi + 1])));
     p->temp[p->ti++] = 'U';
@@ -728,7 +728,7 @@ int  distribution(t_printf *p, char c)
     print_per(p);
   else if ('s' == c)
     print_s(p);
-  else if (('d' == c) || ('i' == c))
+  else if (('d' == c) || ('i' == c) || ('u' == c))
     print_d(p);
   else if ('o' == c)
     print_o(p);
