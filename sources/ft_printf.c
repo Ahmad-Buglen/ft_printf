@@ -10,7 +10,6 @@ void		ft_putnstr(char const *s, size_t n)
     // if n == 0 ?
 }
 
-
 int ft_power(int n, int power)
 {
 	int rez;
@@ -239,37 +238,46 @@ unsigned long long rounding(unsigned long long frac, int prec,
   int j;
   int width;
   int digit;
+  int digit1;
   int zero;
+
+  int test;
   
-  if (prec >= 19)
-    prec = 19;
+  if (prec >= PREC)
+    prec = PREC;
   else 
     prec += 1;
 
-    zero = ft_abs(ft_count_p(frac, 10) - 19);
-    width = prec - zero;
-    frac = frac / pow(10, ft_abs(width - (19 - zero)));
+  zero = ft_abs(ft_count_p(frac, 10) - PREC);
+  width = prec - zero;
+  frac = frac / (unsigned long long)pow(10, ft_abs(width - (PREC - zero)));
 
-  // width = ft_count_p(fract)  - prec
-  // fract = fract / pow(10, );
-  // j = 1;
-  // while ((i > 0) && !remainder)
-  // {
-    digit = frac % 10;
-    if (digit + 5 > 9)
+  digit = frac % 10;
+  digit1 = (frac % 100) / 10; 
+  if (digit + 5 > 9)
+  {
+    frac -= digit;
+    if ((ft_count_p(frac + 10, 10) > ft_count_p(frac, 10)) && (0 == zero))
     {
-      frac -= digit;
-      if ((ft_count_p(frac + 10, 10) > ft_count_p(frac, 10)) && (0 == zero))
-      {
-          *whol += 1;
-          frac = 0;
-      }
-      else
-        frac += 10;
+      *whol += 1;
+      frac = 0;
     }
-  //   ++j;
-  //   --i;
-  // }
+    else
+      frac += 10;
+  }
+  else if (digit1 + 5 > 9)
+  {
+    // frac /= 10;
+    // frac -= digit1;
+    // if ((ft_count_p(frac + 10, 10) > ft_count_p(frac, 10)) && (0 == zero))
+    // {
+    //   *whol += 1;
+    //   frac = 0;
+    // }
+    // else
+      frac += 1;
+  }
+ 
   return(frac);
 }
 
@@ -300,7 +308,7 @@ void print_f(t_printf *p)
   prec = (prec > 0) ? prec : 0;
   
   unsigned long long temp = n;
-    frac = (n - temp) * pow(10.0, 19);
+    frac = (n - temp) * pow(10.0, PREC);
     whol = n;
   frac = rounding(frac, prec, &whol);
 
@@ -385,51 +393,43 @@ void print_x(t_printf *p)
   int width;
   int prec;
   int length;
-  char  flag;
   int i;
-  int sign;
+  int crutch;
   int lattice;
 
   p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
-  p->f_space = (p->f_plus) ? false : p->f_space;
 
   n = va_arg(p->argptr, unsigned long long);
   length = ft_count_p(n, 16);
   buf = (p->f_zero) ? '0' : ' ';
   lattice = (p->f_lattice && n != 0) ? 2 : 0;
-  prec = (p->f_prec) ? p->prec - length : 0;
-  prec = (prec > 0) ? prec : 0;
-
-  width = (p->f_width) ? p->width - (length + lattice) : 0;
-  width = ((p->f_prec) && (0 == n) && (0 == p->prec) && (p->f_width)) ? width + 1 : width;
-  width = (prec > 0) ? width - prec : width;
-  width = !(p->f_minus) ? width : 0;
-
+  prec = ((p->f_prec) && ((p->prec - length) > 0)) ? p->prec - length : 0;
+  crutch = (p->f_prec && (0 == n) && (0 == p->prec) ) ? 1 : 0;
+  width = (p->f_width) ? p->width - (length + lattice) - prec + crutch : 0;
 
   i = width;
-  while (!(p->f_zero) &&  (i-- > 0))
+  while (!p->f_minus && !p->f_zero && (i-- > 0))
     p->temp[p->ti++] = buf;
 
-   if (2 == lattice)
-   {
+  if (2 == lattice)
+  {
     p->temp[p->ti++] = '0';
     p->temp[p->ti++] = ('x' == p->format[p->fi]) ? 'x' : 'X';
-   }
+  }
 
   while ((p->f_zero) &&  (i-- > 0))
     p->temp[p->ti++] = buf;
-
-     i = prec;
+  
+  i = prec;
   while (i-- > 0)
     p->temp[p->ti++] = '0';
 
- if (!((0 == n) && p->f_prec && (0 == p->prec)))
+ if (!crutch)
     ft_itoa_base(p, n, 16);
  
-
-  if ((p->f_width) && (p->width > p->ti) && p->f_minus) //ti
-      while(p->width > p->ti)
-        p->temp[p->ti++] = ' ';
+  i = width;
+  while (p->f_minus && (i-- > 0))
+    p->temp[p->ti++] = ' ';
 
   data_record(p);
 }
@@ -602,6 +602,7 @@ void printf_init(t_printf *p)
   p->f_hh = false;
   p->f_l = false;
   p->f_ll = false;
+  p->f_L = false;
 }
 
 void print_c(t_printf *p)
@@ -648,7 +649,7 @@ int print_ub(t_printf *p)
   // p->temp[p->ti++] = 'B';
 
   if (('\0' == p->format[p->fi + 1]) ||
-      !(ft_cinstr(&(p->format[p->fi + 1]), "cp%sdiouxXfF")))
+      !(ft_cinstr(&(p->format[p->fi + 1]), FLAGS)))
   {
     //ft_strncpy(p->temp, p->format[p->fi + 1], ft_strlen(&(p->format[p->fi + 1])));
     p->temp[p->ti++] = 'U';
@@ -678,6 +679,11 @@ void modif_check(t_printf *p)
     p->fi += 2;
   }
   else if ('l' == p->format[p->fi])
+  {
+    p->f_l = true;
+    ++p->fi;
+  }
+  else if ('L' == p->format[p->fi])
   {
     p->f_l = true;
     ++p->fi;

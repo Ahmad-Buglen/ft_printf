@@ -5,6 +5,8 @@
 # include "../libft/libft.h"
 
 # define BUFF 65536
+# define FLAGS "cp%sdiouxXfF"
+# define PREC 20
 
 typedef enum  s_bool
 {
@@ -44,6 +46,7 @@ typedef struct s_printf
   t_bool      f_hh;
   t_bool      f_l;
   t_bool      f_ll;
+  t_bool      f_L;
   int         width;
   int         prec;
   va_list     argptr;

@@ -1,1878 +1,989 @@
-Test 294 (i_size_l_pos_ref) : FAILED.
-    First line of code: {return test("%li", l_pos_1);}
-      expected output : "22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : "22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 295 (i_size_l_pos_ref_lmax) : FAILED.
-    First line of code: {return test("%li", lmax);}
-      expected output : "9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : "9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 296 (i_size_ll_pos_ref_llmax) : FAILED.
-    First line of code: {return test("%lli", llmax);}
-      expected output : "9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : "9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 297 (i_size_l_neg_ref) : FAILED.
-    First line of code: {return test("%li", l_neg_1);}
-      expected output : "-22337203685477"
-      your output     : "921221019"
-      expected (nonprintable as hex) : "-22337203685477"
-      actual   (nonprintable as hex) : "921221019"
-
-Test 298 (i_size_ll_pos_ref) : FAILED.
-    First line of code: {return test("%lli", ll_pos_1);}
-      expected output : "22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : "22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 299 (i_size_ll_neg_ref) : FAILED.
-    First line of code: {return test("%lli", ll_neg_1);}
-      expected output : "-22337203685477"
-      your output     : "921221019"
-      expected (nonprintable as hex) : "-22337203685477"
-      actual   (nonprintable as hex) : "921221019"
-
-Test 300 (i_size_l_pos_big) : FAILED.
-    First line of code: {return test("%li", 22337203685477);}
-      expected output : "22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : "22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 301 (i_size_l_neg_big) : FAILED.
-    First line of code: {return test("%li", -22337203685477);}
-      expected output : "-22337203685477"
-      your output     : "921221019"
-      expected (nonprintable as hex) : "-22337203685477"
-      actual   (nonprintable as hex) : "921221019"
-
-Test 302 (i_size_ll_pos_big) : FAILED.
-    First line of code: {return test("%lli", 522337203685470ll);}
-      expected output : "522337203685470"
-      your output     : "461015134"
-      expected (nonprintable as hex) : "522337203685470"
-      actual   (nonprintable as hex) : "461015134"
-
-Test 303 (i_size_ll_neg_big) : FAILED.
-    First line of code: {return test("%lli", -522337203685470ll);}
-      expected output : "-522337203685470"
-      your output     : "-461015134"
-      expected (nonprintable as hex) : "-522337203685470"
-      actual   (nonprintable as hex) : "-461015134"
-
-Test 304 (i_llmax) : FAILED.
-    First line of code: {return test("%lli", 9223372036854775807ll);}
-      expected output : "9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : "9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 305 (i_llmin) : FAILED.
-    First line of code: {return test("%lli", llmin);}
-      expected output : "-9223372036854775807"
-      your output     : "1"
-      expected (nonprintable as hex) : "-9223372036854775807"
-      actual   (nonprintable as hex) : "1"
-
-Test 306 (i_lmax) : FAILED.
-    First line of code: {return test("%li", 9223372036854775807l);}
-      expected output : "9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : "9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 307 (i_lmin) : FAILED.
-    First line of code: {return test("%li", lmin);}
-      expected output : "-9223372036854775807"
-      your output     : "1"
-      expected (nonprintable as hex) : "-9223372036854775807"
-      actual   (nonprintable as hex) : "1"
-
-Test 312 (i_size_l_pos_big_zp) : FAILED.
-    First line of code: {return test("%037li", 22337203685477l);}
-      expected output : "0000000000000000000000022337203685477"
-      your output     : "-000000000000000000000000000921221019"
-      expected (nonprintable as hex) : "0000000000000000000000022337203685477"
-      actual   (nonprintable as hex) : "-000000000000000000000000000921221019"
-
-Test 313 (i_size_l_neg_big_prec) : FAILED.
-    First line of code: {return test("%.37li", -22337203685477l);}
-      expected output : "-0000000000000000000000022337203685477"
-      your output     : "0000000000000000000000000000921221019"
-      expected (nonprintable as hex) : "-0000000000000000000000022337203685477"
-      actual   (nonprintable as hex) : "0000000000000000000000000000921221019"
-
-Test 314 (i_size_ll_pos_big_width) : FAILED.
-    First line of code: {return test("%37lli", 522337203685470ll);}
-      expected output : "                      522337203685470"
-      your output     : "                            461015134"
-      expected (nonprintable as hex) : "                      522337203685470"
-      actual   (nonprintable as hex) : "                            461015134"
-
-Test 315 (i_size_ll_neg_big_lj) : FAILED.
-    First line of code: {return test("%-37lli", -522337203685470ll);}
-      expected output : "-522337203685470                     "
-      your output     : "-461015134                           "
-      expected (nonprintable as hex) : "-522337203685470                     "
-      actual   (nonprintable as hex) : "-461015134                           "
-
-Test 316 (i_size_l_pos_big_as) : FAILED.
-    First line of code: {return test("%+li", 22337203685477l);}
-      expected output : "+22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : "+22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 318 (i_size_follows_i_l) : FAILED.
-    First line of code: {return test("[%i] [%li]", i_pos_1, l_pos_1);}
-      expected output : "[878023] [22337203685477]"
-      your output     : "[878023] [-921221019]"
-      expected (nonprintable as hex) : "[878023] [22337203685477]"
-      actual   (nonprintable as hex) : "[878023] [-921221019]"
-
-Test 319 (i_size_follows_i_ll) : FAILED.
-    First line of code: {return test("[%i] [%lli]", i_pos_1, ll_pos_1);}
-      expected output : "[878023] [22337203685477]"
-      your output     : "[878023] [-921221019]"
-      expected (nonprintable as hex) : "[878023] [22337203685477]"
-      actual   (nonprintable as hex) : "[878023] [-921221019]"
-
-Test 322 (i_size_ll_hh_ll) : FAILED.
-    First line of code: {return test("%lli%hhi%lli", ll_pos_1, ch_neg_1, ll_neg_1);}
-      expected output : "22337203685477-87-22337203685477"
-      your output     : "-921221019-87921221019"
-      expected (nonprintable as hex) : "22337203685477-87-22337203685477"
-      actual   (nonprintable as hex) : "-921221019-87921221019"
-
-Test 323 (i_size_h_l_hh) : FAILED.
-    First line of code: {return test("%hi%li%hhi", sh_pos_1, l_neg_1, ch_neg_1);}
-      expected output : "3047-22337203685477-87"
-      your output     : "3047921221019-87"
-      expected (nonprintable as hex) : "3047-22337203685477-87"
-      actual   (nonprintable as hex) : "3047921221019-87"
-
-Test 324 (i_size_l_hh_h) : FAILED.
-    First line of code: {return test("%li%hhi%hi", l_neg_1, ch_pos_1, sh_pos_1);}
-      expected output : "-223372036854771003047"
-      your output     : "9212210191003047"
-      expected (nonprintable as hex) : "-223372036854771003047"
-      actual   (nonprintable as hex) : "9212210191003047"
-
-Test 325 (i_size_n_ll_hh) : FAILED.
-    First line of code: {return test("%i%lli%hhi", i_pos_1, ll_neg_1, ch_pos_1);}
-      expected output : "878023-22337203685477100"
-      your output     : "878023921221019100"
-      expected (nonprintable as hex) : "878023-22337203685477100"
-      actual   (nonprintable as hex) : "878023921221019100"
-
-Test 326 (i_size_ll_n_l) : FAILED.
-    First line of code: {return test("%lli%i%li", ll_neg_1, i_pos_1, l_pos_1);}
-      expected output : "-2233720368547787802322337203685477"
-      your output     : "921221019878023-921221019"
-      expected (nonprintable as hex) : "-2233720368547787802322337203685477"
-      actual   (nonprintable as hex) : "921221019878023-921221019"
-
-Test 460 (i_size_l_pos_ref_sp) : FAILED.
-    First line of code: {return test("% li", l_pos_1);}
-      expected output : " 22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : " 22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 461 (i_size_l_neg_ref_sp) : FAILED.
-    First line of code: {return test("% li", l_neg_1);}
-      expected output : "-22337203685477"
-      your output     : " 921221019"
-      expected (nonprintable as hex) : "-22337203685477"
-      actual   (nonprintable as hex) : " 921221019"
-
-Test 462 (i_size_ll_pos_ref_sp) : FAILED.
-    First line of code: {return test("% lli", ll_pos_1);}
-      expected output : " 22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : " 22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 463 (i_size_ll_neg_ref_sp) : FAILED.
-    First line of code: {return test("% lli", ll_neg_1);}
-      expected output : "-22337203685477"
-      your output     : " 921221019"
-      expected (nonprintable as hex) : "-22337203685477"
-      actual   (nonprintable as hex) : " 921221019"
-
-Test 464 (i_size_l_pos_big_sp) : FAILED.
-    First line of code: {return test("% li", 22337203685477l);}
-      expected output : " 22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : " 22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 465 (i_size_l_neg_big_sp) : FAILED.
-    First line of code: {return test("% li", -22337203685477l);}
-      expected output : "-22337203685477"
-      your output     : " 921221019"
-      expected (nonprintable as hex) : "-22337203685477"
-      actual   (nonprintable as hex) : " 921221019"
-
-Test 466 (i_size_ll_pos_big_sp) : FAILED.
-    First line of code: {return test("% lli", 522337203685470ll);}
-      expected output : " 522337203685470"
-      your output     : " 461015134"
-      expected (nonprintable as hex) : " 522337203685470"
-      actual   (nonprintable as hex) : " 461015134"
-
-Test 467 (i_size_ll_neg_big_sp) : FAILED.
-    First line of code: {return test("% lli", -522337203685470ll);}
-      expected output : "-522337203685470"
-      your output     : "-461015134"
-      expected (nonprintable as hex) : "-522337203685470"
-      actual   (nonprintable as hex) : "-461015134"
-
-Test 468 (i_llmax_sp) : FAILED.
-    First line of code: {return test("% lli", 9223372036854775807ll);}
-      expected output : " 9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : " 9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 469 (i_llmin_sp) : FAILED.
-    First line of code: {return test("% lli", llmin);}
-      expected output : "-9223372036854775807"
-      your output     : " 1"
-      expected (nonprintable as hex) : "-9223372036854775807"
-      actual   (nonprintable as hex) : " 1"
-
-Test 470 (i_lmax_sp) : FAILED.
-    First line of code: {return test("% li", 9223372036854775807l);}
-      expected output : " 9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : " 9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 471 (i_lmin_sp) : FAILED.
-    First line of code: {return test("% li", lmin);}
-      expected output : "-9223372036854775807"
-      your output     : " 1"
-      expected (nonprintable as hex) : "-9223372036854775807"
-      actual   (nonprintable as hex) : " 1"
-
-Test 622 (d_size_l_pos_ref) : FAILED.
-    First line of code: {return test("%ld", l_pos_1);}
-      expected output : "22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : "22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 623 (d_size_l_pos_ref_lmax) : FAILED.
-    First line of code: {return test("%ld", lmax);}
-      expected output : "9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : "9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 624 (d_size_ll_pos_ref_llmax) : FAILED.
-    First line of code: {return test("%lld", llmax);}
-      expected output : "9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : "9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 625 (d_size_l_neg_ref) : FAILED.
-    First line of code: {return test("%ld", l_neg_1);}
-      expected output : "-22337203685477"
-      your output     : "921221019"
-      expected (nonprintable as hex) : "-22337203685477"
-      actual   (nonprintable as hex) : "921221019"
-
-Test 626 (d_size_ll_pos_ref) : FAILED.
-    First line of code: {return test("%lld", ll_pos_1);}
-      expected output : "22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : "22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 627 (d_size_ll_neg_ref) : FAILED.
-    First line of code: {return test("%lld", ll_neg_1);}
-      expected output : "-22337203685477"
-      your output     : "921221019"
-      expected (nonprintable as hex) : "-22337203685477"
-      actual   (nonprintable as hex) : "921221019"
-
-Test 628 (d_size_l_pos_big) : FAILED.
-    First line of code: {return test("%ld", 22337203685477);}
-      expected output : "22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : "22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 629 (d_size_l_neg_big) : FAILED.
-    First line of code: {return test("%ld", -22337203685477);}
-      expected output : "-22337203685477"
-      your output     : "921221019"
-      expected (nonprintable as hex) : "-22337203685477"
-      actual   (nonprintable as hex) : "921221019"
-
-Test 630 (d_size_ll_pos_big) : FAILED.
-    First line of code: {return test("%lld", 522337203685470ll);}
-      expected output : "522337203685470"
-      your output     : "461015134"
-      expected (nonprintable as hex) : "522337203685470"
-      actual   (nonprintable as hex) : "461015134"
-
-Test 631 (d_size_ll_neg_big) : FAILED.
-    First line of code: {return test("%lld", -522337203685470ll);}
-      expected output : "-522337203685470"
-      your output     : "-461015134"
-      expected (nonprintable as hex) : "-522337203685470"
-      actual   (nonprintable as hex) : "-461015134"
-
-Test 632 (d_llmax) : FAILED.
-    First line of code: {return test("%lld", 9223372036854775807ll);}
-      expected output : "9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : "9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 633 (d_llmin) : FAILED.
-    First line of code: {return test("%lld", llmin);}
-      expected output : "-9223372036854775807"
-      your output     : "1"
-      expected (nonprintable as hex) : "-9223372036854775807"
-      actual   (nonprintable as hex) : "1"
-
-Test 634 (d_lmax) : FAILED.
-    First line of code: {return test("%ld", 9223372036854775807l);}
-      expected output : "9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : "9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 635 (d_lmin) : FAILED.
-    First line of code: {return test("%ld", lmin);}
-      expected output : "-9223372036854775807"
-      your output     : "1"
-      expected (nonprintable as hex) : "-9223372036854775807"
-      actual   (nonprintable as hex) : "1"
-
-Test 640 (d_size_l_pos_big_zp) : FAILED.
-    First line of code: {return test("%037ld", 22337203685477l);}
-      expected output : "0000000000000000000000022337203685477"
-      your output     : "-000000000000000000000000000921221019"
-      expected (nonprintable as hex) : "0000000000000000000000022337203685477"
-      actual   (nonprintable as hex) : "-000000000000000000000000000921221019"
-
-Test 641 (d_size_l_neg_big_prec) : FAILED.
-    First line of code: {return test("%.37ld", -22337203685477l);}
-      expected output : "-0000000000000000000000022337203685477"
-      your output     : "0000000000000000000000000000921221019"
-      expected (nonprintable as hex) : "-0000000000000000000000022337203685477"
-      actual   (nonprintable as hex) : "0000000000000000000000000000921221019"
-
-Test 642 (d_size_ll_pos_big_width) : FAILED.
-    First line of code: {return test("%37lld", 522337203685470ll);}
-      expected output : "                      522337203685470"
-      your output     : "                            461015134"
-      expected (nonprintable as hex) : "                      522337203685470"
-      actual   (nonprintable as hex) : "                            461015134"
-
-Test 643 (d_size_ll_neg_big_lj) : FAILED.
-    First line of code: {return test("%-37lld", -522337203685470ll);}
-      expected output : "-522337203685470                     "
-      your output     : "-461015134                           "
-      expected (nonprintable as hex) : "-522337203685470                     "
-      actual   (nonprintable as hex) : "-461015134                           "
-
-Test 644 (d_size_l_pos_big_as) : FAILED.
-    First line of code: {return test("%+ld", 22337203685477l);}
-      expected output : "+22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : "+22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 646 (d_size_follows_i_l) : FAILED.
-    First line of code: {return test("[%d] [%ld]", i_pos_1, l_pos_1);}
-      expected output : "[878023] [22337203685477]"
-      your output     : "[878023] [-921221019]"
-      expected (nonprintable as hex) : "[878023] [22337203685477]"
-      actual   (nonprintable as hex) : "[878023] [-921221019]"
-
-Test 647 (d_size_follows_i_ll) : FAILED.
-    First line of code: {return test("[%d] [%lld]", i_pos_1, ll_pos_1);}
-      expected output : "[878023] [22337203685477]"
-      your output     : "[878023] [-921221019]"
-      expected (nonprintable as hex) : "[878023] [22337203685477]"
-      actual   (nonprintable as hex) : "[878023] [-921221019]"
-
-Test 650 (d_size_ll_hh_ll) : FAILED.
-    First line of code: {return test("%lld%hhd%lld", ll_pos_1, ch_neg_1, ll_neg_1);}
-      expected output : "22337203685477-87-22337203685477"
-      your output     : "-921221019-87921221019"
-      expected (nonprintable as hex) : "22337203685477-87-22337203685477"
-      actual   (nonprintable as hex) : "-921221019-87921221019"
-
-Test 651 (d_size_h_l_hh) : FAILED.
-    First line of code: {return test("%hd%ld%hhd", sh_pos_1, l_neg_1, ch_neg_1);}
-      expected output : "3047-22337203685477-87"
-      your output     : "3047921221019-87"
-      expected (nonprintable as hex) : "3047-22337203685477-87"
-      actual   (nonprintable as hex) : "3047921221019-87"
-
-Test 652 (d_size_l_hh_h) : FAILED.
-    First line of code: {return test("%ld%hhd%hd", l_neg_1, ch_pos_1, sh_pos_1);}
-      expected output : "-223372036854771003047"
-      your output     : "9212210191003047"
-      expected (nonprintable as hex) : "-223372036854771003047"
-      actual   (nonprintable as hex) : "9212210191003047"
-
-Test 653 (d_size_n_ll_hh) : FAILED.
-    First line of code: {return test("%d%lld%hhd", i_pos_1, ll_neg_1, ch_pos_1);}
-      expected output : "878023-22337203685477100"
-      your output     : "878023921221019100"
-      expected (nonprintable as hex) : "878023-22337203685477100"
-      actual   (nonprintable as hex) : "878023921221019100"
-
-Test 654 (d_size_ll_n_l) : FAILED.
-    First line of code: {return test("%lli%d%ld", ll_neg_1, i_pos_1, l_pos_1);}
-      expected output : "-2233720368547787802322337203685477"
-      your output     : "921221019878023-921221019"
-      expected (nonprintable as hex) : "-2233720368547787802322337203685477"
-      actual   (nonprintable as hex) : "921221019878023-921221019"
-
-Test 788 (d_size_l_pos_ref_sp) : FAILED.
-    First line of code: {return test("% ld", l_pos_1);}
-      expected output : " 22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : " 22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 789 (d_size_l_neg_ref_sp) : FAILED.
-    First line of code: {return test("% ld", l_neg_1);}
-      expected output : "-22337203685477"
-      your output     : " 921221019"
-      expected (nonprintable as hex) : "-22337203685477"
-      actual   (nonprintable as hex) : " 921221019"
-
-Test 790 (d_size_ll_pos_ref_sp) : FAILED.
-    First line of code: {return test("% lld", ll_pos_1);}
-      expected output : " 22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : " 22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 791 (d_size_ll_neg_ref_sp) : FAILED.
-    First line of code: {return test("% lld", ll_neg_1);}
-      expected output : "-22337203685477"
-      your output     : " 921221019"
-      expected (nonprintable as hex) : "-22337203685477"
-      actual   (nonprintable as hex) : " 921221019"
-
-Test 792 (d_size_l_pos_big_sp) : FAILED.
-    First line of code: {return test("% ld", 22337203685477l);}
-      expected output : " 22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : " 22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 793 (d_size_l_neg_big_sp) : FAILED.
-    First line of code: {return test("% ld", -22337203685477l);}
-      expected output : "-22337203685477"
-      your output     : " 921221019"
-      expected (nonprintable as hex) : "-22337203685477"
-      actual   (nonprintable as hex) : " 921221019"
-
-Test 794 (d_size_ll_pos_big_sp) : FAILED.
-    First line of code: {return test("% lld", 522337203685470ll);}
-      expected output : " 522337203685470"
-      your output     : " 461015134"
-      expected (nonprintable as hex) : " 522337203685470"
-      actual   (nonprintable as hex) : " 461015134"
-
-Test 795 (d_size_ll_neg_big_sp) : FAILED.
-    First line of code: {return test("% lld", -522337203685470ll);}
-      expected output : "-522337203685470"
-      your output     : "-461015134"
-      expected (nonprintable as hex) : "-522337203685470"
-      actual   (nonprintable as hex) : "-461015134"
-
-Test 796 (d_llmax_sp) : FAILED.
-    First line of code: {return test("% lld", 9223372036854775807ll);}
-      expected output : " 9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : " 9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 797 (d_llmin_sp) : FAILED.
-    First line of code: {return test("% lld", llmin);}
-      expected output : "-9223372036854775807"
-      your output     : " 1"
-      expected (nonprintable as hex) : "-9223372036854775807"
-      actual   (nonprintable as hex) : " 1"
-
-Test 798 (d_lmax_sp) : FAILED.
-    First line of code: {return test("% ld", 9223372036854775807l);}
-      expected output : " 9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : " 9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 799 (d_lmin_sp) : FAILED.
-    First line of code: {return test("% ld", lmin);}
-      expected output : "-9223372036854775807"
-      your output     : " 1"
-      expected (nonprintable as hex) : "-9223372036854775807"
-      actual   (nonprintable as hex) : " 1"
-
-Test 816 (mix_hhi_str_lli_str) : FAILED.
-    First line of code: {return test("%hhi%s%lli%s", ch_pos_1, str_3, ll_neg_1, str_2);}
-      expected output : "100this is a longer string-22337203685477panda"
-      your output     : "100this is a longer string921221019panda"
-      expected (nonprintable as hex) : "100this is a longer string-22337203685477panda"
-      actual   (nonprintable as hex) : "100this is a longer string921221019panda"
-
-Test 817 (mix_str_hi_str_li) : FAILED.
-    First line of code: {return test("%s%hi%s%li", str_1, sh_neg_1, str_3, l_neg_1);}
-      expected output : "hello world-8875this is a longer string-22337203685477"
-      your output     : "hello world-8875this is a longer string921221019"
-      expected (nonprintable as hex) : "hello world-8875this is a longer string-22337203685477"
-      actual   (nonprintable as hex) : "hello world-8875this is a longer string921221019"
-
-Test 818 (mix_str_hi_str_li_emptystr) : FAILED.
-    First line of code: {return test("%s%hi%s%li", str_empty, sh_neg_1, str_3, l_neg_1);}
-      expected output : "-8875this is a longer string-22337203685477"
-      your output     : "-8875this is a longer string921221019"
-      expected (nonprintable as hex) : "-8875this is a longer string-22337203685477"
-      actual   (nonprintable as hex) : "-8875this is a longer string921221019"
-
-Test 822 (u_uintmax) : FAILED.
-    First line of code: {return test("%u", 4294967295u);}
-      expected output : "4294967295"
-      your output     : "-1"
-      expected (nonprintable as hex) : "4294967295"
-      actual   (nonprintable as hex) : "-1"
-
-Test 864 (u_size_l_pos_ref) : FAILED.
-    First line of code: {return test("%lu", ul_pos_1);}
-      expected output : "22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : "22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 865 (u_size_ll_pos_ref) : FAILED.
-    First line of code: {return test("%llu", ull_pos_1);}
-      expected output : "22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : "22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 866 (u_size_l_pos_big) : FAILED.
-    First line of code: {return test("%lu", 22337203685477ul);}
-      expected output : "22337203685477"
-      your output     : "-921221019"
-      expected (nonprintable as hex) : "22337203685477"
-      actual   (nonprintable as hex) : "-921221019"
-
-Test 867 (u_size_ll_pos_big) : FAILED.
-    First line of code: {return test("%llu", 522337203685470ull);}
-      expected output : "522337203685470"
-      your output     : "461015134"
-      expected (nonprintable as hex) : "522337203685470"
-      actual   (nonprintable as hex) : "461015134"
-
-Test 868 (u_ullmax) : FAILED.
-    First line of code: {return test("%llu", ullmax);}
-      expected output : "9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : "9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 869 (u_ulmax) : FAILED.
-    First line of code: {return test("%lu", ulmax);}
-      expected output : "9223372036854775807"
-      your output     : "-1"
-      expected (nonprintable as hex) : "9223372036854775807"
-      actual   (nonprintable as hex) : "-1"
-
-Test 872 (u_size_l_pos_big_zp) : FAILED.
-    First line of code: {return test("%037lu", 22337203685477ul);}
-      expected output : "0000000000000000000000022337203685477"
-      your output     : "-000000000000000000000000000921221019"
-      expected (nonprintable as hex) : "0000000000000000000000022337203685477"
-      actual   (nonprintable as hex) : "-000000000000000000000000000921221019"
-
-Test 873 (u_size_ll_pos_big_width) : FAILED.
-    First line of code: {return test("%37llu", 522337203685470ull);}
-      expected output : "                      522337203685470"
-      your output     : "                            461015134"
-      expected (nonprintable as hex) : "                      522337203685470"
-      actual   (nonprintable as hex) : "                            461015134"
-
-Test 874 (u_size_ll_hh_ll) : FAILED.
-    First line of code: {return test("%llu%hhu%llu", ull_pos_1, uch_pos_1, ull_pos_1);}
-      expected output : "2233720368547710022337203685477"
-      your output     : "-921221019100-921221019"
-      expected (nonprintable as hex) : "2233720368547710022337203685477"
-      actual   (nonprintable as hex) : "-921221019100-921221019"
-
-Test 875 (u_size_h_l_hh) : FAILED.
-    First line of code: {return test("%hu%lu%hhu", ush_pos_1, ul_pos_1, uch_pos_1);}
-      expected output : "304722337203685477100"
-      your output     : "3047-921221019100"
-      expected (nonprintable as hex) : "304722337203685477100"
-      actual   (nonprintable as hex) : "3047-921221019100"
-
-Test 876 (u_size_l_hh_h) : FAILED.
-    First line of code: {return test("%lu%hhu%hu", ul_pos_1, uch_pos_1, ush_pos_1);}
-      expected output : "223372036854771003047"
-      your output     : "-9212210191003047"
-      expected (nonprintable as hex) : "223372036854771003047"
-      actual   (nonprintable as hex) : "-9212210191003047"
-
-Test 877 (u_size_n_ll_hh) : FAILED.
-    First line of code: {return test("%u%llu%hhu", ui_pos_1, ull_pos_1, uch_pos_1);}
-      expected output : "87802322337203685477100"
-      your output     : "878023-921221019100"
-      expected (nonprintable as hex) : "87802322337203685477100"
-      actual   (nonprintable as hex) : "878023-921221019100"
-
-Test 878 (u_size_ll_n_l) : FAILED.
-    First line of code: {return test("%llu%u%lu", ull_pos_1, ui_pos_1, ul_pos_1);}
-      expected output : "2233720368547787802322337203685477"
-      your output     : "-921221019878023-921221019"
-      expected (nonprintable as hex) : "2233720368547787802322337203685477"
-      actual   (nonprintable as hex) : "-921221019878023-921221019"
-
-Test 885 (mix_hhu_str_llu_str) : FAILED.
-    First line of code: {return test("%hhu%s%llu%s", uch_pos_1, str_3, ull_pos_1, str_2);}
-      expected output : "100this is a longer string22337203685477panda"
-      your output     : "100this is a longer string-921221019panda"
-      expected (nonprintable as hex) : "100this is a longer string22337203685477panda"
-      actual   (nonprintable as hex) : "100this is a longer string-921221019panda"
-
-Test 886 (mix_str_hu_str_lu) : FAILED.
-    First line of code: {return test("%s%hu%s%lu", str_1, ush_pos_1, str_3, ul_pos_1);}
-      expected output : "hello world3047this is a longer string22337203685477"
-      your output     : "hello world3047this is a longer string-921221019"
-      expected (nonprintable as hex) : "hello world3047this is a longer string22337203685477"
-      actual   (nonprintable as hex) : "hello world3047this is a longer string-921221019"
-
-Test 887 (mixed_test_0001) : FAILED.
-    First line of code: {return test(
-      expected output : "abc-8875hello22337203685477   -2233720368547700003047wassup             nopesomestuff3276700000000000223372036854770878023no22337203685477"
-      your output     : "abc-8875hello-00000921221019  92122101900003047wassup             nopesomestuff327670-0000000000000009212210190878023no-921221019"
-      expected (nonprintable as hex) : "abc-8875hello22337203685477   -2233720368547700003047wassup             nopesomestuff3276700000000000223372036854770878023no22337203685477"
-      actual   (nonprintable as hex) : "abc-8875hello-00000921221019  92122101900003047wassup             nopesomestuff327670-0000000000000009212210190878023no-921221019"
-
-Test 943 (x_size_ll_hh_ll) : FAILED.
-    First line of code: {return test("%llu%hhu%llx", ull_pos_1, uch_pos_1, ull_pos_1);}
-      expected output : "223372036854771001450c9174865"
-      your output     : "-9212210191001450c9174865"
-      expected (nonprintable as hex) : "223372036854771001450c9174865"
-      actual   (nonprintable as hex) : "-9212210191001450c9174865"
-
-Test 944 (x_size_h_l_hh) : FAILED.
-    First line of code: {return test("%hu%lu%hhx", ush_pos_1, ul_pos_1, uch_pos_1);}
-      expected output : "30472233720368547764"
-      your output     : "3047-92122101964"
-      expected (nonprintable as hex) : "30472233720368547764"
-      actual   (nonprintable as hex) : "3047-92122101964"
-
-Test 945 (x_size_l_hh_h) : FAILED.
-    First line of code: {return test("%lu%hhu%hx", ul_pos_1, uch_pos_1, ush_pos_1);}
-      expected output : "22337203685477100be7"
-      your output     : "-921221019100be7"
-      expected (nonprintable as hex) : "22337203685477100be7"
-      actual   (nonprintable as hex) : "-921221019100be7"
-
-Test 946 (x_size_n_ll_hh) : FAILED.
-    First line of code: {return test("%u%llu%hhx", ui_pos_1, ull_pos_1, uch_pos_1);}
-      expected output : "8780232233720368547764"
-      your output     : "878023-92122101964"
-      expected (nonprintable as hex) : "8780232233720368547764"
-      actual   (nonprintable as hex) : "878023-92122101964"
-
-Test 947 (x_size_ll_n_l) : FAILED.
-    First line of code: {return test("%llu%u%lx", ull_pos_1, ui_pos_1, ul_pos_1);}
-      expected output : "223372036854778780231450c9174865"
-      your output     : "-9212210198780231450c9174865"
-      expected (nonprintable as hex) : "223372036854778780231450c9174865"
-      actual   (nonprintable as hex) : "-9212210198780231450c9174865"
-
-Test 1003 (x_size_ll_hh_ll_af) : FAILED.
-    First line of code: {return test("%llu%hhu%#llx", ull_pos_1, uch_pos_1, ull_pos_1);}
-      expected output : "223372036854771000x1450c9174865"
-      your output     : "-9212210191000x1450c9174865"
-      expected (nonprintable as hex) : "223372036854771000x1450c9174865"
-      actual   (nonprintable as hex) : "-9212210191000x1450c9174865"
-
-Test 1005 (x_size_l_hh_h_af) : FAILED.
-    First line of code: {return test("%lu%hhu%#hx", ul_pos_1, uch_pos_1, ush_pos_1);}
-      expected output : "223372036854771000xbe7"
-      your output     : "-9212210191000xbe7"
-      expected (nonprintable as hex) : "223372036854771000xbe7"
-      actual   (nonprintable as hex) : "-9212210191000xbe7"
-
-Test 1006 (x_size_n_ll_hh_af) : FAILED.
-    First line of code: {return test("%#x%llu%hhx", ui_pos_1, ull_pos_1, uch_pos_1);}
-      expected output : "0xd65c72233720368547764"
-      your output     : "0xd65c7-92122101964"
-      expected (nonprintable as hex) : "0xd65c72233720368547764"
-      actual   (nonprintable as hex) : "0xd65c7-92122101964"
-
-Test 1007 (x_size_ll_n_l_af) : FAILED.
-    First line of code: {return test("%llu%u%#lx", ull_pos_1, ui_pos_1, ul_pos_1);}
-      expected output : "223372036854778780230x1450c9174865"
-      your output     : "-9212210198780230x1450c9174865"
-      expected (nonprintable as hex) : "223372036854778780230x1450c9174865"
-      actual   (nonprintable as hex) : "-9212210198780230x1450c9174865"
-
-Test 1075 (X_size_ll_hh_ll) : FAILED.
-    First line of code: {return test("%llu%hhu%llX", ull_pos_1, uch_pos_1, ull_pos_1);}
-      expected output : "223372036854771001450C9174865"
-      your output     : "-9212210191001450C9174865"
-      expected (nonprintable as hex) : "223372036854771001450C9174865"
-      actual   (nonprintable as hex) : "-9212210191001450C9174865"
-
-Test 1076 (X_size_h_l_hh) : FAILED.
-    First line of code: {return test("%hu%lu%hhX", ush_pos_1, ul_pos_1, uch_pos_1);}
-      expected output : "30472233720368547764"
-      your output     : "3047-92122101964"
-      expected (nonprintable as hex) : "30472233720368547764"
-      actual   (nonprintable as hex) : "3047-92122101964"
-
-Test 1077 (X_size_l_hh_h) : FAILED.
-    First line of code: {return test("%lu%hhu%hX", ul_pos_1, uch_pos_1, ush_pos_1);}
-      expected output : "22337203685477100BE7"
-      your output     : "-921221019100BE7"
-      expected (nonprintable as hex) : "22337203685477100BE7"
-      actual   (nonprintable as hex) : "-921221019100BE7"
-
-Test 1078 (X_size_n_ll_hh) : FAILED.
-    First line of code: {return test("%u%llu%hhX", ui_pos_1, ull_pos_1, uch_pos_1);}
-      expected output : "8780232233720368547764"
-      your output     : "878023-92122101964"
-      expected (nonprintable as hex) : "8780232233720368547764"
-      actual   (nonprintable as hex) : "878023-92122101964"
-
-Test 1079 (X_size_ll_n_l) : FAILED.
-    First line of code: {return test("%llu%u%lX", ull_pos_1, ui_pos_1, ul_pos_1);}
-      expected output : "223372036854778780231450C9174865"
-      your output     : "-9212210198780231450C9174865"
-      expected (nonprintable as hex) : "223372036854778780231450C9174865"
-      actual   (nonprintable as hex) : "-9212210198780231450C9174865"
-
-Test 1135 (X_size_ll_hh_ll_af) : FAILED.
-    First line of code: {return test("%llu%hhu%#llX", ull_pos_1, uch_pos_1, ull_pos_1);}
-      expected output : "223372036854771000X1450C9174865"
-      your output     : "-9212210191000X1450C9174865"
-      expected (nonprintable as hex) : "223372036854771000X1450C9174865"
-      actual   (nonprintable as hex) : "-9212210191000X1450C9174865"
-
-Test 1136 (X_size_h_l_hh_af) : FAILED.
-    First line of code: {return test("%#hx%lu%#hhX", ush_pos_1, ul_pos_1, uch_pos_1);}
-      expected output : "0xbe7223372036854770X64"
-      your output     : "0xbe7-9212210190X64"
-      expected (nonprintable as hex) : "0xbe7223372036854770X64"
-      actual   (nonprintable as hex) : "0xbe7-9212210190X64"
-
-Test 1137 (X_size_l_hh_h_af) : FAILED.
-    First line of code: {return test("%lu%hhu%#hX", ul_pos_1, uch_pos_1, ush_pos_1);}
-      expected output : "223372036854771000XBE7"
-      your output     : "-9212210191000XBE7"
-      expected (nonprintable as hex) : "223372036854771000XBE7"
-      actual   (nonprintable as hex) : "-9212210191000XBE7"
-
-Test 1138 (X_size_n_ll_hh_af) : FAILED.
-    First line of code: {return test("%#x%llu%#hhX", ui_pos_1, ull_pos_1, uch_pos_1);}
-      expected output : "0xd65c7223372036854770X64"
-      your output     : "0xd65c7-9212210190X64"
-      expected (nonprintable as hex) : "0xd65c7223372036854770X64"
-      actual   (nonprintable as hex) : "0xd65c7-9212210190X64"
-
-Test 1207 (o_size_ll_hh_ll) : FAILED.
-    First line of code: {return test("%llu%hhu%llo", ull_pos_1, uch_pos_1, ull_pos_1);}
-      expected output : "22337203685477100505031105644145"
-      your output     : "-921221019100505031105644145"
-      expected (nonprintable as hex) : "22337203685477100505031105644145"
-      actual   (nonprintable as hex) : "-921221019100505031105644145"
-
-Test 1208 (o_size_h_l_hh) : FAILED.
-    First line of code: {return test("%hu%lu%hho", ush_pos_1, ul_pos_1, uch_pos_1);}
-      expected output : "304722337203685477144"
-      your output     : "3047-921221019144"
-      expected (nonprintable as hex) : "304722337203685477144"
-      actual   (nonprintable as hex) : "3047-921221019144"
-
-Test 1209 (o_size_l_hh_h) : FAILED.
-    First line of code: {return test("%lu%hhu%ho", ul_pos_1, uch_pos_1, ush_pos_1);}
-      expected output : "223372036854771005747"
-      your output     : "-9212210191005747"
-      expected (nonprintable as hex) : "223372036854771005747"
-      actual   (nonprintable as hex) : "-9212210191005747"
-
-Test 1210 (o_size_n_ll_hh) : FAILED.
-    First line of code: {return test("%u%llu%hho", ui_pos_1, ull_pos_1, uch_pos_1);}
-      expected output : "87802322337203685477144"
-      your output     : "878023-921221019144"
-      expected (nonprintable as hex) : "87802322337203685477144"
-      actual   (nonprintable as hex) : "878023-921221019144"
-
-Test 1211 (o_size_ll_n_l) : FAILED.
-    First line of code: {return test("%llu%u%lo", ull_pos_1, ui_pos_1, ul_pos_1);}
-      expected output : "22337203685477878023505031105644145"
-      your output     : "-921221019878023505031105644145"
-      expected (nonprintable as hex) : "22337203685477878023505031105644145"
-      actual   (nonprintable as hex) : "-921221019878023505031105644145"
-
-Test 1267 (o_size_ll_hh_ll_af) : FAILED.
-    First line of code: {return test("%llu%hhu%#llo", ull_pos_1, uch_pos_1, ull_pos_1);}
-      expected output : "223372036854771000505031105644145"
-      your output     : "-9212210191000505031105644145"
-      expected (nonprintable as hex) : "223372036854771000505031105644145"
-      actual   (nonprintable as hex) : "-9212210191000505031105644145"
-
-Test 1268 (o_size_h_l_hh_af) : FAILED.
-    First line of code: {return test("%hu%lu%#hho", ush_pos_1, ul_pos_1, uch_pos_1);}
-      expected output : "3047223372036854770144"
-      your output     : "3047-9212210190144"
-      expected (nonprintable as hex) : "3047223372036854770144"
-      actual   (nonprintable as hex) : "3047-9212210190144"
-
-Test 1270 (o_size_n_ll_hh_af) : FAILED.
-    First line of code: {return test("%#o%llu%hho", ui_pos_1, ull_pos_1, uch_pos_1);}
-      expected output : "0326270722337203685477144"
-      your output     : "03262707-921221019144"
-      expected (nonprintable as hex) : "0326270722337203685477144"
-      actual   (nonprintable as hex) : "03262707-921221019144"
-
-Test 1312 (c_nullterm_5wlj) : FAILED.
-    First line of code: {return test("%-5c", '
-      expected output : "     "
-      your output     : "     "
-      expected (nonprintable as hex) : "\x00    "
-      actual   (nonprintable as hex) : "\x00\x00\x00\x00\x00"
-
-Test 1507 (f_stress_prec16_limits_big) : FAILED.
-    First line of code: {return test("%.16f",  0.999999999999999900);}
-      expected output : "0.9999999999999999"
-      your output     : "0.9999999999999998"
-      expected (nonprintable as hex) : "0.9999999999999999"
-      actual   (nonprintable as hex) : "0.9999999999999998"
-
-Test 1513 (f_stress_prec18_rndd) : FAILED.
-    First line of code: {return test("%.18f",        0.125978548534310421);}
-      expected output : "0.125978548534310425"
-      your output     : "0.125978548534310426"
-      expected (nonprintable as hex) : "0.125978548534310425"
-      actual   (nonprintable as hex) : "0.125978548534310426"
-
 Test 1758 (f_L_basic_1) : FAILED.
     First line of code: {return test("this %Lf float", 1.5l);}
       expected output : "this 1.500000 float"
-      your output     : "this f float"
+      your output     : "this 0.000000 float"
       expected (nonprintable as hex) : "this 1.500000 float"
-      actual   (nonprintable as hex) : "this f float"
+      actual   (nonprintable as hex) : "this 0.000000 float"
 
 Test 1759 (f_L_basic_fltonly) : FAILED.
     First line of code: {return test("%Lf", 7.5l);}
       expected output : "7.500000"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "7.500000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1760 (f_L_basic_whole) : FAILED.
     First line of code: {return test("%Lf", 1.0l);}
       expected output : "1.000000"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "1.000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1761 (f_L_basic_negative) : FAILED.
     First line of code: {return test("%Lf", -3.85l);}
       expected output : "-3.850000"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-3.850000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1762 (f_L_basic_positive_3_3) : FAILED.
     First line of code: {return test("%Lf", 573.924l);}
       expected output : "573.924000"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "573.924000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1763 (f_L_basic_negative_3_3) : FAILED.
     First line of code: {return test("%Lf", -958.125l);}
       expected output : "-958.125000"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-958.125000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1764 (f_L_basic_positive_smallfpart) : FAILED.
     First line of code: {return test("%Lf", 23.00041l);}
       expected output : "23.000410"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "23.000410"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1765 (f_L_basic_positive_allsmall) : FAILED.
     First line of code: {return test("%Lf", 0.000039l);}
       expected output : "0.000039"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "0.000039"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1766 (f_L_basic_negative_smallfpart) : FAILED.
     First line of code: {return test("%Lf", -7.00036l);}
       expected output : "-7.000360"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-7.000360"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1767 (f_L_basic_negative_allsmall) : FAILED.
     First line of code: {return test("%Lf", -0.00032l);}
       expected output : "-0.000320"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-0.000320"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1768 (f_L_basic_limits_allsmall_pos) : FAILED.
     First line of code: {return test("%Lf", 0.000001l);}
       expected output : "0.000001"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "0.000001"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1769 (f_L_basic_limits_allsmall_neg) : FAILED.
     First line of code: {return test("%Lf", -0.000001l);}
       expected output : "-0.000001"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-0.000001"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1770 (f_L_basic_limits_smallfpart_pos) : FAILED.
     First line of code: {return test("%Lf", 9873.000001l);}
       expected output : "9873.000001"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "9873.000001"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1771 (f_L_basic_limits_smallfpart_neg) : FAILED.
     First line of code: {return test("%Lf", -875.000001l);}
       expected output : "-875.000001"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-875.000001"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1772 (f_L_basic_limits_allbig_pos) : FAILED.
     First line of code: {return test("%Lf", 999.999999l);}
       expected output : "999.999999"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "999.999999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1773 (f_L_basic_limits_allbig_neg) : FAILED.
     First line of code: {return test("%Lf", -99.999999l);}
       expected output : "-99.999999"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-99.999999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1774 (f_L_basic_limits_bigfpart_pos) : FAILED.
     First line of code: {return test("%Lf", 0.999999l);}
       expected output : "0.999999"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "0.999999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1775 (f_L_basic_limits_bigfpart_neg) : FAILED.
     First line of code: {return test("%Lf", -0.999999l);}
       expected output : "-0.999999"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-0.999999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1776 (f_L_rndd_pos) : FAILED.
     First line of code: {return test("%Lf", 23.375094499l);}
       expected output : "23.375094"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "23.375094"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1777 (f_L_rndd_neg) : FAILED.
     First line of code: {return test("%Lf", -985.765426499l);}
       expected output : "-985.765426"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-985.765426"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1778 (f_L_rndu_pos) : FAILED.
     First line of code: {return test("%Lf", 0.08942555l);}
       expected output : "0.089426"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "0.089426"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1779 (f_L_rndu_neg) : FAILED.
     First line of code: {return test("%Lf", -56.2012685l);}
       expected output : "-56.201268"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-56.201268"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1780 (f_L_rndu_multidigit_pos) : FAILED.
     First line of code: {return test("%Lf", 43.4399999l);}
       expected output : "43.440000"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "43.440000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1781 (f_L_rndu_multidigit_neg) : FAILED.
     First line of code: {return test("%Lf", -5.0299999l);}
       expected output : "-5.030000"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-5.030000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1782 (f_L_rndd_multidigit_pos) : FAILED.
     First line of code: {return test("%Lf", 43.43999949l);}
       expected output : "43.439999"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "43.439999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1783 (f_L_rndd_multidigit_neg) : FAILED.
     First line of code: {return test("%Lf", -5.02999949l);}
       expected output : "-5.029999"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-5.029999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1784 (f_L_rndd_wholnobump_pos) : FAILED.
     First line of code: {return test("%Lf", 1.99999949l);}
       expected output : "1.999999"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "1.999999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1785 (f_L_rndd_wholnobump_neg) : FAILED.
     First line of code: {return test("%Lf", -0.99999949l);}
       expected output : "-0.999999"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-0.999999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1786 (f_L_rndu_bumpwhole_pos) : FAILED.
     First line of code: {return test("%Lf", 3.9999999l);}
       expected output : "4.000000"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "4.000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1787 (f_L_rndu_bumpwhole_neg) : FAILED.
     First line of code: {return test("%Lf", -5.9999999l);}
       expected output : "-6.000000"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-6.000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1788 (f_L_prec7_1) : FAILED.
     First line of code: {return test("this %.7Lf float", 1.5l);}
       expected output : "this 1.5000000 float"
-      your output     : "this f float"
+      your output     : "this 0.0000000 float"
       expected (nonprintable as hex) : "this 1.5000000 float"
-      actual   (nonprintable as hex) : "this f float"
+      actual   (nonprintable as hex) : "this 0.0000000 float"
 
 Test 1789 (f_L_prec7_fltonly) : FAILED.
     First line of code: {return test("%.7Lf", 7.5l);}
       expected output : "7.5000000"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "7.5000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1790 (f_L_prec7_whole) : FAILED.
     First line of code: {return test("%.7Lf", 1.0l);}
       expected output : "1.0000000"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "1.0000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1791 (f_L_prec7_negative) : FAILED.
     First line of code: {return test("%.7Lf", -3.85l);}
       expected output : "-3.8500000"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "-3.8500000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1792 (f_L_prec7_positive_3_3) : FAILED.
     First line of code: {return test("%.7Lf", 573.924l);}
       expected output : "573.9240000"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "573.9240000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1793 (f_L_prec7_negative_3_3) : FAILED.
     First line of code: {return test("%.7Lf", -958.125l);}
       expected output : "-958.1250000"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "-958.1250000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1794 (f_L_prec7_positive_smallfpart) : FAILED.
     First line of code: {return test("%.7Lf", 23.00041l);}
       expected output : "23.0004100"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "23.0004100"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1795 (f_L_prec7_positive_allsmall) : FAILED.
     First line of code: {return test("%.7Lf", 0.0000039l);}
       expected output : "0.0000039"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "0.0000039"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1796 (f_L_prec7_negative_smallfpart) : FAILED.
     First line of code: {return test("%.7Lf", -7.00036l);}
       expected output : "-7.0003600"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "-7.0003600"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1797 (f_L_prec7_negative_allsmall) : FAILED.
     First line of code: {return test("%.7Lf", -0.000032l);}
       expected output : "-0.0000320"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "-0.0000320"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1798 (f_L_prec7_limits_allsmall_pos) : FAILED.
     First line of code: {return test("%.7Lf", 0.0000001l);}
       expected output : "0.0000001"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "0.0000001"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1799 (f_L_prec7_limits_allsmall_neg) : FAILED.
     First line of code: {return test("%.7Lf", -0.0000001l);}
       expected output : "-0.0000001"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "-0.0000001"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1800 (f_L_prec7_limits_smallfpart_pos) : FAILED.
     First line of code: {return test("%.7Lf", 9873.000001l);}
       expected output : "9873.0000010"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "9873.0000010"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1801 (f_L_prec7_limits_smallfpart_neg) : FAILED.
     First line of code: {return test("%.7Lf", -875.000001l);}
       expected output : "-875.0000010"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "-875.0000010"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1802 (f_L_prec7_limits_allbig_pos) : FAILED.
     First line of code: {return test("%.7Lf", 999.9999999l);}
       expected output : "999.9999999"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "999.9999999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1803 (f_L_prec7_limits_allbig_neg) : FAILED.
     First line of code: {return test("%.7Lf", -99.9999999l);}
       expected output : "-99.9999999"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "-99.9999999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1804 (f_L_prec7_limits_bigfpart_pos) : FAILED.
     First line of code: {return test("%.7Lf", 0.999999l);}
       expected output : "0.9999990"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "0.9999990"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1805 (f_L_prec7_limits_bigfpart_neg) : FAILED.
     First line of code: {return test("%.7Lf", -0.999999l);}
       expected output : "-0.9999990"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "-0.9999990"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1806 (f_L_rnd_prec7_rndd_pos) : FAILED.
     First line of code: {return test("%.7Lf", 23.375094499l);}
       expected output : "23.3750945"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "23.3750945"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1807 (f_L_rnd_prec7_rndd_neg) : FAILED.
     First line of code: {return test("%.7Lf", -985.765426499l);}
       expected output : "-985.7654265"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "-985.7654265"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1808 (f_L_rnd_prec7_rndu_pos) : FAILED.
     First line of code: {return test("%.7Lf", 0.0894255l);}
       expected output : "0.0894255"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "0.0894255"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1809 (f_L_rnd_prec7_rndu_neg) : FAILED.
     First line of code: {return test("%.7Lf", -56.2012685l);}
       expected output : "-56.2012685"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "-56.2012685"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1810 (f_L_rnd_prec7_rndu_multidigit_pos) : FAILED.
     First line of code: {return test("%.7Lf", 43.4399999l);}
       expected output : "43.4399999"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "43.4399999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1811 (f_L_rnd_prec7_rndu_multidigit_neg) : FAILED.
     First line of code: {return test("%.7Lf", -5.0299999l);}
       expected output : "-5.0299999"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "-5.0299999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1812 (f_L_rnd_prec7_rndd_multidigit_pos) : FAILED.
     First line of code: {return test("%.7Lf", 43.43999949l);}
       expected output : "43.4399995"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "43.4399995"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1813 (f_L_rnd_prec7_rndd_multidigit_neg) : FAILED.
     First line of code: {return test("%.7Lf", -5.02999949l);}
       expected output : "-5.0299995"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "-5.0299995"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1814 (f_L_rnd_prec7_rndd_wholnobump_pos) : FAILED.
     First line of code: {return test("%.7Lf", 1.99999949l);}
       expected output : "1.9999995"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "1.9999995"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1815 (f_L_rnd_prec7_rndd_wholnobump_neg) : FAILED.
     First line of code: {return test("%.7Lf", -0.99999949l);}
       expected output : "-0.9999995"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "-0.9999995"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1816 (f_L_rnd_prec7_rndu_bumpwhole_pos) : FAILED.
     First line of code: {return test("%.7Lf", 3.9999999l);}
       expected output : "3.9999999"
-      your output     : "f"
+      your output     : "0.0000000"
       expected (nonprintable as hex) : "3.9999999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000"
 
 Test 1817 (f_L_prec8_1) : FAILED.
     First line of code: {return test("this %.8Lf float", 1.5l);}
       expected output : "this 1.50000000 float"
-      your output     : "this f float"
+      your output     : "this 0.00000000 float"
       expected (nonprintable as hex) : "this 1.50000000 float"
-      actual   (nonprintable as hex) : "this f float"
+      actual   (nonprintable as hex) : "this 0.00000000 float"
 
 Test 1818 (f_L_prec8_fltonly) : FAILED.
     First line of code: {return test("%.8Lf", 7.5l);}
       expected output : "7.50000000"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "7.50000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1819 (f_L_prec8_whole) : FAILED.
     First line of code: {return test("%.8Lf", 1.0l);}
       expected output : "1.00000000"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "1.00000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1820 (f_L_prec8_negative) : FAILED.
     First line of code: {return test("%.8Lf", -3.85l);}
       expected output : "-3.85000000"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-3.85000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1821 (f_L_prec8_positive_3_3) : FAILED.
     First line of code: {return test("%.8Lf", 573.924l);}
       expected output : "573.92400000"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "573.92400000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1822 (f_L_prec8_negative_3_3) : FAILED.
     First line of code: {return test("%.8Lf", -958.125l);}
       expected output : "-958.12500000"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-958.12500000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1823 (f_L_prec8_positive_smallfpart) : FAILED.
     First line of code: {return test("%.8Lf", 23.00041l);}
       expected output : "23.00041000"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "23.00041000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1824 (f_L_prec8_positive_allsmall) : FAILED.
     First line of code: {return test("%.8Lf", 0.00000039l);}
       expected output : "0.00000039"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "0.00000039"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1825 (f_L_prec8_negative_smallfpart) : FAILED.
     First line of code: {return test("%.8Lf", -7.00036l);}
       expected output : "-7.00036000"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-7.00036000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1826 (f_L_prec8_negative_allsmall) : FAILED.
     First line of code: {return test("%.8Lf", -0.0000032l);}
       expected output : "-0.00000320"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-0.00000320"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1827 (f_L_prec8_limits_allsmall_pos) : FAILED.
     First line of code: {return test("%.8Lf", 0.00000001l);}
       expected output : "0.00000001"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "0.00000001"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1828 (f_L_prec8_limits_allsmall_neg) : FAILED.
     First line of code: {return test("%.8Lf", -0.00000001l);}
       expected output : "-0.00000001"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-0.00000001"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1829 (f_L_prec8_limits_smallfpart_pos) : FAILED.
     First line of code: {return test("%.8Lf", 9873.000001l);}
       expected output : "9873.00000100"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "9873.00000100"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1830 (f_L_prec8_limits_smallfpart_neg) : FAILED.
     First line of code: {return test("%.8Lf", -875.000001l);}
       expected output : "-875.00000100"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-875.00000100"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1831 (f_L_prec8_limits_allbig_pos) : FAILED.
     First line of code: {return test("%.8Lf", 999.9999999l);}
       expected output : "999.99999990"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "999.99999990"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1832 (f_L_prec8_limits_allbig_neg) : FAILED.
     First line of code: {return test("%.8Lf", -99.99999999l);}
       expected output : "-99.99999999"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-99.99999999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1833 (f_L_prec8_limits_bigfpart_pos) : FAILED.
     First line of code: {return test("%.8Lf", 0.999999l);}
       expected output : "0.99999900"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "0.99999900"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1834 (f_L_prec8_limits_bigfpart_neg) : FAILED.
     First line of code: {return test("%.8Lf", -0.999999l);}
       expected output : "-0.99999900"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-0.99999900"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1835 (f_L_rnd_prec8_rndd_pos) : FAILED.
     First line of code: {return test("%.8Lf", 23.375094499l);}
       expected output : "23.37509450"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "23.37509450"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1836 (f_L_rnd_prec8_rndd_neg) : FAILED.
     First line of code: {return test("%.8Lf", -985.765426499l);}
       expected output : "-985.76542650"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-985.76542650"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1837 (f_L_rnd_prec8_rndu_pos) : FAILED.
     First line of code: {return test("%.8Lf", 0.0894255l);}
       expected output : "0.08942550"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "0.08942550"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1838 (f_L_rnd_prec8_rndu_neg) : FAILED.
     First line of code: {return test("%.8Lf", -56.2012685l);}
       expected output : "-56.20126850"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-56.20126850"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1839 (f_L_rnd_prec8_rndu_multidigit_pos) : FAILED.
     First line of code: {return test("%.8Lf", 43.4399999l);}
       expected output : "43.43999990"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "43.43999990"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1840 (f_L_rnd_prec8_rndu_multidigit_neg) : FAILED.
     First line of code: {return test("%.8Lf", -5.0299999l);}
       expected output : "-5.02999990"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-5.02999990"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1841 (f_L_rnd_prec8_rndd_multidigit_pos) : FAILED.
     First line of code: {return test("%.8Lf", 43.43999949l);}
       expected output : "43.43999949"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "43.43999949"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1842 (f_L_rnd_prec8_rndd_multidigit_neg) : FAILED.
     First line of code: {return test("%.8Lf", -5.02999949l);}
       expected output : "-5.02999949"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-5.02999949"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1843 (f_L_rnd_prec8_rndd_wholnobump_pos) : FAILED.
     First line of code: {return test("%.8Lf", 1.99999949l);}
       expected output : "1.99999949"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "1.99999949"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1844 (f_L_rnd_prec8_rndd_wholnobump_neg) : FAILED.
     First line of code: {return test("%.8Lf", -0.99999949l);}
       expected output : "-0.99999949"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-0.99999949"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1845 (f_L_rnd_prec8_rndu_bumpwhole_pos) : FAILED.
     First line of code: {return test("%.8Lf", 3.9999999l);}
       expected output : "3.99999990"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "3.99999990"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 1846 (f_L_prec9_1) : FAILED.
     First line of code: {return test("this %.9Lf float", 1.5l);}
       expected output : "this 1.500000000 float"
-      your output     : "this f float"
+      your output     : "this 0.000000000 float"
       expected (nonprintable as hex) : "this 1.500000000 float"
-      actual   (nonprintable as hex) : "this f float"
+      actual   (nonprintable as hex) : "this 0.000000000 float"
 
 Test 1847 (f_L_prec9_fltonly) : FAILED.
     First line of code: {return test("%.9Lf", 7.5l);}
       expected output : "7.500000000"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "7.500000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1848 (f_L_prec9_whole) : FAILED.
     First line of code: {return test("%.9Lf", 1.0l);}
       expected output : "1.000000000"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "1.000000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1849 (f_L_prec9_negative) : FAILED.
     First line of code: {return test("%.9Lf", -3.85l);}
       expected output : "-3.850000000"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "-3.850000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1850 (f_L_prec9_positive_3_3) : FAILED.
     First line of code: {return test("%.9Lf", 573.924l);}
       expected output : "573.924000000"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "573.924000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1851 (f_L_prec9_negative_3_3) : FAILED.
     First line of code: {return test("%.9Lf", -958.125l);}
       expected output : "-958.125000000"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "-958.125000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1852 (f_L_prec9_positive_smallfpart) : FAILED.
     First line of code: {return test("%.9Lf", 23.00041l);}
       expected output : "23.000410000"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "23.000410000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1853 (f_L_prec9_positive_allsmall) : FAILED.
     First line of code: {return test("%.9Lf", 0.00000039l);}
       expected output : "0.000000390"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "0.000000390"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1854 (f_L_prec9_negative_smallfpart) : FAILED.
     First line of code: {return test("%.9Lf", -7.00036l);}
       expected output : "-7.000360000"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "-7.000360000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1855 (f_L_prec9_negative_allsmall) : FAILED.
     First line of code: {return test("%.9Lf", -0.0000032l);}
       expected output : "-0.000003200"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "-0.000003200"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1856 (f_L_prec9_limits_allsmall_pos) : FAILED.
     First line of code: {return test("%.9Lf", 0.00000001l);}
       expected output : "0.000000010"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "0.000000010"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1857 (f_L_prec9_limits_allsmall_neg) : FAILED.
     First line of code: {return test("%.9Lf", -0.00000001l);}
       expected output : "-0.000000010"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "-0.000000010"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1858 (f_L_prec9_limits_smallfpart_pos) : FAILED.
     First line of code: {return test("%.9Lf", 9873.000001l);}
       expected output : "9873.000001000"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "9873.000001000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1859 (f_L_prec9_limits_smallfpart_neg) : FAILED.
     First line of code: {return test("%.9Lf", -875.000001l);}
       expected output : "-875.000001000"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "-875.000001000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1860 (f_L_prec9_limits_allbig_pos) : FAILED.
     First line of code: {return test("%.9Lf", 999.99999999l);}
       expected output : "999.999999990"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "999.999999990"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1861 (f_L_prec9_limits_allbig_neg) : FAILED.
     First line of code: {return test("%.9Lf", -99.99999999l);}
       expected output : "-99.999999990"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "-99.999999990"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1862 (f_L_prec9_limits_bigfpart_pos) : FAILED.
     First line of code: {return test("%.9Lf", 0.999999l);}
       expected output : "0.999999000"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "0.999999000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1863 (f_L_prec9_limits_bigfpart_neg) : FAILED.
     First line of code: {return test("%.9Lf", -0.999999l);}
       expected output : "-0.999999000"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "-0.999999000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1864 (f_L_rnd_prec9_rndd_pos) : FAILED.
     First line of code: {return test("%.9Lf", 23.375094499l);}
       expected output : "23.375094499"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "23.375094499"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1865 (f_L_rnd_prec9_rndd_neg) : FAILED.
     First line of code: {return test("%.9Lf", -985.765426499l);}
       expected output : "-985.765426499"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "-985.765426499"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1866 (f_L_rnd_prec9_rndu_pos) : FAILED.
     First line of code: {return test("%.9Lf", 0.0894255l);}
       expected output : "0.089425500"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "0.089425500"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1867 (f_L_rnd_prec9_rndu_neg) : FAILED.
     First line of code: {return test("%.9Lf", -56.2012685l);}
       expected output : "-56.201268500"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "-56.201268500"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1868 (f_L_rnd_prec9_rndu_multidigit_pos) : FAILED.
     First line of code: {return test("%.9Lf", 43.4399999l);}
       expected output : "43.439999900"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "43.439999900"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1869 (f_L_rnd_prec9_rndu_multidigit_neg) : FAILED.
     First line of code: {return test("%.9Lf", -5.0299999l);}
       expected output : "-5.029999900"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "-5.029999900"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1870 (f_L_rnd_prec9_rndd_multidigit_pos) : FAILED.
     First line of code: {return test("%.9Lf", 43.43999949l);}
       expected output : "43.439999490"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "43.439999490"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1871 (f_L_rnd_prec9_rndd_multidigit_neg) : FAILED.
     First line of code: {return test("%.9Lf", -5.02999949l);}
       expected output : "-5.029999490"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "-5.029999490"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1872 (f_L_rnd_prec9_rndd_wholnobump_pos) : FAILED.
     First line of code: {return test("%.9Lf", 1.99999949l);}
       expected output : "1.999999490"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "1.999999490"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1873 (f_L_rnd_prec9_rndd_wholnobump_neg) : FAILED.
     First line of code: {return test("%.9Lf", -0.99999949l);}
       expected output : "-0.999999490"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "-0.999999490"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1874 (f_L_rnd_prec9_rndu_bumpwhole_pos) : FAILED.
     First line of code: {return test("%.9Lf", 3.9999999l);}
       expected output : "3.999999900"
-      your output     : "f"
+      your output     : "0.000000000"
       expected (nonprintable as hex) : "3.999999900"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000"
 
 Test 1875 (f_L_stress_prec10_1) : FAILED.
     First line of code: {return test("this %.10Lf float", 1.5l);}
       expected output : "this 1.5000000000 float"
-      your output     : "this f float"
+      your output     : "this 0.0000000000 float"
       expected (nonprintable as hex) : "this 1.5000000000 float"
-      actual   (nonprintable as hex) : "this f float"
+      actual   (nonprintable as hex) : "this 0.0000000000 float"
 
 Test 1876 (f_L_stress_prec10_fltonly) : FAILED.
     First line of code: {return test("%.10Lf", 7.5l);}
       expected output : "7.5000000000"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "7.5000000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1877 (f_L_stress_prec10_whole) : FAILED.
     First line of code: {return test("%.10Lf", 1.0l);}
       expected output : "1.0000000000"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "1.0000000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1878 (f_L_stress_prec10_negative) : FAILED.
     First line of code: {return test("%.10Lf", -3.85l);}
       expected output : "-3.8500000000"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "-3.8500000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1879 (f_L_stress_prec10_positive_3_10) : FAILED.
     First line of code: {return test("%.10Lf", 573.924l);}
       expected output : "573.9240000000"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "573.9240000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1880 (f_L_stress_prec10_negative_3_10) : FAILED.
     First line of code: {return test("%.10Lf", -958.125l);}
       expected output : "-958.1250000000"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "-958.1250000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1881 (f_L_stress_prec10_pos) : FAILED.
     First line of code: {return test("%.10Lf", 23.8341375094l);}
       expected output : "23.8341375094"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "23.8341375094"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1882 (f_L_stress_prec10_neg) : FAILED.
     First line of code: {return test("%.10Lf", -985.2459765426l);}
       expected output : "-985.2459765426"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "-985.2459765426"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1883 (f_L_stress_prec10_rndd_pos) : FAILED.
     First line of code: {return test("%.10Lf", 23.8341375094499l);}
       expected output : "23.8341375094"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "23.8341375094"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1884 (f_L_stress_prec10_rndd_neg) : FAILED.
     First line of code: {return test("%.10Lf", -985.2459765426499l);}
       expected output : "-985.2459765426"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "-985.2459765426"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1885 (f_L_stress_prec10_rndu_pos) : FAILED.
     First line of code: {return test("%.10Lf", 0.87650894255l);}
       expected output : "0.8765089426"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "0.8765089426"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1886 (f_L_stress_prec10_rndu_neg) : FAILED.
     First line of code: {return test("%.10Lf", -56.47852012685l);}
       expected output : "-56.4785201269"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "-56.4785201269"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1887 (f_L_stress_prec10_positive_smallfpart) : FAILED.
     First line of code: {return test("%.10Lf", 23.000000041l);}
       expected output : "23.0000000410"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "23.0000000410"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1888 (f_L_stress_prec10_positive_allsmall) : FAILED.
     First line of code: {return test("%.10Lf", 0.0000000039l);}
       expected output : "0.0000000039"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "0.0000000039"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1889 (f_L_stress_prec10_negative_smallfpart) : FAILED.
     First line of code: {return test("%.10Lf", -7.000000036l);}
       expected output : "-7.0000000360"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "-7.0000000360"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1890 (f_L_stress_prec10_negative_allsmall) : FAILED.
     First line of code: {return test("%.10Lf", -0.000000032l);}
       expected output : "-0.0000000320"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "-0.0000000320"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1891 (f_L_stress_prec10_limits_allsmall_pos) : FAILED.
     First line of code: {return test("%.10Lf", 0.0000000001l);}
       expected output : "0.0000000001"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "0.0000000001"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1892 (f_L_stress_prec10_limits_allsmall_neg) : FAILED.
     First line of code: {return test("%.10Lf", -0.0000000001l);}
       expected output : "-0.0000000001"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "-0.0000000001"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1893 (f_L_stress_prec10_limits_smallfpart_pos) : FAILED.
     First line of code: {return test("%.10Lf", 9873.0000000001l);}
       expected output : "9873.0000000001"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "9873.0000000001"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1894 (f_L_stress_prec10_limits_smallfpart_neg) : FAILED.
     First line of code: {return test("%.10Lf", -875.0000000001l);}
       expected output : "-875.0000000001"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "-875.0000000001"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1895 (f_L_stress_prec10_limits_allbig_pos) : FAILED.
     First line of code: {return test("%.10Lf", 999.9999999999l);}
       expected output : "999.9999999999"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "999.9999999999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1896 (f_L_stress_prec10_limits_allbig_neg) : FAILED.
     First line of code: {return test("%.10Lf", -99.9999999999l);}
       expected output : "-99.9999999999"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "-99.9999999999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1897 (f_L_stress_prec10_limits_bigfpart_pos) : FAILED.
     First line of code: {return test("%.10Lf", 0.9999999999l);}
       expected output : "0.9999999999"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "0.9999999999"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1898 (f_L_stress_prec10_limits_bigfpart_neg) : FAILED.
     First line of code: {return test("%.10Lf", -0.9999999999l);}
       expected output : "-0.9999999999"
-      your output     : "f"
+      your output     : "0.0000000000"
       expected (nonprintable as hex) : "-0.9999999999"
-      actual   (nonprintable as hex) : "f"
-
-Test 1910 (f_L_stress_prec16_limits_big) : FAILED.
-    First line of code: {return test("%.16f",  0.999999999999999900000);}
-      expected output : "0.9999999999999999"
-      your output     : "0.9999999999999998"
-      expected (nonprintable as hex) : "0.9999999999999999"
-      actual   (nonprintable as hex) : "0.9999999999999998"
-
-Test 1916 (f_L_stress_prec18_rndd) : FAILED.
-    First line of code: {return test("%.18f",        1.025978548534310421834);}
-      expected output : "1.025978548534310475"
-      your output     : "1.025978548534310474"
-      expected (nonprintable as hex) : "1.025978548534310475"
-      actual   (nonprintable as hex) : "1.025978548534310474"
+      actual   (nonprintable as hex) : "0.0000000000"
 
 Test 1919 (f_L_stress_prec19_rndu) : FAILED.
     First line of code: {return test("%.19f",        1.025978542436587568678);}
@@ -1884,9 +995,9 @@ Test 1919 (f_L_stress_prec19_rndu) : FAILED.
 Test 1920 (f_L_stress_prec19_rndd) : FAILED.
     First line of code: {return test("%.19f",        1.025978548534310421934);}
       expected output : "1.0259785485343104749"
-      your output     : "1.0025978548534310474"
+      your output     : "1.0025978548534310475"
       expected (nonprintable as hex) : "1.0259785485343104749"
-      actual   (nonprintable as hex) : "1.0025978548534310474"
+      actual   (nonprintable as hex) : "1.0025978548534310475"
 
 Test 1921 (f_L_stress_prec19_limits_tiny) : FAILED.
     First line of code: {return test("%.19f", 0.000000000000000000100);}
@@ -1905,9 +1016,9 @@ Test 1923 (f_L_stress_prec20_rndu) : FAILED.
 Test 1924 (f_L_stress_prec20_rndd) : FAILED.
     First line of code: {return test("%.20f",        1.025978548534310422034);}
       expected output : "1.02597854853431047495"
-      your output     : "1.00025978548534310474"
+      your output     : "1.00025978548534310475"
       expected (nonprintable as hex) : "1.02597854853431047495"
-      actual   (nonprintable as hex) : "1.00025978548534310474"
+      actual   (nonprintable as hex) : "1.00025978548534310475"
 
 Test 1925 (f_L_stress_prec20_limits_tiny) : FAILED.
     First line of code: {return test("%.20f", 0.000000000000000000010);}
@@ -1916,1594 +1027,52 @@ Test 1925 (f_L_stress_prec20_limits_tiny) : FAILED.
       expected (nonprintable as hex) : "0.00000000000000000001"
       actual   (nonprintable as hex) : "0.00000000000000000000"
 
-Test 1989 (f_L_limits_dblmin_prec0) : FAILED.
-    First line of code: {return test("%.0Lf", LDBL_MIN);}
-      expected output : "0"
-      your output     : "f"
-      expected (nonprintable as hex) : "0"
-      actual   (nonprintable as hex) : "f"
-
-Test 1990 (f_L_limits_dblmin_prec3) : FAILED.
-    First line of code: {return test("%.3Lf", LDBL_MIN);}
-      expected output : "0.000"
-      your output     : "f"
-      expected (nonprintable as hex) : "0.000"
-      actual   (nonprintable as hex) : "f"
-
-Test 1991 (f_L_limits_dblmin_precd) : FAILED.
-    First line of code: {return test("%Lf", LDBL_MIN);}
-      expected output : "0.000000"
-      your output     : "f"
-      expected (nonprintable as hex) : "0.000000"
-      actual   (nonprintable as hex) : "f"
-
-Test 1992 (f_L_limits_dblmin_prec8) : FAILED.
-    First line of code: {return test("%.8Lf", LDBL_MIN);}
-      expected output : "0.00000000"
-      your output     : "f"
-      expected (nonprintable as hex) : "0.00000000"
-      actual   (nonprintable as hex) : "f"
-
-Test 1993 (f_L_stress_limits_dblmin_prec12) : FAILED.
-    First line of code: {return test("%.12Lf", LDBL_MIN);}
-      expected output : "0.000000000000"
-      your output     : "f"
-      expected (nonprintable as hex) : "0.000000000000"
-      actual   (nonprintable as hex) : "f"
-
-Test 1994 (f_L_stress_limits_dblmin_prec16) : FAILED.
-    First line of code: {return test("%.16Lf", LDBL_MIN);}
-      expected output : "0.0000000000000000"
-      your output     : "f"
-      expected (nonprintable as hex) : "0.0000000000000000"
-      actual   (nonprintable as hex) : "f"
-
-Test 1995 (f_L_stress_limits_dblmin_prec18) : FAILED.
-    First line of code: {return test("%.18Lf", LDBL_MIN);}
-      expected output : "0.000000000000000000"
-      your output     : "f"
-      expected (nonprintable as hex) : "0.000000000000000000"
-      actual   (nonprintable as hex) : "f"
-
 Test 1996 (f_L_limits_ndblmin_prec0) : FAILED.
     First line of code: {return test("%.0Lf", -LDBL_MIN);}
       expected output : "-0"
-      your output     : "f"
+      your output     : "0"
       expected (nonprintable as hex) : "-0"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0"
 
 Test 1997 (f_L_limits_ndblmin_prec3) : FAILED.
     First line of code: {return test("%.3Lf", -LDBL_MIN);}
       expected output : "-0.000"
-      your output     : "f"
+      your output     : "0.000"
       expected (nonprintable as hex) : "-0.000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000"
 
 Test 1998 (f_L_limits_ndblmin_precd) : FAILED.
     First line of code: {return test("%Lf", -LDBL_MIN);}
       expected output : "-0.000000"
-      your output     : "f"
+      your output     : "0.000000"
       expected (nonprintable as hex) : "-0.000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000"
 
 Test 1999 (f_L_limits_ndblmin_prec8) : FAILED.
     First line of code: {return test("%.8Lf", -LDBL_MIN);}
       expected output : "-0.00000000"
-      your output     : "f"
+      your output     : "0.00000000"
       expected (nonprintable as hex) : "-0.00000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.00000000"
 
 Test 2000 (f_L_stress_limits_ndblmin_prec12) : FAILED.
     First line of code: {return test("%.12Lf", -LDBL_MIN);}
       expected output : "-0.000000000000"
-      your output     : "f"
+      your output     : "0.000000000000"
       expected (nonprintable as hex) : "-0.000000000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.000000000000"
 
 Test 2001 (f_L_stress_limits_ndblmin_prec16) : FAILED.
     First line of code: {return test("%.16Lf", -LDBL_MIN);}
       expected output : "-0.0000000000000000"
-      your output     : "f"
+      your output     : "0.0000000000000000"
       expected (nonprintable as hex) : "-0.0000000000000000"
-      actual   (nonprintable as hex) : "f"
+      actual   (nonprintable as hex) : "0.0000000000000000"
 
 Test 2002 (f_L_stress_limits_ndblmin_prec18) : FAILED.
     First line of code: {return test("%.18Lf", -LDBL_MIN);}
       expected output : "-0.000000000000000000"
-      your output     : "f"
+      your output     : "0.000000000000000000"
       expected (nonprintable as hex) : "-0.000000000000000000"
-      actual   (nonprintable as hex) : "f"
-
-Test 2019 (mix_test_0) : FAILED.
-    First line of code: {return test(
-      expected output : "  353    235    4223372036854775800    Hello, World!    EB    3223372036654775200  "
-      your output     : "  353    235    -1156841480    Hello, World!    EB    129776544  "
-      expected (nonprintable as hex) : "  353    235    4223372036854775800    Hello, World!    EB    3223372036654775200  "
-      actual   (nonprintable as hex) : "  353    235    -1156841480    Hello, World!    EB    129776544  "
-
-Test 2020 (mix_test_1) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    235    Hello, World!    EB    eb    0.375000  "
-      your output     : "  -1156841480    235    Hello, World!    EB    eb    f  "
-      expected (nonprintable as hex) : "  4223372036854775800    235    Hello, World!    EB    eb    0.375000  "
-      actual   (nonprintable as hex) : "  -1156841480    235    Hello, World!    EB    eb    f  "
-
-Test 2021 (mix_test_2) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    0x10eee7b90    42    4223372036854775800    3223372036654775200    Hello, World!  "
-      your output     : "  f    0x10eee7b90    42    -1156841480    129776544    Hello, World!  "
-      expected (nonprintable as hex) : "  0.375000    0x10eee7b90    42    4223372036854775800    3223372036654775200    Hello, World!  "
-      actual   (nonprintable as hex) : "  f    0x10eee7b90    42    -1156841480    129776544    Hello, World!  "
-
-Test 2022 (mix_test_3) : FAILED.
-    First line of code: {return test(
-      expected output : "  eb    Hello, World!    42    0x10eee7b90    EB    0.375000  "
-      your output     : "  eb    Hello, World!    42    0x10eee7b90    EB    f  "
-      expected (nonprintable as hex) : "  eb    Hello, World!    42    0x10eee7b90    EB    0.375000  "
-      actual   (nonprintable as hex) : "  eb    Hello, World!    42    0x10eee7b90    EB    f  "
-
-Test 2023 (mix_test_4) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    71    0x10eee7b90    353    %    0.375000  "
-      your output     : "  -1156841480    71    0x10eee7b90    353    %    f  "
-      expected (nonprintable as hex) : "  4223372036854775800    71    0x10eee7b90    353    %    0.375000  "
-      actual   (nonprintable as hex) : "  -1156841480    71    0x10eee7b90    353    %    f  "
-
-Test 2025 (mix_test_6) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    4223372036854775800    42    0x10eee7b90    235    -3244  "
-      your output     : "  0.625000    -1156841480    42    0x10eee7b90    235    -3244  "
-      expected (nonprintable as hex) : "  0.625000    4223372036854775800    42    0x10eee7b90    235    -3244  "
-      actual   (nonprintable as hex) : "  0.625000    -1156841480    42    0x10eee7b90    235    -3244  "
-
-Test 2026 (mix_test_7) : FAILED.
-    First line of code: {return test(
-      expected output : "  235    71    0x10eee7b90    4223372036854775800    0.375000    EB  "
-      your output     : "  235    71    0x10eee7b90    -1156841480    f    EB  "
-      expected (nonprintable as hex) : "  235    71    0x10eee7b90    4223372036854775800    0.375000    EB  "
-      actual   (nonprintable as hex) : "  235    71    0x10eee7b90    -1156841480    f    EB  "
-
-Test 2027 (mix_test_8) : FAILED.
-    First line of code: {return test(
-      expected output : "  353    0.375000    235    4223372036854775800    3223372036654775200    eb  "
-      your output     : "  353    f    235    -1156841480    129776544    eb  "
-      expected (nonprintable as hex) : "  353    0.375000    235    4223372036854775800    3223372036654775200    eb  "
-      actual   (nonprintable as hex) : "  353    f    235    -1156841480    129776544    eb  "
-
-Test 2028 (mix_test_9) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    4223372036854775800    Hello, World!    0x10eee7b90    eb    353  "
-      your output     : "  f    -1156841480    Hello, World!    0x10eee7b90    eb    353  "
-      expected (nonprintable as hex) : "  0.375000    4223372036854775800    Hello, World!    0x10eee7b90    eb    353  "
-      actual   (nonprintable as hex) : "  f    -1156841480    Hello, World!    0x10eee7b90    eb    353  "
-
-Test 2029 (mix_test_10) : FAILED.
-    First line of code: {return test(
-      expected output : "  71    eb    Hello, World!    235    42    4223372036854775800  "
-      your output     : "  71    eb    Hello, World!    235    42    -1156841480  "
-      expected (nonprintable as hex) : "  71    eb    Hello, World!    235    42    4223372036854775800  "
-      actual   (nonprintable as hex) : "  71    eb    Hello, World!    235    42    -1156841480  "
-
-Test 2030 (mix_test_11) : FAILED.
-    First line of code: {return test(
-      expected output : "  EB    4223372036854775800    353    Hello, World!    0.625000    235  "
-      your output     : "  EB    -1156841480    353    Hello, World!    0.625000    235  "
-      expected (nonprintable as hex) : "  EB    4223372036854775800    353    Hello, World!    0.625000    235  "
-      actual   (nonprintable as hex) : "  EB    -1156841480    353    Hello, World!    0.625000    235  "
-
-Test 2031 (mix_test_12) : FAILED.
-    First line of code: {return test(
-      expected output : "  353    eb    42    G    -3244    0.375000  "
-      your output     : "  353    eb    42    G    -3244    f  "
-      expected (nonprintable as hex) : "  353    eb    42    G    -3244    0.375000  "
-      actual   (nonprintable as hex) : "  353    eb    42    G    -3244    f  "
-
-Test 2033 (mix_test_14) : FAILED.
-    First line of code: {return test(
-      expected output : "  42    0.625000    4223372036854775800    0.375000    EB    71  "
-      your output     : "  42    0.625000    -1156841480    f    EB    71  "
-      expected (nonprintable as hex) : "  42    0.625000    4223372036854775800    0.375000    EB    71  "
-      actual   (nonprintable as hex) : "  42    0.625000    -1156841480    f    EB    71  "
-
-Test 2034 (mix_test_15) : FAILED.
-    First line of code: {return test(
-      expected output : "  Hello, World!    235    3223372036654775200    0.375000    0.625000    353  "
-      your output     : "  Hello, World!    235    129776544    f    0.625000    353  "
-      expected (nonprintable as hex) : "  Hello, World!    235    3223372036654775200    0.375000    0.625000    353  "
-      actual   (nonprintable as hex) : "  Hello, World!    235    129776544    f    0.625000    353  "
-
-Test 2036 (mix_test_17) : FAILED.
-    First line of code: {return test(
-      expected output : "  EB    42    G    3223372036654775200    353    0x10eee7b90  "
-      your output     : "  EB    42    G    129776544    353    0x10eee7b90  "
-      expected (nonprintable as hex) : "  EB    42    G    3223372036654775200    353    0x10eee7b90  "
-      actual   (nonprintable as hex) : "  EB    42    G    129776544    353    0x10eee7b90  "
-
-Test 2038 (mix_test_19) : FAILED.
-    First line of code: {return test(
-      expected output : "  71    4223372036854775800    eb    -3244    3223372036654775200    Hello, World!  "
-      your output     : "  71    -1156841480    eb    -3244    129776544    Hello, World!  "
-      expected (nonprintable as hex) : "  71    4223372036854775800    eb    -3244    3223372036654775200    Hello, World!  "
-      actual   (nonprintable as hex) : "  71    -1156841480    eb    -3244    129776544    Hello, World!  "
-
-Test 2039 (mix_test_20) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    0x10eee7b90    3223372036654775200    71    G    0.625000  "
-      your output     : "  f    0x10eee7b90    129776544    71    G    0.625000  "
-      expected (nonprintable as hex) : "  0.375000    0x10eee7b90    3223372036654775200    71    G    0.625000  "
-      actual   (nonprintable as hex) : "  f    0x10eee7b90    129776544    71    G    0.625000  "
-
-Test 2040 (mix_test_21) : FAILED.
-    First line of code: {return test(
-      expected output : "  -3244    Hello, World!    71    0x10eee7b90    3223372036654775200    235  "
-      your output     : "  -3244    Hello, World!    71    0x10eee7b90    129776544    235  "
-      expected (nonprintable as hex) : "  -3244    Hello, World!    71    0x10eee7b90    3223372036654775200    235  "
-      actual   (nonprintable as hex) : "  -3244    Hello, World!    71    0x10eee7b90    129776544    235  "
-
-Test 2041 (mix_test_22) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    3223372036654775200    Hello, World!    EB    235    71  "
-      your output     : "  0x10eee7b90    129776544    Hello, World!    EB    235    71  "
-      expected (nonprintable as hex) : "  0x10eee7b90    3223372036654775200    Hello, World!    EB    235    71  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    129776544    Hello, World!    EB    235    71  "
-
-Test 2043 (mix_test_24) : FAILED.
-    First line of code: {return test(
-      expected output : "  3223372036654775200    71    -3244    42    G    353  "
-      your output     : "  129776544    71    -3244    42    G    353  "
-      expected (nonprintable as hex) : "  3223372036654775200    71    -3244    42    G    353  "
-      actual   (nonprintable as hex) : "  129776544    71    -3244    42    G    353  "
-
-Test 2044 (mix_test_25) : FAILED.
-    First line of code: {return test(
-      expected output : "  Hello, World!    0.375000    0x10eee7b90    G    EB    eb  "
-      your output     : "  Hello, World!    f    0x10eee7b90    G    EB    eb  "
-      expected (nonprintable as hex) : "  Hello, World!    0.375000    0x10eee7b90    G    EB    eb  "
-      actual   (nonprintable as hex) : "  Hello, World!    f    0x10eee7b90    G    EB    eb  "
-
-Test 2045 (mix_test_26) : FAILED.
-    First line of code: {return test(
-      expected output : "  3223372036654775200    42    235    0x10eee7b90    353    G  "
-      your output     : "  129776544    42    235    0x10eee7b90    353    G  "
-      expected (nonprintable as hex) : "  3223372036654775200    42    235    0x10eee7b90    353    G  "
-      actual   (nonprintable as hex) : "  129776544    42    235    0x10eee7b90    353    G  "
-
-Test 2046 (mix_test_27) : FAILED.
-    First line of code: {return test(
-      expected output : "  42    0x10eee7b90    71    EB    0.375000    3223372036654775200  "
-      your output     : "  42    0x10eee7b90    71    EB    f    129776544  "
-      expected (nonprintable as hex) : "  42    0x10eee7b90    71    EB    0.375000    3223372036654775200  "
-      actual   (nonprintable as hex) : "  42    0x10eee7b90    71    EB    f    129776544  "
-
-Test 2047 (mix_test_28) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    42    0x10eee7b90    4223372036854775800    353    eb  "
-      your output     : "  0.625000    42    0x10eee7b90    -1156841480    353    eb  "
-      expected (nonprintable as hex) : "  0.625000    42    0x10eee7b90    4223372036854775800    353    eb  "
-      actual   (nonprintable as hex) : "  0.625000    42    0x10eee7b90    -1156841480    353    eb  "
-
-Test 2048 (mix_test_29) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    3223372036654775200    0.625000    EB    353    Hello, World!  "
-      your output     : "  -1156841480    129776544    0.625000    EB    353    Hello, World!  "
-      expected (nonprintable as hex) : "  4223372036854775800    3223372036654775200    0.625000    EB    353    Hello, World!  "
-      actual   (nonprintable as hex) : "  -1156841480    129776544    0.625000    EB    353    Hello, World!  "
-
-Test 2049 (mix_test_30) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    -3244    0x10eee7b90    71    4223372036854775800    235  "
-      your output     : "  0.625000    -3244    0x10eee7b90    71    -1156841480    235  "
-      expected (nonprintable as hex) : "  0.625000    -3244    0x10eee7b90    71    4223372036854775800    235  "
-      actual   (nonprintable as hex) : "  0.625000    -3244    0x10eee7b90    71    -1156841480    235  "
-
-Test 2050 (mix_test_31) : FAILED.
-    First line of code: {return test(
-      expected output : "  Hello, World!    eb    235    4223372036854775800    353    -3244  "
-      your output     : "  Hello, World!    eb    235    -1156841480    353    -3244  "
-      expected (nonprintable as hex) : "  Hello, World!    eb    235    4223372036854775800    353    -3244  "
-      actual   (nonprintable as hex) : "  Hello, World!    eb    235    -1156841480    353    -3244  "
-
-Test 2051 (mix_test_32) : FAILED.
-    First line of code: {return test(
-      expected output : "  235    3223372036654775200    EB    42    353    0.625000  "
-      your output     : "  235    129776544    EB    42    353    0.625000  "
-      expected (nonprintable as hex) : "  235    3223372036654775200    EB    42    353    0.625000  "
-      actual   (nonprintable as hex) : "  235    129776544    EB    42    353    0.625000  "
-
-Test 2052 (mix_test_33) : FAILED.
-    First line of code: {return test(
-      expected output : "  353    EB    235    G    3223372036654775200    -3244  "
-      your output     : "  353    EB    235    G    129776544    -3244  "
-      expected (nonprintable as hex) : "  353    EB    235    G    3223372036654775200    -3244  "
-      actual   (nonprintable as hex) : "  353    EB    235    G    129776544    -3244  "
-
-Test 2053 (mix_test_34) : FAILED.
-    First line of code: {return test(
-      expected output : "  -3244    EB    0.375000    Hello, World!    353    eb  "
-      your output     : "  -3244    EB    f    Hello, World!    353    eb  "
-      expected (nonprintable as hex) : "  -3244    EB    0.375000    Hello, World!    353    eb  "
-      actual   (nonprintable as hex) : "  -3244    EB    f    Hello, World!    353    eb  "
-
-Test 2054 (mix_test_35) : FAILED.
-    First line of code: {return test(
-      expected output : "  EB    0x10eee7b90    353    -3244    Hello, World!    3223372036654775200  "
-      your output     : "  EB    0x10eee7b90    353    -3244    Hello, World!    129776544  "
-      expected (nonprintable as hex) : "  EB    0x10eee7b90    353    -3244    Hello, World!    3223372036654775200  "
-      actual   (nonprintable as hex) : "  EB    0x10eee7b90    353    -3244    Hello, World!    129776544  "
-
-Test 2055 (mix_test_36) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    0x10eee7b90    0.625000    0.375000    eb    3223372036654775200  "
-      your output     : "  -1156841480    0x10eee7b90    0.625000    f    eb    129776544  "
-      expected (nonprintable as hex) : "  4223372036854775800    0x10eee7b90    0.625000    0.375000    eb    3223372036654775200  "
-      actual   (nonprintable as hex) : "  -1156841480    0x10eee7b90    0.625000    f    eb    129776544  "
-
-Test 2056 (mix_test_37) : FAILED.
-    First line of code: {return test(
-      expected output : "  42    4223372036854775800    EB    0x10eee7b90    -3244    353  "
-      your output     : "  42    -1156841480    EB    0x10eee7b90    -3244    353  "
-      expected (nonprintable as hex) : "  42    4223372036854775800    EB    0x10eee7b90    -3244    353  "
-      actual   (nonprintable as hex) : "  42    -1156841480    EB    0x10eee7b90    -3244    353  "
-
-Test 2058 (mix_test_39) : FAILED.
-    First line of code: {return test(
-      expected output : "  353    G    4223372036854775800    0x10eee7b90    -3244    0.625000  "
-      your output     : "  353    G    -1156841480    0x10eee7b90    -3244    0.625000  "
-      expected (nonprintable as hex) : "  353    G    4223372036854775800    0x10eee7b90    -3244    0.625000  "
-      actual   (nonprintable as hex) : "  353    G    -1156841480    0x10eee7b90    -3244    0.625000  "
-
-Test 2060 (mix_test_41) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    eb    71    EB    Hello, World!    3223372036654775200  "
-      your output     : "  -1156841480    eb    71    EB    Hello, World!    129776544  "
-      expected (nonprintable as hex) : "  4223372036854775800    eb    71    EB    Hello, World!    3223372036654775200  "
-      actual   (nonprintable as hex) : "  -1156841480    eb    71    EB    Hello, World!    129776544  "
-
-Test 2061 (mix_test_42) : FAILED.
-    First line of code: {return test(
-      expected output : "  -3244    eb    42    G    71    4223372036854775800  "
-      your output     : "  -3244    eb    42    G    71    -1156841480  "
-      expected (nonprintable as hex) : "  -3244    eb    42    G    71    4223372036854775800  "
-      actual   (nonprintable as hex) : "  -3244    eb    42    G    71    -1156841480  "
-
-Test 2062 (mix_test_43) : FAILED.
-    First line of code: {return test(
-      expected output : "  eb    EB    353    Hello, World!    3223372036654775200    71  "
-      your output     : "  eb    EB    353    Hello, World!    129776544    71  "
-      expected (nonprintable as hex) : "  eb    EB    353    Hello, World!    3223372036654775200    71  "
-      actual   (nonprintable as hex) : "  eb    EB    353    Hello, World!    129776544    71  "
-
-Test 2063 (mix_test_44) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    eb    353    -3244    4223372036854775800    235  "
-      your output     : "  0.625000    eb    353    -3244    -1156841480    235  "
-      expected (nonprintable as hex) : "  0.625000    eb    353    -3244    4223372036854775800    235  "
-      actual   (nonprintable as hex) : "  0.625000    eb    353    -3244    -1156841480    235  "
-
-Test 2064 (mix_test_45) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    71    G    EB    3223372036654775200    Hello, World!  "
-      your output     : "  0.625000    71    G    EB    129776544    Hello, World!  "
-      expected (nonprintable as hex) : "  0.625000    71    G    EB    3223372036654775200    Hello, World!  "
-      actual   (nonprintable as hex) : "  0.625000    71    G    EB    129776544    Hello, World!  "
-
-Test 2065 (mix_test_46) : FAILED.
-    First line of code: {return test(
-      expected output : "  3223372036654775200    42    71    -3244    4223372036854775800    0.375000  "
-      your output     : "  129776544    42    71    -3244    -1156841480    f  "
-      expected (nonprintable as hex) : "  3223372036654775200    42    71    -3244    4223372036854775800    0.375000  "
-      actual   (nonprintable as hex) : "  129776544    42    71    -3244    -1156841480    f  "
-
-Test 2066 (mix_test_47) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    G    3223372036654775200    Hello, World!    71    0x10eee7b90  "
-      your output     : "  0.625000    G    129776544    Hello, World!    71    0x10eee7b90  "
-      expected (nonprintable as hex) : "  0.625000    G    3223372036654775200    Hello, World!    71    0x10eee7b90  "
-      actual   (nonprintable as hex) : "  0.625000    G    129776544    Hello, World!    71    0x10eee7b90  "
-
-Test 2067 (mix_test_48) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    71    4223372036854775800    3223372036654775200    eb    0x10eee7b90  "
-      your output     : "  0.625000    71    -1156841480    129776544    eb    0x10eee7b90  "
-      expected (nonprintable as hex) : "  0.625000    71    4223372036854775800    3223372036654775200    eb    0x10eee7b90  "
-      actual   (nonprintable as hex) : "  0.625000    71    -1156841480    129776544    eb    0x10eee7b90  "
-
-Test 2068 (mix_test_49) : FAILED.
-    First line of code: {return test(
-      expected output : "  353    3223372036654775200    -3244    0.625000    EB    71  "
-      your output     : "  353    129776544    -3244    0.625000    EB    71  "
-      expected (nonprintable as hex) : "  353    3223372036654775200    -3244    0.625000    EB    71  "
-      actual   (nonprintable as hex) : "  353    129776544    -3244    0.625000    EB    71  "
-
-Test 2070 (mix_test_51) : FAILED.
-    First line of code: {return test(
-      expected output : "  eb    235    0.375000    -3244    353    EB  "
-      your output     : "  eb    235    f    -3244    353    EB  "
-      expected (nonprintable as hex) : "  eb    235    0.375000    -3244    353    EB  "
-      actual   (nonprintable as hex) : "  eb    235    f    -3244    353    EB  "
-
-Test 2071 (mix_test_52) : FAILED.
-    First line of code: {return test(
-      expected output : "  235    0.375000    -3244    4223372036854775800    EB    71  "
-      your output     : "  235    f    -3244    -1156841480    EB    71  "
-      expected (nonprintable as hex) : "  235    0.375000    -3244    4223372036854775800    EB    71  "
-      actual   (nonprintable as hex) : "  235    f    -3244    -1156841480    EB    71  "
-
-Test 2072 (mix_test_53) : FAILED.
-    First line of code: {return test(
-      expected output : "  353    G    0.375000    -3244    Hello, World!    0x10eee7b90  "
-      your output     : "  353    G    f    -3244    Hello, World!    0x10eee7b90  "
-      expected (nonprintable as hex) : "  353    G    0.375000    -3244    Hello, World!    0x10eee7b90  "
-      actual   (nonprintable as hex) : "  353    G    f    -3244    Hello, World!    0x10eee7b90  "
-
-Test 2073 (mix_test_54) : FAILED.
-    First line of code: {return test(
-      expected output : "  Hello, World!    71    EB    3223372036654775200    eb    235  "
-      your output     : "  Hello, World!    71    EB    129776544    eb    235  "
-      expected (nonprintable as hex) : "  Hello, World!    71    EB    3223372036654775200    eb    235  "
-      actual   (nonprintable as hex) : "  Hello, World!    71    EB    129776544    eb    235  "
-
-Test 2074 (mix_test_55) : FAILED.
-    First line of code: {return test(
-      expected output : "  eb    EB    353    3223372036654775200    G    235  "
-      your output     : "  eb    EB    353    129776544    G    235  "
-      expected (nonprintable as hex) : "  eb    EB    353    3223372036654775200    G    235  "
-      actual   (nonprintable as hex) : "  eb    EB    353    129776544    G    235  "
-
-Test 2076 (mix_test_57) : FAILED.
-    First line of code: {return test(
-      expected output : "  -3244    Hello, World!    42    EB    235    4223372036854775800  "
-      your output     : "  -3244    Hello, World!    42    EB    235    -1156841480  "
-      expected (nonprintable as hex) : "  -3244    Hello, World!    42    EB    235    4223372036854775800  "
-      actual   (nonprintable as hex) : "  -3244    Hello, World!    42    EB    235    -1156841480  "
-
-Test 2077 (mix_test_58) : FAILED.
-    First line of code: {return test(
-      expected output : "  G    EB    4223372036854775800    -3244    0.375000    0x10eee7b90  "
-      your output     : "  G    EB    -1156841480    -3244    f    0x10eee7b90  "
-      expected (nonprintable as hex) : "  G    EB    4223372036854775800    -3244    0.375000    0x10eee7b90  "
-      actual   (nonprintable as hex) : "  G    EB    -1156841480    -3244    f    0x10eee7b90  "
-
-Test 2078 (mix_test_59) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    -3244    G    235    71    4223372036854775800  "
-      your output     : "  f    -3244    G    235    71    -1156841480  "
-      expected (nonprintable as hex) : "  0.375000    -3244    G    235    71    4223372036854775800  "
-      actual   (nonprintable as hex) : "  f    -3244    G    235    71    -1156841480  "
-
-Test 2079 (mix_test_60) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    0x10eee7b90    Hello, World!    -3244    235    3223372036654775200  "
-      your output     : "  -1156841480    0x10eee7b90    Hello, World!    -3244    235    129776544  "
-      expected (nonprintable as hex) : "  4223372036854775800    0x10eee7b90    Hello, World!    -3244    235    3223372036654775200  "
-      actual   (nonprintable as hex) : "  -1156841480    0x10eee7b90    Hello, World!    -3244    235    129776544  "
-
-Test 2080 (mix_test_61) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    EB    0.375000    Hello, World!    G    3223372036654775200  "
-      your output     : "  -1156841480    EB    f    Hello, World!    G    129776544  "
-      expected (nonprintable as hex) : "  4223372036854775800    EB    0.375000    Hello, World!    G    3223372036654775200  "
-      actual   (nonprintable as hex) : "  -1156841480    EB    f    Hello, World!    G    129776544  "
-
-Test 2081 (mix_test_62) : FAILED.
-    First line of code: {return test(
-      expected output : "  3223372036654775200    71    0.625000    353    Hello, World!    EB  "
-      your output     : "  129776544    71    0.625000    353    Hello, World!    EB  "
-      expected (nonprintable as hex) : "  3223372036654775200    71    0.625000    353    Hello, World!    EB  "
-      actual   (nonprintable as hex) : "  129776544    71    0.625000    353    Hello, World!    EB  "
-
-Test 2082 (mix_test_63) : FAILED.
-    First line of code: {return test(
-      expected output : "  eb    EB    235    Hello, World!    4223372036854775800    0.625000  "
-      your output     : "  eb    EB    235    Hello, World!    -1156841480    0.625000  "
-      expected (nonprintable as hex) : "  eb    EB    235    Hello, World!    4223372036854775800    0.625000  "
-      actual   (nonprintable as hex) : "  eb    EB    235    Hello, World!    -1156841480    0.625000  "
-
-Test 2083 (mix_test_64) : FAILED.
-    First line of code: {return test(
-      expected output : "  71    EB    235    353    0.375000    Hello, World!  "
-      your output     : "  71    EB    235    353    f    Hello, World!  "
-      expected (nonprintable as hex) : "  71    EB    235    353    0.375000    Hello, World!  "
-      actual   (nonprintable as hex) : "  71    EB    235    353    f    Hello, World!  "
-
-Test 2084 (mix_test_65) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    235    eb    353    3223372036654775200    Hello, World!  "
-      your output     : "  -1156841480    235    eb    353    129776544    Hello, World!  "
-      expected (nonprintable as hex) : "  4223372036854775800    235    eb    353    3223372036654775200    Hello, World!  "
-      actual   (nonprintable as hex) : "  -1156841480    235    eb    353    129776544    Hello, World!  "
-
-Test 2087 (mix_test_68) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    Hello, World!    0x10eee7b90    0.625000    0.375000    EB  "
-      your output     : "  -1156841480    Hello, World!    0x10eee7b90    0.625000    f    EB  "
-      expected (nonprintable as hex) : "  4223372036854775800    Hello, World!    0x10eee7b90    0.625000    0.375000    EB  "
-      actual   (nonprintable as hex) : "  -1156841480    Hello, World!    0x10eee7b90    0.625000    f    EB  "
-
-Test 2088 (mix_test_69) : FAILED.
-    First line of code: {return test(
-      expected output : "  Hello, World!    0x10eee7b90    0.375000    3223372036654775200    eb    353  "
-      your output     : "  Hello, World!    0x10eee7b90    f    129776544    eb    353  "
-      expected (nonprintable as hex) : "  Hello, World!    0x10eee7b90    0.375000    3223372036654775200    eb    353  "
-      actual   (nonprintable as hex) : "  Hello, World!    0x10eee7b90    f    129776544    eb    353  "
-
-Test 2089 (mix_test_70) : FAILED.
-    First line of code: {return test(
-      expected output : "  71    -3244    0.375000    G    eb    3223372036654775200  "
-      your output     : "  71    -3244    f    G    eb    129776544  "
-      expected (nonprintable as hex) : "  71    -3244    0.375000    G    eb    3223372036654775200  "
-      actual   (nonprintable as hex) : "  71    -3244    f    G    eb    129776544  "
-
-Test 2090 (mix_test_71) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    235    3223372036654775200    G    0.375000    EB  "
-      your output     : "  0x10eee7b90    235    129776544    G    f    EB  "
-      expected (nonprintable as hex) : "  0x10eee7b90    235    3223372036654775200    G    0.375000    EB  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    235    129776544    G    f    EB  "
-
-Test 2091 (mix_test_72) : FAILED.
-    First line of code: {return test(
-      expected output : "  EB    0x10eee7b90    0.625000    G    353    4223372036854775800  "
-      your output     : "  EB    0x10eee7b90    0.625000    G    353    -1156841480  "
-      expected (nonprintable as hex) : "  EB    0x10eee7b90    0.625000    G    353    4223372036854775800  "
-      actual   (nonprintable as hex) : "  EB    0x10eee7b90    0.625000    G    353    -1156841480  "
-
-Test 2092 (mix_test_73) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    G    4223372036854775800    3223372036654775200    eb    0.625000  "
-      your output     : "  0x10eee7b90    G    -1156841480    129776544    eb    0.625000  "
-      expected (nonprintable as hex) : "  0x10eee7b90    G    4223372036854775800    3223372036654775200    eb    0.625000  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    G    -1156841480    129776544    eb    0.625000  "
-
-Test 2093 (mix_test_74) : FAILED.
-    First line of code: {return test(
-      expected output : "  235    G    4223372036854775800    0x10eee7b90    353    Hello, World!  "
-      your output     : "  235    G    -1156841480    0x10eee7b90    353    Hello, World!  "
-      expected (nonprintable as hex) : "  235    G    4223372036854775800    0x10eee7b90    353    Hello, World!  "
-      actual   (nonprintable as hex) : "  235    G    -1156841480    0x10eee7b90    353    Hello, World!  "
-
-Test 2094 (mix_test_75) : FAILED.
-    First line of code: {return test(
-      expected output : "  71    3223372036654775200    Hello, World!    4223372036854775800    -3244    G  "
-      your output     : "  71    129776544    Hello, World!    -1156841480    -3244    G  "
-      expected (nonprintable as hex) : "  71    3223372036654775200    Hello, World!    4223372036854775800    -3244    G  "
-      actual   (nonprintable as hex) : "  71    129776544    Hello, World!    -1156841480    -3244    G  "
-
-Test 2095 (mix_test_76) : FAILED.
-    First line of code: {return test(
-      expected output : "  235    eb    3223372036654775200    -3244    42    71  "
-      your output     : "  235    eb    129776544    -3244    42    71  "
-      expected (nonprintable as hex) : "  235    eb    3223372036654775200    -3244    42    71  "
-      actual   (nonprintable as hex) : "  235    eb    129776544    -3244    42    71  "
-
-Test 2096 (mix_test_77) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    -3244    0.375000    G    353    3223372036654775200  "
-      your output     : "  -1156841480    -3244    f    G    353    129776544  "
-      expected (nonprintable as hex) : "  4223372036854775800    -3244    0.375000    G    353    3223372036654775200  "
-      actual   (nonprintable as hex) : "  -1156841480    -3244    f    G    353    129776544  "
-
-Test 2098 (mix_test_79) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    EB    0x10eee7b90    71    G    Hello, World!  "
-      your output     : "  f    EB    0x10eee7b90    71    G    Hello, World!  "
-      expected (nonprintable as hex) : "  0.375000    EB    0x10eee7b90    71    G    Hello, World!  "
-      actual   (nonprintable as hex) : "  f    EB    0x10eee7b90    71    G    Hello, World!  "
-
-Test 2100 (mix_test_81) : FAILED.
-    First line of code: {return test(
-      expected output : "  Hello, World!    0x10eee7b90    235    0.375000    71    4223372036854775800  "
-      your output     : "  Hello, World!    0x10eee7b90    235    f    71    -1156841480  "
-      expected (nonprintable as hex) : "  Hello, World!    0x10eee7b90    235    0.375000    71    4223372036854775800  "
-      actual   (nonprintable as hex) : "  Hello, World!    0x10eee7b90    235    f    71    -1156841480  "
-
-Test 2101 (mix_test_82) : FAILED.
-    First line of code: {return test(
-      expected output : "  EB    eb    42    G    0.375000    4223372036854775800  "
-      your output     : "  EB    eb    42    G    f    -1156841480  "
-      expected (nonprintable as hex) : "  EB    eb    42    G    0.375000    4223372036854775800  "
-      actual   (nonprintable as hex) : "  EB    eb    42    G    f    -1156841480  "
-
-Test 2103 (mix_test_84) : FAILED.
-    First line of code: {return test(
-      expected output : "  -3244    0.375000    71    4223372036854775800    Hello, World!    3223372036654775200  "
-      your output     : "  -3244    f    71    -1156841480    Hello, World!    129776544  "
-      expected (nonprintable as hex) : "  -3244    0.375000    71    4223372036854775800    Hello, World!    3223372036654775200  "
-      actual   (nonprintable as hex) : "  -3244    f    71    -1156841480    Hello, World!    129776544  "
-
-Test 2104 (mix_test_85) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    353    0.625000    235    EB    4223372036854775800  "
-      your output     : "  f    353    0.625000    235    EB    -1156841480  "
-      expected (nonprintable as hex) : "  0.375000    353    0.625000    235    EB    4223372036854775800  "
-      actual   (nonprintable as hex) : "  f    353    0.625000    235    EB    -1156841480  "
-
-Test 2105 (mix_test_86) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    42    3223372036654775200    -3244    235    353  "
-      your output     : "  0.625000    42    129776544    -3244    235    353  "
-      expected (nonprintable as hex) : "  0.625000    42    3223372036654775200    -3244    235    353  "
-      actual   (nonprintable as hex) : "  0.625000    42    129776544    -3244    235    353  "
-
-Test 2106 (mix_test_87) : FAILED.
-    First line of code: {return test(
-      expected output : "  42    eb    3223372036654775200    G    -3244    0.625000  "
-      your output     : "  42    eb    129776544    G    -3244    0.625000  "
-      expected (nonprintable as hex) : "  42    eb    3223372036654775200    G    -3244    0.625000  "
-      actual   (nonprintable as hex) : "  42    eb    129776544    G    -3244    0.625000  "
-
-Test 2108 (mix_test_89) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    G    353    0.625000    235    3223372036654775200  "
-      your output     : "  -1156841480    G    353    0.625000    235    129776544  "
-      expected (nonprintable as hex) : "  4223372036854775800    G    353    0.625000    235    3223372036654775200  "
-      actual   (nonprintable as hex) : "  -1156841480    G    353    0.625000    235    129776544  "
-
-Test 2109 (mix_test_90) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    353    0.625000    4223372036854775800    0x10eee7b90    Hello, World!  "
-      your output     : "  f    353    0.625000    -1156841480    0x10eee7b90    Hello, World!  "
-      expected (nonprintable as hex) : "  0.375000    353    0.625000    4223372036854775800    0x10eee7b90    Hello, World!  "
-      actual   (nonprintable as hex) : "  f    353    0.625000    -1156841480    0x10eee7b90    Hello, World!  "
-
-Test 2111 (mix_test_92) : FAILED.
-    First line of code: {return test(
-      expected output : "  G    71    353    EB    Hello, World!    3223372036654775200  "
-      your output     : "  G    71    353    EB    Hello, World!    129776544  "
-      expected (nonprintable as hex) : "  G    71    353    EB    Hello, World!    3223372036654775200  "
-      actual   (nonprintable as hex) : "  G    71    353    EB    Hello, World!    129776544  "
-
-Test 2112 (mix_test_93) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    -3244    G    71    Hello, World!    0.625000  "
-      your output     : "  f    -3244    G    71    Hello, World!    0.625000  "
-      expected (nonprintable as hex) : "  0.375000    -3244    G    71    Hello, World!    0.625000  "
-      actual   (nonprintable as hex) : "  f    -3244    G    71    Hello, World!    0.625000  "
-
-Test 2113 (mix_test_94) : FAILED.
-    First line of code: {return test(
-      expected output : "  G    235    eb    3223372036654775200    -3244    Hello, World!  "
-      your output     : "  G    235    eb    129776544    -3244    Hello, World!  "
-      expected (nonprintable as hex) : "  G    235    eb    3223372036654775200    -3244    Hello, World!  "
-      actual   (nonprintable as hex) : "  G    235    eb    129776544    -3244    Hello, World!  "
-
-Test 2114 (mix_test_95) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    235    G    eb    3223372036654775200    4223372036854775800  "
-      your output     : "  0.625000    235    G    eb    129776544    -1156841480  "
-      expected (nonprintable as hex) : "  0.625000    235    G    eb    3223372036654775200    4223372036854775800  "
-      actual   (nonprintable as hex) : "  0.625000    235    G    eb    129776544    -1156841480  "
-
-Test 2115 (mix_test_96) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    -3244    4223372036854775800    G    eb    EB  "
-      your output     : "  0.625000    -3244    -1156841480    G    eb    EB  "
-      expected (nonprintable as hex) : "  0.625000    -3244    4223372036854775800    G    eb    EB  "
-      actual   (nonprintable as hex) : "  0.625000    -3244    -1156841480    G    eb    EB  "
-
-Test 2116 (mix_test_97) : FAILED.
-    First line of code: {return test(
-      expected output : "  235    0.375000    42    0.625000    71    -3244  "
-      your output     : "  235    f    42    0.625000    71    -3244  "
-      expected (nonprintable as hex) : "  235    0.375000    42    0.625000    71    -3244  "
-      actual   (nonprintable as hex) : "  235    f    42    0.625000    71    -3244  "
-
-Test 2117 (mix_test_98) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    Hello, World!    -3244    42    0.625000    eb  "
-      your output     : "  f    Hello, World!    -3244    42    0.625000    eb  "
-      expected (nonprintable as hex) : "  0.375000    Hello, World!    -3244    42    0.625000    eb  "
-      actual   (nonprintable as hex) : "  f    Hello, World!    -3244    42    0.625000    eb  "
-
-Test 2118 (mix_test_99) : FAILED.
-    First line of code: {return test(
-      expected output : "  235    0.625000    EB    G    3223372036654775200    0x10eee7b90  "
-      your output     : "  235    0.625000    EB    G    129776544    0x10eee7b90  "
-      expected (nonprintable as hex) : "  235    0.625000    EB    G    3223372036654775200    0x10eee7b90  "
-      actual   (nonprintable as hex) : "  235    0.625000    EB    G    129776544    0x10eee7b90  "
-
-Test 2119 (mix_test_100) : FAILED.
-    First line of code: {return test(
-      expected output : "  EB    4223372036854775800    0.625000    Hello, World!    71    eb  "
-      your output     : "  EB    -1156841480    0.625000    Hello, World!    71    eb  "
-      expected (nonprintable as hex) : "  EB    4223372036854775800    0.625000    Hello, World!    71    eb  "
-      actual   (nonprintable as hex) : "  EB    -1156841480    0.625000    Hello, World!    71    eb  "
-
-Test 2121 (mix_test_102) : FAILED.
-    First line of code: {return test(
-      expected output : "  71    G    0.625000    eb    -3244    4223372036854775800  "
-      your output     : "  71    G    0.625000    eb    -3244    -1156841480  "
-      expected (nonprintable as hex) : "  71    G    0.625000    eb    -3244    4223372036854775800  "
-      actual   (nonprintable as hex) : "  71    G    0.625000    eb    -3244    -1156841480  "
-
-Test 2122 (mix_test_103) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    0.375000    eb    EB    0.625000    Hello, World!  "
-      your output     : "  0x10eee7b90    f    eb    EB    0.625000    Hello, World!  "
-      expected (nonprintable as hex) : "  0x10eee7b90    0.375000    eb    EB    0.625000    Hello, World!  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    f    eb    EB    0.625000    Hello, World!  "
-
-Test 2123 (mix_test_104) : FAILED.
-    First line of code: {return test(
-      expected output : "  Hello, World!    eb    3223372036654775200    42    353    0x10eee7b90  "
-      your output     : "  Hello, World!    eb    129776544    42    353    0x10eee7b90  "
-      expected (nonprintable as hex) : "  Hello, World!    eb    3223372036654775200    42    353    0x10eee7b90  "
-      actual   (nonprintable as hex) : "  Hello, World!    eb    129776544    42    353    0x10eee7b90  "
-
-Test 2124 (mix_test_105) : FAILED.
-    First line of code: {return test(
-      expected output : "  EB    Hello, World!    0.375000    0x10eee7b90    3223372036654775200    eb  "
-      your output     : "  EB    Hello, World!    f    0x10eee7b90    129776544    eb  "
-      expected (nonprintable as hex) : "  EB    Hello, World!    0.375000    0x10eee7b90    3223372036654775200    eb  "
-      actual   (nonprintable as hex) : "  EB    Hello, World!    f    0x10eee7b90    129776544    eb  "
-
-Test 2125 (mix_test_106) : FAILED.
-    First line of code: {return test(
-      expected output : "  G    71    -3244    eb    235    4223372036854775800  "
-      your output     : "  G    71    -3244    eb    235    -1156841480  "
-      expected (nonprintable as hex) : "  G    71    -3244    eb    235    4223372036854775800  "
-      actual   (nonprintable as hex) : "  G    71    -3244    eb    235    -1156841480  "
-
-Test 2126 (mix_test_107) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    EB    Hello, World!    0.375000    0.625000    71  "
-      your output     : "  -1156841480    EB    Hello, World!    f    0.625000    71  "
-      expected (nonprintable as hex) : "  4223372036854775800    EB    Hello, World!    0.375000    0.625000    71  "
-      actual   (nonprintable as hex) : "  -1156841480    EB    Hello, World!    f    0.625000    71  "
-
-Test 2128 (mix_test_109) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    Hello, World!    235    0.625000    42    EB  "
-      your output     : "  f    Hello, World!    235    0.625000    42    EB  "
-      expected (nonprintable as hex) : "  0.375000    Hello, World!    235    0.625000    42    EB  "
-      actual   (nonprintable as hex) : "  f    Hello, World!    235    0.625000    42    EB  "
-
-Test 2130 (mix_test_111) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    EB    3223372036654775200    -3244    0.375000    0.625000  "
-      your output     : "  0x10eee7b90    EB    129776544    -3244    f    0.625000  "
-      expected (nonprintable as hex) : "  0x10eee7b90    EB    3223372036654775200    -3244    0.375000    0.625000  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    EB    129776544    -3244    f    0.625000  "
-
-Test 2131 (mix_test_112) : FAILED.
-    First line of code: {return test(
-      expected output : "  235    G    0.375000    3223372036654775200    353    71  "
-      your output     : "  235    G    f    129776544    353    71  "
-      expected (nonprintable as hex) : "  235    G    0.375000    3223372036654775200    353    71  "
-      actual   (nonprintable as hex) : "  235    G    f    129776544    353    71  "
-
-Test 2134 (mix_test_115) : FAILED.
-    First line of code: {return test(
-      expected output : "  EB    71    3223372036654775200    0x10eee7b90    4223372036854775800    -3244  "
-      your output     : "  EB    71    129776544    0x10eee7b90    -1156841480    -3244  "
-      expected (nonprintable as hex) : "  EB    71    3223372036654775200    0x10eee7b90    4223372036854775800    -3244  "
-      actual   (nonprintable as hex) : "  EB    71    129776544    0x10eee7b90    -1156841480    -3244  "
-
-Test 2135 (mix_test_116) : FAILED.
-    First line of code: {return test(
-      expected output : "  3223372036654775200    G    4223372036854775800    353    0.375000    eb  "
-      your output     : "  129776544    G    -1156841480    353    f    eb  "
-      expected (nonprintable as hex) : "  3223372036654775200    G    4223372036854775800    353    0.375000    eb  "
-      actual   (nonprintable as hex) : "  129776544    G    -1156841480    353    f    eb  "
-
-Test 2136 (mix_test_117) : FAILED.
-    First line of code: {return test(
-      expected output : "  3223372036654775200    Hello, World!    42    0.375000    71    eb  "
-      your output     : "  129776544    Hello, World!    42    f    71    eb  "
-      expected (nonprintable as hex) : "  3223372036654775200    Hello, World!    42    0.375000    71    eb  "
-      actual   (nonprintable as hex) : "  129776544    Hello, World!    42    f    71    eb  "
-
-Test 2137 (mix_test_118) : FAILED.
-    First line of code: {return test(
-      expected output : "  353    0.625000    0.375000    eb    0x10eee7b90    71  "
-      your output     : "  353    0.625000    f    eb    0x10eee7b90    71  "
-      expected (nonprintable as hex) : "  353    0.625000    0.375000    eb    0x10eee7b90    71  "
-      actual   (nonprintable as hex) : "  353    0.625000    f    eb    0x10eee7b90    71  "
-
-Test 2139 (mix_test_120) : FAILED.
-    First line of code: {return test(
-      expected output : "  EB    3223372036654775200    353    4223372036854775800    eb    0x10eee7b90  "
-      your output     : "  EB    129776544    353    -1156841480    eb    0x10eee7b90  "
-      expected (nonprintable as hex) : "  EB    3223372036654775200    353    4223372036854775800    eb    0x10eee7b90  "
-      actual   (nonprintable as hex) : "  EB    129776544    353    -1156841480    eb    0x10eee7b90  "
-
-Test 2140 (mix_test_121) : FAILED.
-    First line of code: {return test(
-      expected output : "  EB    Hello, World!    -3244    4223372036854775800    G    eb  "
-      your output     : "  EB    Hello, World!    -3244    -1156841480    G    eb  "
-      expected (nonprintable as hex) : "  EB    Hello, World!    -3244    4223372036854775800    G    eb  "
-      actual   (nonprintable as hex) : "  EB    Hello, World!    -3244    -1156841480    G    eb  "
-
-Test 2141 (mix_test_122) : FAILED.
-    First line of code: {return test(
-      expected output : "  3223372036654775200    Hello, World!    0.625000    42    0.375000    235  "
-      your output     : "  129776544    Hello, World!    0.625000    42    f    235  "
-      expected (nonprintable as hex) : "  3223372036654775200    Hello, World!    0.625000    42    0.375000    235  "
-      actual   (nonprintable as hex) : "  129776544    Hello, World!    0.625000    42    f    235  "
-
-Test 2142 (mix_test_123) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    3223372036654775200    eb    0.375000    353    0x10eee7b90  "
-      your output     : "  0.625000    129776544    eb    f    353    0x10eee7b90  "
-      expected (nonprintable as hex) : "  0.625000    3223372036654775200    eb    0.375000    353    0x10eee7b90  "
-      actual   (nonprintable as hex) : "  0.625000    129776544    eb    f    353    0x10eee7b90  "
-
-Test 2143 (mix_test_124) : FAILED.
-    First line of code: {return test(
-      expected output : "  71    235    3223372036654775200    eb    -3244    0.375000  "
-      your output     : "  71    235    129776544    eb    -3244    f  "
-      expected (nonprintable as hex) : "  71    235    3223372036654775200    eb    -3244    0.375000  "
-      actual   (nonprintable as hex) : "  71    235    129776544    eb    -3244    f  "
-
-Test 2144 (mix_test_125) : FAILED.
-    First line of code: {return test(
-      expected output : "  G    eb    71    42    0.375000    0x10eee7b90  "
-      your output     : "  G    eb    71    42    f    0x10eee7b90  "
-      expected (nonprintable as hex) : "  G    eb    71    42    0.375000    0x10eee7b90  "
-      actual   (nonprintable as hex) : "  G    eb    71    42    f    0x10eee7b90  "
-
-Test 2145 (mix_test_126) : FAILED.
-    First line of code: {return test(
-      expected output : "  G    0.375000    EB    eb    235    42  "
-      your output     : "  G    f    EB    eb    235    42  "
-      expected (nonprintable as hex) : "  G    0.375000    EB    eb    235    42  "
-      actual   (nonprintable as hex) : "  G    f    EB    eb    235    42  "
-
-Test 2146 (mix_test_127) : FAILED.
-    First line of code: {return test(
-      expected output : "  42    0x10eee7b90    0.625000    353    4223372036854775800    0.375000  "
-      your output     : "  42    0x10eee7b90    0.625000    353    -1156841480    f  "
-      expected (nonprintable as hex) : "  42    0x10eee7b90    0.625000    353    4223372036854775800    0.375000  "
-      actual   (nonprintable as hex) : "  42    0x10eee7b90    0.625000    353    -1156841480    f  "
-
-Test 2147 (mix_test_128) : FAILED.
-    First line of code: {return test(
-      expected output : "  -3244    353    42    0.375000    3223372036654775200    0x10eee7b90  "
-      your output     : "  -3244    353    42    f    129776544    0x10eee7b90  "
-      expected (nonprintable as hex) : "  -3244    353    42    0.375000    3223372036654775200    0x10eee7b90  "
-      actual   (nonprintable as hex) : "  -3244    353    42    f    129776544    0x10eee7b90  "
-
-Test 2148 (mix_test_129) : FAILED.
-    First line of code: {return test(
-      expected output : "  235    G    Hello, World!    3223372036654775200    EB    eb  "
-      your output     : "  235    G    Hello, World!    129776544    EB    eb  "
-      expected (nonprintable as hex) : "  235    G    Hello, World!    3223372036654775200    EB    eb  "
-      actual   (nonprintable as hex) : "  235    G    Hello, World!    129776544    EB    eb  "
-
-Test 2149 (mix_test_130) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    0.625000    0x10eee7b90    71    42    235  "
-      your output     : "  -1156841480    0.625000    0x10eee7b90    71    42    235  "
-      expected (nonprintable as hex) : "  4223372036854775800    0.625000    0x10eee7b90    71    42    235  "
-      actual   (nonprintable as hex) : "  -1156841480    0.625000    0x10eee7b90    71    42    235  "
-
-Test 2151 (mix_test_132) : FAILED.
-    First line of code: {return test(
-      expected output : "  235    0.375000    3223372036654775200    42    0.625000    -3244  "
-      your output     : "  235    f    129776544    42    0.625000    -3244  "
-      expected (nonprintable as hex) : "  235    0.375000    3223372036654775200    42    0.625000    -3244  "
-      actual   (nonprintable as hex) : "  235    f    129776544    42    0.625000    -3244  "
-
-Test 2152 (mix_test_133) : FAILED.
-    First line of code: {return test(
-      expected output : "  eb    Hello, World!    42    71    0.375000    4223372036854775800  "
-      your output     : "  eb    Hello, World!    42    71    f    -1156841480  "
-      expected (nonprintable as hex) : "  eb    Hello, World!    42    71    0.375000    4223372036854775800  "
-      actual   (nonprintable as hex) : "  eb    Hello, World!    42    71    f    -1156841480  "
-
-Test 2153 (mix_test_134) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    0x10eee7b90    353    -3244    eb    4223372036854775800  "
-      your output     : "  0.625000    0x10eee7b90    353    -3244    eb    -1156841480  "
-      expected (nonprintable as hex) : "  0.625000    0x10eee7b90    353    -3244    eb    4223372036854775800  "
-      actual   (nonprintable as hex) : "  0.625000    0x10eee7b90    353    -3244    eb    -1156841480  "
-
-Test 2154 (mix_test_135) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    EB    Hello, World!    4223372036854775800    235    G  "
-      your output     : "  0x10eee7b90    EB    Hello, World!    -1156841480    235    G  "
-      expected (nonprintable as hex) : "  0x10eee7b90    EB    Hello, World!    4223372036854775800    235    G  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    EB    Hello, World!    -1156841480    235    G  "
-
-Test 2155 (mix_test_136) : FAILED.
-    First line of code: {return test(
-      expected output : "  71    353    EB    0x10eee7b90    Hello, World!    4223372036854775800  "
-      your output     : "  71    353    EB    0x10eee7b90    Hello, World!    -1156841480  "
-      expected (nonprintable as hex) : "  71    353    EB    0x10eee7b90    Hello, World!    4223372036854775800  "
-      actual   (nonprintable as hex) : "  71    353    EB    0x10eee7b90    Hello, World!    -1156841480  "
-
-Test 2157 (mix_test_138) : FAILED.
-    First line of code: {return test(
-      expected output : "  Hello, World!    4223372036854775800    42    eb    0x10eee7b90    353  "
-      your output     : "  Hello, World!    -1156841480    42    eb    0x10eee7b90    353  "
-      expected (nonprintable as hex) : "  Hello, World!    4223372036854775800    42    eb    0x10eee7b90    353  "
-      actual   (nonprintable as hex) : "  Hello, World!    -1156841480    42    eb    0x10eee7b90    353  "
-
-Test 2158 (mix_test_139) : FAILED.
-    First line of code: {return test(
-      expected output : "  42    EB    3223372036654775200    235    Hello, World!    71  "
-      your output     : "  42    EB    129776544    235    Hello, World!    71  "
-      expected (nonprintable as hex) : "  42    EB    3223372036654775200    235    Hello, World!    71  "
-      actual   (nonprintable as hex) : "  42    EB    129776544    235    Hello, World!    71  "
-
-Test 2159 (mix_test_140) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    G    eb    -3244    3223372036654775200    235  "
-      your output     : "  0x10eee7b90    G    eb    -3244    129776544    235  "
-      expected (nonprintable as hex) : "  0x10eee7b90    G    eb    -3244    3223372036654775200    235  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    G    eb    -3244    129776544    235  "
-
-Test 2160 (mix_test_141) : FAILED.
-    First line of code: {return test(
-      expected output : "  3223372036654775200    4223372036854775800    eb    0.375000    Hello, World!    235  "
-      your output     : "  129776544    -1156841480    eb    f    Hello, World!    235  "
-      expected (nonprintable as hex) : "  3223372036654775200    4223372036854775800    eb    0.375000    Hello, World!    235  "
-      actual   (nonprintable as hex) : "  129776544    -1156841480    eb    f    Hello, World!    235  "
-
-Test 2161 (mix_test_142) : FAILED.
-    First line of code: {return test(
-      expected output : "  71    353    -3244    G    Hello, World!    4223372036854775800  "
-      your output     : "  71    353    -3244    G    Hello, World!    -1156841480  "
-      expected (nonprintable as hex) : "  71    353    -3244    G    Hello, World!    4223372036854775800  "
-      actual   (nonprintable as hex) : "  71    353    -3244    G    Hello, World!    -1156841480  "
-
-Test 2162 (mix_test_143) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    71    3223372036654775200    Hello, World!    G    235  "
-      your output     : "  0x10eee7b90    71    129776544    Hello, World!    G    235  "
-      expected (nonprintable as hex) : "  0x10eee7b90    71    3223372036654775200    Hello, World!    G    235  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    71    129776544    Hello, World!    G    235  "
-
-Test 2163 (mix_test_144) : FAILED.
-    First line of code: {return test(
-      expected output : "  eb    0x10eee7b90    42    0.375000    235    Hello, World!  "
-      your output     : "  eb    0x10eee7b90    42    f    235    Hello, World!  "
-      expected (nonprintable as hex) : "  eb    0x10eee7b90    42    0.375000    235    Hello, World!  "
-      actual   (nonprintable as hex) : "  eb    0x10eee7b90    42    f    235    Hello, World!  "
-
-Test 2164 (mix_test_145) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    71    235    42    EB    353  "
-      your output     : "  -1156841480    71    235    42    EB    353  "
-      expected (nonprintable as hex) : "  4223372036854775800    71    235    42    EB    353  "
-      actual   (nonprintable as hex) : "  -1156841480    71    235    42    EB    353  "
-
-Test 2166 (mix_test_147) : FAILED.
-    First line of code: {return test(
-      expected output : "  71    4223372036854775800    0x10eee7b90    Hello, World!    0.375000    353  "
-      your output     : "  71    -1156841480    0x10eee7b90    Hello, World!    f    353  "
-      expected (nonprintable as hex) : "  71    4223372036854775800    0x10eee7b90    Hello, World!    0.375000    353  "
-      actual   (nonprintable as hex) : "  71    -1156841480    0x10eee7b90    Hello, World!    f    353  "
-
-Test 2167 (mix_test_148) : FAILED.
-    First line of code: {return test(
-      expected output : "  3223372036654775200    Hello, World!    EB    42    -3244    G  "
-      your output     : "  129776544    Hello, World!    EB    42    -3244    G  "
-      expected (nonprintable as hex) : "  3223372036654775200    Hello, World!    EB    42    -3244    G  "
-      actual   (nonprintable as hex) : "  129776544    Hello, World!    EB    42    -3244    G  "
-
-Test 2168 (mix_test_149) : FAILED.
-    First line of code: {return test(
-      expected output : "  G    0x10eee7b90    4223372036854775800    EB    Hello, World!    3223372036654775200  "
-      your output     : "  G    0x10eee7b90    -1156841480    EB    Hello, World!    129776544  "
-      expected (nonprintable as hex) : "  G    0x10eee7b90    4223372036854775800    EB    Hello, World!    3223372036654775200  "
-      actual   (nonprintable as hex) : "  G    0x10eee7b90    -1156841480    EB    Hello, World!    129776544  "
-
-Test 2169 (mix_test_150) : FAILED.
-    First line of code: {return test(
-      expected output : "  EB    3223372036654775200    G    42    0.625000    235  "
-      your output     : "  EB    129776544    G    42    0.625000    235  "
-      expected (nonprintable as hex) : "  EB    3223372036654775200    G    42    0.625000    235  "
-      actual   (nonprintable as hex) : "  EB    129776544    G    42    0.625000    235  "
-
-Test 2170 (mix_test_151) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    G    71    235    -3244    eb  "
-      your output     : "  f    G    71    235    -3244    eb  "
-      expected (nonprintable as hex) : "  0.375000    G    71    235    -3244    eb  "
-      actual   (nonprintable as hex) : "  f    G    71    235    -3244    eb  "
-
-Test 2171 (mix_test_152) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    -3244    353    Hello, World!    3223372036654775200    71  "
-      your output     : "  -1156841480    -3244    353    Hello, World!    129776544    71  "
-      expected (nonprintable as hex) : "  4223372036854775800    -3244    353    Hello, World!    3223372036654775200    71  "
-      actual   (nonprintable as hex) : "  -1156841480    -3244    353    Hello, World!    129776544    71  "
-
-Test 2172 (mix_test_153) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    4223372036854775800    71    Hello, World!    0x10eee7b90    G  "
-      your output     : "  f    -1156841480    71    Hello, World!    0x10eee7b90    G  "
-      expected (nonprintable as hex) : "  0.375000    4223372036854775800    71    Hello, World!    0x10eee7b90    G  "
-      actual   (nonprintable as hex) : "  f    -1156841480    71    Hello, World!    0x10eee7b90    G  "
-
-Test 2173 (mix_test_154) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    EB    353    235    3223372036654775200    4223372036854775800  "
-      your output     : "  0x10eee7b90    EB    353    235    129776544    -1156841480  "
-      expected (nonprintable as hex) : "  0x10eee7b90    EB    353    235    3223372036654775200    4223372036854775800  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    EB    353    235    129776544    -1156841480  "
-
-Test 2174 (mix_test_155) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    EB    235    42    0.625000    -3244  "
-      your output     : "  -1156841480    EB    235    42    0.625000    -3244  "
-      expected (nonprintable as hex) : "  4223372036854775800    EB    235    42    0.625000    -3244  "
-      actual   (nonprintable as hex) : "  -1156841480    EB    235    42    0.625000    -3244  "
-
-Test 2175 (mix_test_156) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    42    EB    G    71    0.625000  "
-      your output     : "  f    42    EB    G    71    0.625000  "
-      expected (nonprintable as hex) : "  0.375000    42    EB    G    71    0.625000  "
-      actual   (nonprintable as hex) : "  f    42    EB    G    71    0.625000  "
-
-Test 2176 (mix_test_157) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    42    0.375000    G    4223372036854775800    EB  "
-      your output     : "  0x10eee7b90    42    f    G    -1156841480    EB  "
-      expected (nonprintable as hex) : "  0x10eee7b90    42    0.375000    G    4223372036854775800    EB  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    42    f    G    -1156841480    EB  "
-
-Test 2177 (mix_test_158) : FAILED.
-    First line of code: {return test(
-      expected output : "  42    0x10eee7b90    G    0.625000    eb    4223372036854775800  "
-      your output     : "  42    0x10eee7b90    G    0.625000    eb    -1156841480  "
-      expected (nonprintable as hex) : "  42    0x10eee7b90    G    0.625000    eb    4223372036854775800  "
-      actual   (nonprintable as hex) : "  42    0x10eee7b90    G    0.625000    eb    -1156841480  "
-
-Test 2178 (mix_test_159) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    EB    0.625000    353    Hello, World!    0.375000  "
-      your output     : "  -1156841480    EB    0.625000    353    Hello, World!    f  "
-      expected (nonprintable as hex) : "  4223372036854775800    EB    0.625000    353    Hello, World!    0.375000  "
-      actual   (nonprintable as hex) : "  -1156841480    EB    0.625000    353    Hello, World!    f  "
-
-Test 2179 (mix_test_160) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    -3244    71    3223372036654775200    0.375000    0x10eee7b90  "
-      your output     : "  -1156841480    -3244    71    129776544    f    0x10eee7b90  "
-      expected (nonprintable as hex) : "  4223372036854775800    -3244    71    3223372036654775200    0.375000    0x10eee7b90  "
-      actual   (nonprintable as hex) : "  -1156841480    -3244    71    129776544    f    0x10eee7b90  "
-
-Test 2180 (mix_test_161) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    71    4223372036854775800    G    EB    -3244  "
-      your output     : "  f    71    -1156841480    G    EB    -3244  "
-      expected (nonprintable as hex) : "  0.375000    71    4223372036854775800    G    EB    -3244  "
-      actual   (nonprintable as hex) : "  f    71    -1156841480    G    EB    -3244  "
-
-Test 2181 (mix_test_162) : FAILED.
-    First line of code: {return test(
-      expected output : "  3223372036654775200    G    353    4223372036854775800    235    42  "
-      your output     : "  129776544    G    353    -1156841480    235    42  "
-      expected (nonprintable as hex) : "  3223372036654775200    G    353    4223372036854775800    235    42  "
-      actual   (nonprintable as hex) : "  129776544    G    353    -1156841480    235    42  "
-
-Test 2182 (mix_test_163) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    4223372036854775800    42    3223372036654775200    -3244    G  "
-      your output     : "  f    -1156841480    42    129776544    -3244    G  "
-      expected (nonprintable as hex) : "  0.375000    4223372036854775800    42    3223372036654775200    -3244    G  "
-      actual   (nonprintable as hex) : "  f    -1156841480    42    129776544    -3244    G  "
-
-Test 2183 (mix_test_164) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    3223372036654775200    -3244    eb    4223372036854775800    0.375000  "
-      your output     : "  0x10eee7b90    129776544    -3244    eb    -1156841480    f  "
-      expected (nonprintable as hex) : "  0x10eee7b90    3223372036654775200    -3244    eb    4223372036854775800    0.375000  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    129776544    -3244    eb    -1156841480    f  "
-
-Test 2184 (mix_test_165) : FAILED.
-    First line of code: {return test(
-      expected output : "  235    71    0x10eee7b90    3223372036654775200    -3244    eb  "
-      your output     : "  235    71    0x10eee7b90    129776544    -3244    eb  "
-      expected (nonprintable as hex) : "  235    71    0x10eee7b90    3223372036654775200    -3244    eb  "
-      actual   (nonprintable as hex) : "  235    71    0x10eee7b90    129776544    -3244    eb  "
-
-Test 2185 (mix_test_166) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    71    Hello, World!    4223372036854775800    0.375000    -3244  "
-      your output     : "  0x10eee7b90    71    Hello, World!    -1156841480    f    -3244  "
-      expected (nonprintable as hex) : "  0x10eee7b90    71    Hello, World!    4223372036854775800    0.375000    -3244  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    71    Hello, World!    -1156841480    f    -3244  "
-
-Test 2186 (mix_test_167) : FAILED.
-    First line of code: {return test(
-      expected output : "  Hello, World!    3223372036654775200    0x10eee7b90    42    235    71  "
-      your output     : "  Hello, World!    129776544    0x10eee7b90    42    235    71  "
-      expected (nonprintable as hex) : "  Hello, World!    3223372036654775200    0x10eee7b90    42    235    71  "
-      actual   (nonprintable as hex) : "  Hello, World!    129776544    0x10eee7b90    42    235    71  "
-
-Test 2187 (mix_test_168) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    353    0.375000    EB    G    235  "
-      your output     : "  0x10eee7b90    353    f    EB    G    235  "
-      expected (nonprintable as hex) : "  0x10eee7b90    353    0.375000    EB    G    235  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    353    f    EB    G    235  "
-
-Test 2188 (mix_test_169) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    42    EB    3223372036654775200    G    71  "
-      your output     : "  0x10eee7b90    42    EB    129776544    G    71  "
-      expected (nonprintable as hex) : "  0x10eee7b90    42    EB    3223372036654775200    G    71  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    42    EB    129776544    G    71  "
-
-Test 2189 (mix_test_170) : FAILED.
-    First line of code: {return test(
-      expected output : "  42    3223372036654775200    0x10eee7b90    353    EB    0.625000  "
-      your output     : "  42    129776544    0x10eee7b90    353    EB    0.625000  "
-      expected (nonprintable as hex) : "  42    3223372036654775200    0x10eee7b90    353    EB    0.625000  "
-      actual   (nonprintable as hex) : "  42    129776544    0x10eee7b90    353    EB    0.625000  "
-
-Test 2190 (mix_test_171) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    0x10eee7b90    G    -3244    4223372036854775800    42  "
-      your output     : "  0.625000    0x10eee7b90    G    -3244    -1156841480    42  "
-      expected (nonprintable as hex) : "  0.625000    0x10eee7b90    G    -3244    4223372036854775800    42  "
-      actual   (nonprintable as hex) : "  0.625000    0x10eee7b90    G    -3244    -1156841480    42  "
-
-Test 2191 (mix_test_172) : FAILED.
-    First line of code: {return test(
-      expected output : "  3223372036654775200    353    42    71    G    EB  "
-      your output     : "  129776544    353    42    71    G    EB  "
-      expected (nonprintable as hex) : "  3223372036654775200    353    42    71    G    EB  "
-      actual   (nonprintable as hex) : "  129776544    353    42    71    G    EB  "
-
-Test 2192 (mix_test_173) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    -3244    3223372036654775200    EB    eb    353  "
-      your output     : "  0x10eee7b90    -3244    129776544    EB    eb    353  "
-      expected (nonprintable as hex) : "  0x10eee7b90    -3244    3223372036654775200    EB    eb    353  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    -3244    129776544    EB    eb    353  "
-
-Test 2193 (mix_test_174) : FAILED.
-    First line of code: {return test(
-      expected output : "  71    EB    235    0x10eee7b90    eb    3223372036654775200  "
-      your output     : "  71    EB    235    0x10eee7b90    eb    129776544  "
-      expected (nonprintable as hex) : "  71    EB    235    0x10eee7b90    eb    3223372036654775200  "
-      actual   (nonprintable as hex) : "  71    EB    235    0x10eee7b90    eb    129776544  "
-
-Test 2194 (mix_test_175) : FAILED.
-    First line of code: {return test(
-      expected output : "  Hello, World!    0.375000    0.625000    71    eb    353  "
-      your output     : "  Hello, World!    f    0.625000    71    eb    353  "
-      expected (nonprintable as hex) : "  Hello, World!    0.375000    0.625000    71    eb    353  "
-      actual   (nonprintable as hex) : "  Hello, World!    f    0.625000    71    eb    353  "
-
-Test 2197 (mix_test_178) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    42    3223372036654775200    353    EB    G  "
-      your output     : "  0.625000    42    129776544    353    EB    G  "
-      expected (nonprintable as hex) : "  0.625000    42    3223372036654775200    353    EB    G  "
-      actual   (nonprintable as hex) : "  0.625000    42    129776544    353    EB    G  "
-
-Test 2198 (mix_test_179) : FAILED.
-    First line of code: {return test(
-      expected output : "  3223372036654775200    353    4223372036854775800    EB    0x10eee7b90    G  "
-      your output     : "  129776544    353    -1156841480    EB    0x10eee7b90    G  "
-      expected (nonprintable as hex) : "  3223372036654775200    353    4223372036854775800    EB    0x10eee7b90    G  "
-      actual   (nonprintable as hex) : "  129776544    353    -1156841480    EB    0x10eee7b90    G  "
-
-Test 2200 (mix_test_181) : FAILED.
-    First line of code: {return test(
-      expected output : "  -3244    EB    71    Hello, World!    3223372036654775200    G  "
-      your output     : "  -3244    EB    71    Hello, World!    129776544    G  "
-      expected (nonprintable as hex) : "  -3244    EB    71    Hello, World!    3223372036654775200    G  "
-      actual   (nonprintable as hex) : "  -3244    EB    71    Hello, World!    129776544    G  "
-
-Test 2201 (mix_test_182) : FAILED.
-    First line of code: {return test(
-      expected output : "  71    G    0.625000    0.375000    4223372036854775800    42  "
-      your output     : "  71    G    0.625000    f    -1156841480    42  "
-      expected (nonprintable as hex) : "  71    G    0.625000    0.375000    4223372036854775800    42  "
-      actual   (nonprintable as hex) : "  71    G    0.625000    f    -1156841480    42  "
-
-Test 2202 (mix_test_183) : FAILED.
-    First line of code: {return test(
-      expected output : "  3223372036654775200    eb    -3244    G    71    42  "
-      your output     : "  129776544    eb    -3244    G    71    42  "
-      expected (nonprintable as hex) : "  3223372036654775200    eb    -3244    G    71    42  "
-      actual   (nonprintable as hex) : "  129776544    eb    -3244    G    71    42  "
-
-Test 2204 (mix_test_185) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    71    0.625000    0.375000    G    353  "
-      your output     : "  -1156841480    71    0.625000    f    G    353  "
-      expected (nonprintable as hex) : "  4223372036854775800    71    0.625000    0.375000    G    353  "
-      actual   (nonprintable as hex) : "  -1156841480    71    0.625000    f    G    353  "
-
-Test 2205 (mix_test_186) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    42    4223372036854775800    235    EB    71  "
-      your output     : "  f    42    -1156841480    235    EB    71  "
-      expected (nonprintable as hex) : "  0.375000    42    4223372036854775800    235    EB    71  "
-      actual   (nonprintable as hex) : "  f    42    -1156841480    235    EB    71  "
-
-Test 2206 (mix_test_187) : FAILED.
-    First line of code: {return test(
-      expected output : "  -3244    0.375000    0.625000    353    Hello, World!    71  "
-      your output     : "  -3244    f    0.625000    353    Hello, World!    71  "
-      expected (nonprintable as hex) : "  -3244    0.375000    0.625000    353    Hello, World!    71  "
-      actual   (nonprintable as hex) : "  -3244    f    0.625000    353    Hello, World!    71  "
-
-Test 2207 (mix_test_188) : FAILED.
-    First line of code: {return test(
-      expected output : "  235    eb    -3244    0.375000    3223372036654775200    EB  "
-      your output     : "  235    eb    -3244    f    129776544    EB  "
-      expected (nonprintable as hex) : "  235    eb    -3244    0.375000    3223372036654775200    EB  "
-      actual   (nonprintable as hex) : "  235    eb    -3244    f    129776544    EB  "
-
-Test 2209 (mix_test_190) : FAILED.
-    First line of code: {return test(
-      expected output : "  EB    Hello, World!    71    235    353    3223372036654775200  "
-      your output     : "  EB    Hello, World!    71    235    353    129776544  "
-      expected (nonprintable as hex) : "  EB    Hello, World!    71    235    353    3223372036654775200  "
-      actual   (nonprintable as hex) : "  EB    Hello, World!    71    235    353    129776544  "
-
-Test 2210 (mix_test_191) : FAILED.
-    First line of code: {return test(
-      expected output : "  G    0.625000    eb    3223372036654775200    235    353  "
-      your output     : "  G    0.625000    eb    129776544    235    353  "
-      expected (nonprintable as hex) : "  G    0.625000    eb    3223372036654775200    235    353  "
-      actual   (nonprintable as hex) : "  G    0.625000    eb    129776544    235    353  "
-
-Test 2211 (mix_test_192) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    235    4223372036854775800    eb    G    71  "
-      your output     : "  0.625000    235    -1156841480    eb    G    71  "
-      expected (nonprintable as hex) : "  0.625000    235    4223372036854775800    eb    G    71  "
-      actual   (nonprintable as hex) : "  0.625000    235    -1156841480    eb    G    71  "
-
-Test 2212 (mix_test_193) : FAILED.
-    First line of code: {return test(
-      expected output : "  353    42    -3244    eb    71    4223372036854775800  "
-      your output     : "  353    42    -3244    eb    71    -1156841480  "
-      expected (nonprintable as hex) : "  353    42    -3244    eb    71    4223372036854775800  "
-      actual   (nonprintable as hex) : "  353    42    -3244    eb    71    -1156841480  "
-
-Test 2213 (mix_test_194) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.375000    Hello, World!    42    G    EB    4223372036854775800  "
-      your output     : "  f    Hello, World!    42    G    EB    -1156841480  "
-      expected (nonprintable as hex) : "  0.375000    Hello, World!    42    G    EB    4223372036854775800  "
-      actual   (nonprintable as hex) : "  f    Hello, World!    42    G    EB    -1156841480  "
-
-Test 2214 (mix_test_195) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    Hello, World!    EB    353    3223372036654775200    0.625000  "
-      your output     : "  -1156841480    Hello, World!    EB    353    129776544    0.625000  "
-      expected (nonprintable as hex) : "  4223372036854775800    Hello, World!    EB    353    3223372036654775200    0.625000  "
-      actual   (nonprintable as hex) : "  -1156841480    Hello, World!    EB    353    129776544    0.625000  "
-
-Test 2215 (mix_test_196) : FAILED.
-    First line of code: {return test(
-      expected output : "  G    353    0.625000    0.375000    3223372036654775200    EB  "
-      your output     : "  G    353    0.625000    f    129776544    EB  "
-      expected (nonprintable as hex) : "  G    353    0.625000    0.375000    3223372036654775200    EB  "
-      actual   (nonprintable as hex) : "  G    353    0.625000    f    129776544    EB  "
-
-Test 2216 (mix_test_197) : FAILED.
-    First line of code: {return test(
-      expected output : "  -3244    353    42    0.375000    4223372036854775800    eb  "
-      your output     : "  -3244    353    42    f    -1156841480    eb  "
-      expected (nonprintable as hex) : "  -3244    353    42    0.375000    4223372036854775800    eb  "
-      actual   (nonprintable as hex) : "  -3244    353    42    f    -1156841480    eb  "
-
-Test 2217 (mix_test_198) : FAILED.
-    First line of code: {return test(
-      expected output : "  0x10eee7b90    42    eb    0.375000    235    353  "
-      your output     : "  0x10eee7b90    42    eb    f    235    353  "
-      expected (nonprintable as hex) : "  0x10eee7b90    42    eb    0.375000    235    353  "
-      actual   (nonprintable as hex) : "  0x10eee7b90    42    eb    f    235    353  "
-
-Test 2218 (mix_test_199) : FAILED.
-    First line of code: {return test(
-      expected output : "  0.625000    0.375000    G    -3244    71    4223372036854775800  "
-      your output     : "  0.625000    f    G    -3244    71    -1156841480  "
-      expected (nonprintable as hex) : "  0.625000    0.375000    G    -3244    71    4223372036854775800  "
-      actual   (nonprintable as hex) : "  0.625000    f    G    -3244    71    -1156841480  "
-
-Test 2219 (mix_test_extra_1) : FAILED.
-    First line of code: {return test(
-      expected output : "  353    0.625000    42    %    71    0.375000  "
-      your output     : "  353    0.625000    42    %    71    f  "
-      expected (nonprintable as hex) : "  353    0.625000    42    %    71    0.375000  "
-      actual   (nonprintable as hex) : "  353    0.625000    42    %    71    f  "
-
-Test 2220 (mix_test_extra_2) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    0.375000    0.625000    42    3223372036654775200    G  "
-      your output     : "  -1156841480    f    0.625000    42    129776544    G  "
-      expected (nonprintable as hex) : "  4223372036854775800    0.375000    0.625000    42    3223372036654775200    G  "
-      actual   (nonprintable as hex) : "  -1156841480    f    0.625000    42    129776544    G  "
-
-Test 2221 (mix_test_extra_3) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    %    0.625000    42    3223372036654775200    G  "
-      your output     : "  -1156841480    %    0.625000    42    129776544    G  "
-      expected (nonprintable as hex) : "  4223372036854775800    %    0.625000    42    3223372036654775200    G  "
-      actual   (nonprintable as hex) : "  -1156841480    %    0.625000    42    129776544    G  "
-
-Test 2222 (mix_test_extra_4) : FAILED.
-    First line of code: {return test(
-      expected output : "  %    0.375000    0.625000    42    %    G  "
-      your output     : "  %    f    0.625000    42    %    G  "
-      expected (nonprintable as hex) : "  %    0.375000    0.625000    42    %    G  "
-      actual   (nonprintable as hex) : "  %    f    0.625000    42    %    G  "
-
-Test 2223 (mix_test_extra_5) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    0.375000    0.625000    %    3223372036654775200    %  "
-      your output     : "  -1156841480    f    0.625000    %    129776544    %  "
-      expected (nonprintable as hex) : "  4223372036854775800    0.375000    0.625000    %    3223372036654775200    %  "
-      actual   (nonprintable as hex) : "  -1156841480    f    0.625000    %    129776544    %  "
-
-Test 2224 (mix_test_extra_6) : FAILED.
-    First line of code: {return test(
-      expected output : "  4223372036854775800    0.375000    0.625000    42    3223372036654775200    G  "
-      your output     : "  -1156841480    f    0.625000    42    129776544    G  "
-      expected (nonprintable as hex) : "  4223372036854775800    0.375000    0.625000    42    3223372036654775200    G  "
-      actual   (nonprintable as hex) : "  -1156841480    f    0.625000    42    129776544    G  "
-
-Test 2225 (mix_test_extra_7) : FAILED.
-    First line of code: {return test(
-      expected output : "  %    0.375000    %    42    3223372036654775200    G  "
-      your output     : "  %    f    %    42    129776544    G  "
-      expected (nonprintable as hex) : "  %    0.375000    %    42    3223372036654775200    G  "
-      actual   (nonprintable as hex) : "  %    f    %    42    129776544    G  "
-
-Test 2226 (mix_test_extra_8) : FAILED.
-    First line of code: {return test(
-      expected output : "  %    235    71    4223372036854775800    -3244    eb  "
-      your output     : "  %    235    71    -1156841480    -3244    eb  "
-      expected (nonprintable as hex) : "  %    235    71    4223372036854775800    -3244    eb  "
-      actual   (nonprintable as hex) : "  %    235    71    -1156841480    -3244    eb  "
-
-Test 2231 (mix_successive_2) : FAILED.
-    First line of code: {return ( test("%s", mx_s) + test("%Lf", mx_Lf));}
-      expected output : "Hello, World!0.375000"
-      your output     : "Hello, World!f"
-      expected (nonprintable as hex) : "Hello, World!0.375000"
-      actual   (nonprintable as hex) : "Hello, World!f"
-
-Test 2232 (mix_successive_3) : FAILED.
-    First line of code: {return ( test("%Lf", mx_Lf) + test("%hhi", mx_c));}
-      expected output : "0.37500071"
-      your output     : "f71"
-      expected (nonprintable as hex) : "0.37500071"
-      actual   (nonprintable as hex) : "f71"
-
-Test 2240 (mix_successive_11) : FAILED.
-    First line of code: {return ( test("%Lf", mx_Lf) + test("%p", &mx_i));}
-      expected output : "0.3750000x10eee7b90"
-      your output     : "f0x10eee7b90"
-      expected (nonprintable as hex) : "0.3750000x10eee7b90"
-      actual   (nonprintable as hex) : "f0x10eee7b90"
-
-Test 2246 (mix_successive_17) : FAILED.
-    First line of code: {return ( test("%lli", mx_lli) + test("%i", mx_i));}
-      expected output : "322337203665477520042"
-      your output     : "12977654442"
-      expected (nonprintable as hex) : "322337203665477520042"
-      actual   (nonprintable as hex) : "12977654442"
-
-Test 2251 (mix_successive_22) : FAILED.
-    First line of code: {return ( test("%p", &mx_i) + test("%lli", mx_lli));}
-      expected output : "0x10eee7b903223372036654775200"
-      your output     : "0x10eee7b90129776544"
-      expected (nonprintable as hex) : "0x10eee7b903223372036654775200"
-      actual   (nonprintable as hex) : "0x10eee7b90129776544"
-
-Test 2255 (mix_successive_26) : FAILED.
-    First line of code: {return ( test("%s", mx_s) + test("%li", mx_li));}
-      expected output : "Hello, World!4223372036854775800"
-      your output     : "Hello, World!-1156841480"
-      expected (nonprintable as hex) : "Hello, World!4223372036854775800"
-      actual   (nonprintable as hex) : "Hello, World!-1156841480"
-
-Test 2256 (mix_successive_27) : FAILED.
-    First line of code: {return ( test("%f", mx_f) + test("%Lf", mx_Lf));}
-      expected output : "0.6250000.375000"
-      your output     : "0.625000f"
-      expected (nonprintable as hex) : "0.6250000.375000"
-      actual   (nonprintable as hex) : "0.625000f"
-
-Test 2258 (mix_successive_29) : FAILED.
-    First line of code: {return ( test("%o", mx_u) + test("%li", mx_li));}
-      expected output : "3534223372036854775800"
-      your output     : "353-1156841480"
-      expected (nonprintable as hex) : "3534223372036854775800"
-      actual   (nonprintable as hex) : "353-1156841480"
-
-Test 2262 (mix_successive_33) : FAILED.
-    First line of code: {return ( test("%Lf", mx_Lf) + test("%s", mx_s));}
-      expected output : "0.375000Hello, World!"
-      your output     : "fHello, World!"
-      expected (nonprintable as hex) : "0.375000Hello, World!"
-      actual   (nonprintable as hex) : "fHello, World!"
-
-Test 2265 (mix_successive_36) : FAILED.
-    First line of code: {return ( test("%li", mx_li) + test("%o", mx_u));}
-      expected output : "4223372036854775800353"
-      your output     : "-1156841480353"
-      expected (nonprintable as hex) : "4223372036854775800353"
-      actual   (nonprintable as hex) : "-1156841480353"
-
-Test 2266 (mix_successive_37) : FAILED.
-    First line of code: {return ( test("%s", mx_s) + test("%li", mx_li));}
-      expected output : "Hello, World!4223372036854775800"
-      your output     : "Hello, World!-1156841480"
-      expected (nonprintable as hex) : "Hello, World!4223372036854775800"
-      actual   (nonprintable as hex) : "Hello, World!-1156841480"
-
-Test 2267 (mix_successive_38) : FAILED.
-    First line of code: {return ( test("%o", mx_u) + test("%lli", mx_lli));}
-      expected output : "3533223372036654775200"
-      your output     : "353129776544"
-      expected (nonprintable as hex) : "3533223372036654775200"
-      actual   (nonprintable as hex) : "353129776544"
-
-Test 2279 (mix_successive_50) : FAILED.
-    First line of code: {return ( test("%o", mx_u) + test("%Lf", mx_Lf));}
-      expected output : "3530.375000"
-      your output     : "353f"
-      expected (nonprintable as hex) : "3530.375000"
-      actual   (nonprintable as hex) : "353f"
-
-Test 2280 (mix_successive_51) : FAILED.
-    First line of code: {return ( test("%li", mx_li) + test("%hhi", mx_c));}
-      expected output : "422337203685477580071"
-      your output     : "-115684148071"
-      expected (nonprintable as hex) : "422337203685477580071"
-      actual   (nonprintable as hex) : "-115684148071"
-
-Test 2282 (mix_successive_53) : FAILED.
-    First line of code: {return ( test("%Lf", mx_Lf) + test("%x", mx_u));}
-      expected output : "0.375000eb"
-      your output     : "feb"
-      expected (nonprintable as hex) : "0.375000eb"
-      actual   (nonprintable as hex) : "feb"
-
-Test 2285 (mix_successive_56) : FAILED.
-    First line of code: {return ( test("%i", mx_i) + test("%lli", mx_lli));}
-      expected output : "423223372036654775200"
-      your output     : "42129776544"
-      expected (nonprintable as hex) : "423223372036654775200"
-      actual   (nonprintable as hex) : "42129776544"
-
-Test 2286 (mix_successive_57) : FAILED.
-    First line of code: {return ( test("%c", mx_c) + test("%Lf", mx_Lf));}
-      expected output : "G0.375000"
-      your output     : "Gf"
-      expected (nonprintable as hex) : "G0.375000"
-      actual   (nonprintable as hex) : "Gf"
-
-Test 2288 (mix_successive_59) : FAILED.
-    First line of code: {return ( test("%s", mx_s) + test("%li", mx_li));}
-      expected output : "Hello, World!4223372036854775800"
-      your output     : "Hello, World!-1156841480"
-      expected (nonprintable as hex) : "Hello, World!4223372036854775800"
-      actual   (nonprintable as hex) : "Hello, World!-1156841480"
-
-Test 2291 (mix_successive_62) : FAILED.
-    First line of code: {return ( test("%lli", mx_lli) + test("%u", mx_u));}
-      expected output : "3223372036654775200235"
-      your output     : "129776544235"
-      expected (nonprintable as hex) : "3223372036654775200235"
-      actual   (nonprintable as hex) : "129776544235"
-
-Test 2294 (mix_successive_65) : FAILED.
-    First line of code: {return ( test("%i", mx_i) + test("%lli", mx_lli));}
-      expected output : "423223372036654775200"
-      your output     : "42129776544"
-      expected (nonprintable as hex) : "423223372036654775200"
-      actual   (nonprintable as hex) : "42129776544"
-
-Test 2295 (mix_successive_66) : FAILED.
-    First line of code: {return ( test("%li", mx_li) + test("%Lf", mx_Lf));}
-      expected output : "42233720368547758000.375000"
-      your output     : "-1156841480f"
-      expected (nonprintable as hex) : "42233720368547758000.375000"
-      actual   (nonprintable as hex) : "-1156841480f"
-
-Test 2298 (mix_successive_69) : FAILED.
-    First line of code: {return ( test("%Lf", mx_Lf) + test("%li", mx_li));}
-      expected output : "0.3750004223372036854775800"
-      your output     : "f-1156841480"
-      expected (nonprintable as hex) : "0.3750004223372036854775800"
-      actual   (nonprintable as hex) : "f-1156841480"
-
-Test 2299 (mix_successive_70) : FAILED.
-    First line of code: {return ( test("%o", mx_u) + test("%li", mx_li));}
-      expected output : "3534223372036854775800"
-      your output     : "353-1156841480"
-      expected (nonprintable as hex) : "3534223372036854775800"
-      actual   (nonprintable as hex) : "353-1156841480"
-
-Test 2500 (moul_d_7) : FAILED.
-    First line of code: {return test("%d", INT_MIN);}
-      expected output : "-2147483648"
-      your output     : "--2147483648"
-      expected (nonprintable as hex) : "-2147483648"
-      actual   (nonprintable as hex) : "--2147483648"
-
-Test 2502 (moul_d_9) : FAILED.
-    First line of code: {return test("%d", INT_MAX + 1);}
-      expected output : "-2147483648"
-      your output     : "--2147483648"
-      expected (nonprintable as hex) : "-2147483648"
-      actual   (nonprintable as hex) : "--2147483648"
-
-Test 2538 (moul_ld_3_throwswarning) : FAILED.
-    First line of code: {return test("Il fait au moins %ld
-", -8000);}
-      expected output : "Il fait au moins 4294959296
-"
-      your output     : "Il fait au moins -8000
-"
-      expected (nonprintable as hex) : "Il fait au moins 4294959296\x0a"
-      actual   (nonprintable as hex) : "Il fait au moins -8000\x0a"
-
-Test 2542 (moul_ld_7_throwswarning) : FAILED.
-    First line of code: {return test("%ld", INT_MIN);}
-      expected output : "2147483648"
-      your output     : "--2147483648"
-      expected (nonprintable as hex) : "2147483648"
-      actual   (nonprintable as hex) : "--2147483648"
-
-Test 2544 (moul_ld_9_throwswarning) : FAILED.
-    First line of code: {return test("%ld", INT_MAX + 1);}
-      expected output : "2147483648"
-      your output     : "--2147483648"
-      expected (nonprintable as hex) : "2147483648"
-      actual   (nonprintable as hex) : "--2147483648"
-
-Test 2566 (moul_i_7) : FAILED.
-    First line of code: {return test("%i", INT_MIN);}
-      expected output : "-2147483648"
-      your output     : "--2147483648"
-      expected (nonprintable as hex) : "-2147483648"
-      actual   (nonprintable as hex) : "--2147483648"
-
-Test 2568 (moul_i_9) : FAILED.
-    First line of code: {return test("%i", INT_MAX + 1);}
-      expected output : "-2147483648"
-      your output     : "--2147483648"
-      expected (nonprintable as hex) : "-2147483648"
-      actual   (nonprintable as hex) : "--2147483648"
-
-Test 2613 (moul_u_3) : FAILED.
-    First line of code: {return test("Il fait au moins %u
-", -8000);}
-      expected output : "Il fait au moins 4294959296
-"
-      your output     : "Il fait au moins -8000
-"
-      expected (nonprintable as hex) : "Il fait au moins 4294959296\x0a"
-      actual   (nonprintable as hex) : "Il fait au moins -8000\x0a"
-
-Test 2617 (moul_u_7) : FAILED.
-    First line of code: {return test("%u", INT_MIN);}
-      expected output : "2147483648"
-      your output     : "--2147483648"
-      expected (nonprintable as hex) : "2147483648"
-      actual   (nonprintable as hex) : "--2147483648"
-
-Test 2619 (moul_u_9) : FAILED.
-    First line of code: {return test("%u", INT_MAX + 1);}
-      expected output : "2147483648"
-      your output     : "--2147483648"
-      expected (nonprintable as hex) : "2147483648"
-      actual   (nonprintable as hex) : "--2147483648"
-
-Test 2657 (moul_leftjusty_2) : FAILED.
-    First line of code: {return test("%%-d 42 == %-d
-", INT_MIN);}
-      expected output : "%-d 42 == -2147483648
-"
-      your output     : "%-d 42 == --2147483648
-"
-      expected (nonprintable as hex) : "%-d 42 == -2147483648\x0a"
-      actual   (nonprintable as hex) : "%-d 42 == --2147483648\x0a"
+      actual   (nonprintable as hex) : "0.000000000000000000"
 
