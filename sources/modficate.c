@@ -6,11 +6,20 @@
 /*   By: vletterp <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:13:56 by vletterp          #+#    #+#             */
-/*   Updated: 2020/03/04 17:37:51 by vletterp         ###   ########.fr       */
+/*   Updated: 2020/03/06 08:33:15 by vletterp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+void modif_check(t_printf *p)
+{
+	check_hh(t_printf *p);
+	check_h(t_printf *p);
+	check_ll(t_printf *p);
+	check_l(t_printf *p);
+	check_largel(t_printf *p);
+}
 
 char	modificate(va_list *arg, t_printf *p)
 {
