@@ -5,8 +5,8 @@ int ft_printf(char * format, ...);
 
 int main()//int ac, char **av)
 {
-  char c = 't';
-  int l[100];
+  // char c = 't';
+  // int l[100];
   //ft_printf("%c %s %% ", 't', "strint");
 //   printf("%10.10000d\n", 10);
 //    printf("%10.10f\n", 10.10);
@@ -30,13 +30,29 @@ int main()//int ac, char **av)
     // printf("pow(10.0, 19) = %f", pow(10.0, 19));
 
 
-    printf("%f\n", 0.000039);
-    ft_printf("%f", 0.000039);
+    // printf("%f\n", 0.000001);
+    // printf("%.19f\n", 0.000001);
+    // ft_printf("%f\n", 0.000001);
+    // ft_printf("%.19f\n", 0.000001);
     
     // ft_printf("this %19.19f float", 0.0000000000000000001);
 
 // int i = 0;
+// ft_printf("%x", 4294967296);
+// ft_printf("%d\n", 2147483648);
+// printf("%*.*d\n",100, 10, -2);
+// printf(RED, "Красный Текст\n");
 
+
+
+ ft_printf(UNDERLINED RED_BACK PURPLE  " RED_BACK UNDERLINED BLACK_BACK Текст %d\n", 123456789);
+ ft_printf(NORM BLUE_BACK  "NORM Текст %d\n", 123456789);
+ ft_printf(BOLD  GREEN_BACK "BOLD Текст %d\n", 123456789);
+ ft_printf(FLASHING   "FLASHING Текст %d\n", 123456789);
+ ft_printf(INVERSION   "INVERSION Текст %d\n", 123456789);
+
+//  ft_printf(  "Красный Текст %d", 1);
+// ft_printf("%d\n", 2147483647);
     //printf("%ull\n %ull\n", rounding(9239999, 6), rounding(9240000, 6));
 
     // printf("%.20f\n",        1.025978542436587568678);

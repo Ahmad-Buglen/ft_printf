@@ -6,7 +6,43 @@
 
 # define BUFF 65536
 # define FLAGS "cp%sdiouxXfF"
-# define PREC 20
+# define PREC 19
+
+/*
+** Text colors
+*/
+
+# define BLACK          "\e[30;1m"
+# define RED            "\e[31;1m"
+# define GREEN          "\e[32;1m"
+# define BROWN          "\e[33;1m"
+# define BLUE           "\e[34;1m"
+# define PURPLE         "\e[35;1m"
+# define CYAN           "\e[36;1m"
+# define LIGHTGRAY      "\e[37;1m"
+
+/*
+** Background colors
+*/
+
+# define BLACK_BACK          "\e[40;1m"
+# define RED_BACK            "\e[41;1m"
+# define GREEN_BACK          "\e[42;1m"
+# define BROWN_BACK          "\e[43;1m"
+# define BLUE_BACK           "\e[44;1m"
+# define PURPLE_BACK         "\e[45;1m"
+# define CYAN_BACK           "\e[46;1m"
+# define LIGHTGRAY_BACK      "\e[47;1m"
+
+/*
+** Font type
+*/
+
+# define NORM             "\e[0;1m"
+# define BOLD             "\e[1;1m"
+# define UNDERLINED       "\e[4;1m"
+# define FLASHING         "\e[5;1m"
+# define INVERSION        "\e[7;1m"
 
 typedef enum  s_bool
 {
