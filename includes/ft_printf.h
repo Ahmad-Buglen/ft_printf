@@ -5,7 +5,7 @@
 # include "../libft/libft.h"
 
 # define BUFF 65536
-# define FLAGS "cp%sdiouxXfF"
+# define FLAGS "cp%sdiouxXfFeEb"
 # define PREC 19
 
 /*

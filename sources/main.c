@@ -25,15 +25,40 @@ int main()//int ac, char **av)
 //     printf("%d", (int)(n / 1)); //10000000000000000000.0000000000000000001
     // printf("this %19.19f float", 10000000000000000000.0000000000000000001);
 
-    // printf("this %.19f float\n", 0.1234567891234567891);
+    // printf("0.1234567891234567891 %.19e\n", 0.1234567891234567891);
     // ft_printf("this %.19f float\n", 0.1234567891234567891);
-    // printf("pow(10.0, 19) = %f", pow(10.0, 19));
+    // printf("pow(10.0, 19) = %e\n", pow(10.0, 19));
 
+    // printf(" %e\n", 0.0);
+    // printf(" %e\n", 1.0);
+    // printf(" %e\n", -1.0);
+    // printf(" %e\n", -1234567890.0);
 
-    // printf("%f\n", 0.000001);
-    // printf("%.19f\n", 0.000001);
-    // ft_printf("%f\n", 0.000001);
-    // ft_printf("%.19f\n", 0.000001);
+    // ft_printf(" %e\n", 0.0);
+    // ft_printf(" %e\n", 1.0);
+    // ft_printf(" %e\n", -1.0);
+    // ft_printf(" %e\n", 1234567890.0);
+    // ft_printf(" %.19e\n", 1234567890.0);
+    
+    // printf(" %.19e\n", -0.000001);
+    // printf(" %.5e\n", -0.123456789);
+    // printf(" %.10e\n", -0.123456789);
+    // printf(" %.15e\n", -0.123456789);
+    // printf(" %.20e\n", -0.123456789);
+
+    // ft_printf(" %.19e\n", -0.000001);
+    // ft_printf(" %.5e\n", -0.123456789);
+    // ft_printf(" %.10e\n", -0.123456789);
+    // ft_printf(" %.15e\n", -0.123456789);
+
+    // printf(" %.20e\n", -0.123456789);
+
+    // ft_printf(" %.20e\n", -0.123456789);
+
+    // printf("0.000001 %e\n", 0.000001);
+    // printf("0.000001 %.19e\n", 0.000001);
+    // ft_printf("%e\n", 0.000001);
+    // ft_printf("%.19e\n", 0.000001);
     
     // ft_printf("this %19.19f float", 0.0000000000000000001);
 
@@ -45,25 +70,25 @@ int main()//int ac, char **av)
 
 
 
- ft_printf(UNDERLINED RED_BACK PURPLE  " RED_BACK UNDERLINED BLACK_BACK Текст %d\n", 123456789);
- ft_printf(NORM BLUE_BACK  "NORM Текст %d\n", 123456789);
- ft_printf(BOLD  GREEN_BACK "BOLD Текст %d\n", 123456789);
- ft_printf(FLASHING   "FLASHING Текст %d\n", 123456789);
- ft_printf(INVERSION   "INVERSION Текст %d\n", 123456789);
+//  ft_printf(UNDERLINED RED_BACK PURPLE  " RED_BACK UNDERLINED BLACK_BACK Текст %d\n", 123456789);
+//  ft_printf(NORM BLUE_BACK  "NORM Текст %d\n", 123456789);
+//  ft_printf(BOLD  GREEN_BACK "BOLD Текст %d\n", 123456789);
+//  ft_printf(FLASHING   "FLASHING Текст %d\n", 123456789);
+//  ft_printf(INVERSION   "INVERSION Текст %d\n", 123456789);
 
 //  ft_printf(  "Красный Текст %d", 1);
 // ft_printf("%d\n", 2147483647);
     //printf("%ull\n %ull\n", rounding(9239999, 6), rounding(9240000, 6));
 
-    // printf("%.20f\n",        1.025978542436587568678);
-    //  printf("%.20f\n",        1.025978542436587568678);
-    // ft_printf("%.20f\n",        1.025978542436587568678);
-    //   ft_printf("%.20f\n",        1.025978542436587568678);
+    // printf("1.025978542436587568678 %.20e\n", 1.025978542436587568678);
+    // printf("1.025978542436587568678 %.20e\n", 1.025978542436587568678);
+    // ft_printf("%.20e\n",        1.025978542436587568678);
+    // ft_printf("%.20e\n",        1.025978542436587568678);
 
-    //   printf("%.18f\n",        0.125978548534310421);
-    //  printf("%.20f\n",        0.125978548534310421);
-    // ft_printf("%.18f\n",        0.125978548534310421);
-    //   ft_printf("%.19f\n",        0.125978548534310421);
+    // printf("0.125978548534310421 %.18e\n", 0.125978548534310421);
+    // printf("0.125978548534310421 %.20e\n", 0.125978548534310421);
+    // ft_printf("%.18e\n",        0.125978548534310421);
+    // ft_printf("%.19e\n",        0.125978548534310421);
 
   // printf("%#.5o", 21);
   // ft_printf("%#.5o", 21);
@@ -108,18 +133,18 @@ int main()//int ac, char **av)
   // ft_printf("%+5c\n", c);
   //ft_printf(%-5c);("%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c", c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c);
   //ft_printf("c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c);
-//   ft_printf("1 %10c\n", c);
-//   ft_printf("2 %09c\n", c);
-//   ft_printf("3 %-7c\n", c);
-//   ft_printf("4 %+3c\n", c);
-//   ft_printf("5 % 12c\n", c);
-//   ft_printf("6 %#13c\n", c);
-//   ft_printf("7 %033c\n", c);
-//   ft_printf("8 %+-6c\n", c);
-//   ft_printf("9 % #9c\n", c);
-//   ft_printf("10 %0-10c\n", c);
-//   ft_printf("11 %+021c\n", c);
-//   ft_printf("12 %#-23c\n", c);
+  ft_printf("1 %10b\n", 1);
+  ft_printf("2 %09b\n", 2);
+  ft_printf("3 %7b\n", 3);
+  ft_printf("4 %3b\n", 4);
+  ft_printf("5 %12b\n", 5);
+  ft_printf("6 %#13b\n", 6);
+  ft_printf("7 %.3b\n", 7);
+  ft_printf("8 %6b\n", 8);
+  ft_printf("9 %9b\n", 9);
+  ft_printf("10 %10b\n", 10);
+  ft_printf("11 %.21b\n", 11);
+  ft_printf("12 %.23b\n", 12);
 
   return 0;
 }
