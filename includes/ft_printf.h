@@ -6,6 +6,8 @@
 
 # define BUFF 65536
 # define FLAGS "cp%sdiouxXfFeEb"
+# define  a  "0123456789abcdef"
+# define  A  "0123456789ABCDEF"
 # define PREC 19
 
 /*
@@ -50,16 +52,16 @@ typedef enum  s_bool
               true = 1
 }             t_bool;
 
-typedef union			u_cast_d
-{
-	long double			d;
-	struct
-	{
-		unsigned long	mantisa : 64;
-		unsigned long	exponent : 15;
-		unsigned long	sign : 1;
-	}					d_parts;
-}						t_cast_d;
+// typedef union			u_cast_d
+// {
+// 	long double			d;
+// 	struct
+// 	{
+// 		unsigned long	mantisa : 64;
+// 		unsigned long	exponent : 15;
+// 		unsigned long	sign : 1;
+// 	}					d_parts;
+// }						t_cast_d;
 
 typedef struct s_printf
 {
@@ -87,6 +89,17 @@ typedef struct s_printf
   int         prec;
   va_list     argptr;
 }             t_printf;
+
+typedef struct s_option
+{
+  int         width;
+  int         prec;
+  int         buf;
+  int         crutch;
+  int         short_note;
+  int         flag;
+  int         sign;
+}             t_option;
 
 
 #endif

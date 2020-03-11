@@ -14,6 +14,7 @@ int main()//int ac, char **av)
 //      printf("%10.10s\n", "asdfasfasfasfasfasdfasdf");
 //  ft_printf("%1000000c\n", &c);
 
+  // ft_printf("this %f float", 1.5);
     // fix it !
 //     double  n;
 //     n = 1.5;
@@ -29,36 +30,36 @@ int main()//int ac, char **av)
     // ft_printf("this %.19f float\n", 0.1234567891234567891);
     // printf("pow(10.0, 19) = %e\n", pow(10.0, 19));
 
-    // printf(" %e\n", 0.0);
-    // printf(" %e\n", 1.0);
-    // printf(" %e\n", -1.0);
-    // printf(" %e\n", -1234567890.0);
+    // printf("1 %e\n", 0.0);
+    // printf("2 %e\n", 1.0);
+    // printf("3 %e\n", -1.0);
+    // printf("4 %e\n", -1234567890.0);
+    // printf("4.1 %.19e\n", 1234567890.0);
+    // printf("5 %.19e\n", -0.000001);
+    // printf("6 %.5e\n", -0.123456789);
+    // printf("7 %.10e\n", -0.123456789);
+    // printf("8 %.15e\n", -0.123456789);
+    // printf("9 %.20e\n", -0.123456789);
+    // printf("10 %e\n\n", 0.000001);
 
-    // ft_printf(" %e\n", 0.0);
-    // ft_printf(" %e\n", 1.0);
-    // ft_printf(" %e\n", -1.0);
-    // ft_printf(" %e\n", 1234567890.0);
-    // ft_printf(" %.19e\n", 1234567890.0);
-    
-    // printf(" %.19e\n", -0.000001);
-    // printf(" %.5e\n", -0.123456789);
-    // printf(" %.10e\n", -0.123456789);
-    // printf(" %.15e\n", -0.123456789);
+    // ft_printf("1 %e\n", 0.0);
+    // ft_printf("2 %e\n", 1.0);
+    // ft_printf("3 %e\n", -1.0);
+    // ft_printf("4 %e\n", -1234567890.0);
+    // ft_printf("4.1 %.19e\n", 1234567890.0);
+    // ft_printf("5 %.19e\n", -0.000001);
+    // ft_printf("6 %.5e\n", -0.123456789);
+    // ft_printf("7 %.10e\n", -0.123456789);
+    // ft_printf("8 %.15e\n", -0.123456789);
+    // ft_printf("9 %.20e\n", -0.123456789);
+    // ft_printf("10 %e\n", 0.000001);
+
     // printf(" %.20e\n", -0.123456789);
 
-    // ft_printf(" %.19e\n", -0.000001);
-    // ft_printf(" %.5e\n", -0.123456789);
-    // ft_printf(" %.10e\n", -0.123456789);
-    // ft_printf(" %.15e\n", -0.123456789);
+    // ft_printf("this %d number", 17);
 
-    // printf(" %.20e\n", -0.123456789);
 
-    // ft_printf(" %.20e\n", -0.123456789);
 
-    // printf("0.000001 %e\n", 0.000001);
-    // printf("0.000001 %.19e\n", 0.000001);
-    // ft_printf("%e\n", 0.000001);
-    // ft_printf("%.19e\n", 0.000001);
     
     // ft_printf("this %19.19f float", 0.0000000000000000001);
 

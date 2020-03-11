@@ -1,12 +1,32 @@
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
-#include <math.h>
+// #include <stdio.h>
+// #include <math.h>
 
-void		ft_putnstr(char const *s, size_t n)
+int ft_cinstr(char const *const storage, char const *const desire)
 {
-	if (s)
-    write(1, s, n);
+  int i;
+  int j;
+
+  i = 0;
+  while(storage[i])
+  {
+    j = 0;
+    while(desire[j])
+    {
+      if (storage[i] == desire[j])
+        return (1);
+      ++j;
+    }
+    ++i;
+  }
+  return (0);
+}
+
+void		ft_putnstr(char const *str, size_t length)
+{
+	if (str)
+    write(1, str, length);
     // if n == 0 ?
 }
 
@@ -26,6 +46,18 @@ int ft_power(int n, int power)
 			--power;
 		}
 	return (rez);
+}
+
+unsigned long long ft_pow(int number, int grade)
+{
+  unsigned long long rezult;
+
+  if (0 == grade)
+    return (1);
+  rezult = number;
+  while (--grade)
+    rezult *= number;
+  return (rezult);
 }
 
 int ft_ret(char c)
@@ -52,73 +84,19 @@ static int			ft_count_p(unsigned long long c, int base)
 	return (q);
 }
 
-void ft_itoa_base(t_printf *p, long long n, int base)
+void ull_to_p_base(t_printf *p, long long n, int base)
 {
-  char *a;
-  char *A;
   int length;
   int buf;
- // char *A;
-
-  a = "0123456789abcdef";
-  A = "0123456789ABCDEF";
-
- // if (n < 0)
-  //  p->temp[p->ti++] = '-';
   length = ft_count_p(n, base);
   buf = length--;
   while (length >= 0)
 	{
-		p->temp[p->ti + length--] = ('X' == p->format[p->fi]) ? A[(n % base)] : a[(n % base)];
+		p->temp[p->ti + length--] = ('X' == p->format[p->fi]) ?
+                                        A[(n % base)] : a[(n % base)];
 		n /= base;
 	}
   p->ti += buf;
-}
-
-
-char				*ft_ulltoa(unsigned long long n)
-{
-	int				len;
-	unsigned long long	q;
-	char			*res;
-
-	len = ft_count_p(n, 10);
-//	len = (n < 0 ? len + 1 : len);
-//	q = (n < 0 ? -n : n);
-  q = n;
-	if (!(res = (char *)malloc(sizeof(char) * len + 1)))
-		return (NULL);
-	res[len--] = '\0';
-	while (len >= 0)
-	{
-		res[len--] = (q % 10) + '0';
-		q /= 10;
-	}
-	// if (res[0] == '0' && res[1] != '\0')
-	// 	res[0] = '-';
-	return (res);
-}
-
-int				ft_atoull(const char *str)
-{
-	unsigned long long	n;
-	int			sign;
-
-	n = 0;
-	while ((*str == ' ') || (*str == '\n') || (*str == '\t')
-			|| (*str == '\f') || (*str == '\r') || (*str == '\v'))
-		++str;
-//	sign = (*str == '-') ? -1 : 1;
-//	((*str == '-') || (*str == '+')) ? ++str : 0;
-	while ((*str >= '0') && (*str <= '9'))
-	{
-		if (((n * 10) / 10) != n)
-			return ((sign == -1) ? 0 : -1);
-		n = 10 * n + (*str - '0');
-		++str;
-	}
-//	n = (-1 == sign) ? -n : n;
-	return (n);
 }
 
 void data_release(t_printf *p)
@@ -131,10 +109,9 @@ void data_release(t_printf *p)
   }
 }
 
-
 void  data_record(t_printf *p)
 {
-  if (BUFF > p->di + p->ti) // ?
+  if (BUFF > p->di + p->ti)
   {
     ft_strncpy(p->data + p->di, p->temp, p->ti);
     p->di += p->ti;
@@ -147,7 +124,7 @@ void  data_record(t_printf *p)
       ft_strncpy(p->data, p->temp, p->ti);
       p->di += p->ti;
     }
-    else // maybe ? (BUFF <= p->ti)
+    else
     {
       write(1, p->temp, p->ti);
       p->print_size += p->ti;
@@ -179,9 +156,7 @@ void  data_record(t_printf *p)
  }
 
 void print_d(t_printf *p)
- {
-
-  char *str;
+{
   int length;
   int n;
   char buf;
@@ -189,78 +164,51 @@ void print_d(t_printf *p)
   int prec;
   int width;
   int sign;
-  int i;
-  p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
-  
+
+  p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;  
   n = va_arg(p->argptr, int);
   flag = (n < 0) ? 1 : 0;
   n = (n < 0) ? -n : n;
   sign = (p->f_plus || flag) ? 1 : 0;
   p->f_space = sign ? false : p->f_space;
-  str = ft_ulltoa(n);
-  length = ft_strlen(str);
+  length = ft_count_p(n, 10);
   length = ((0 == n) && p->f_prec && (0 == p->prec)) ? 0 : length;
   buf = (p->f_zero) ? '0' : ' ';
-  prec = (p->f_prec) ?  p->prec - length : 0;
-  prec = (prec > 0) ? prec : 0;
+  prec = ((p->f_prec) && ((p->prec - length) > 0)) ?  p->prec - length : 0;
   width = (p->f_width) ? p->width - (length + sign + ((p->f_space) ? 1 : 0)): 0;
-  width = (prec > 0) ? width - prec : width;
-  // width = !(p->f_minus) ? width : 0;
-  width = (width > 0) ? width : 0;
-
+  width = ((prec > 0) && ((width - prec) > 0)) ? width - prec : width;
   if (sign && (p->f_minus || p->f_zero))
     p->temp[p->ti++] = flag ? '-' : '+';
-
   if (p->f_space)
     p->temp[p->ti++] = ' ';
-
   while (!(p->f_minus) && width-- > 0)
     p->temp[p->ti++] = buf;
-
   if (sign && !(p->f_minus || p->f_zero))
     p->temp[p->ti++] = flag ? '-' : '+';
-
   while (prec-- > 0)
     p->temp[p->ti++] = '0';
-
-  ft_strncpy(p->temp + p->ti, str, length);
-  p->ti += length;
-
-  //if ((p->f_width) && (p->width > length) && (p->f_minus)) //ti
+  if (length > 0)
+    ull_to_p_base(p, n, 10);
   while(p->f_minus && (width-- > 0))
     p->temp[p->ti++] = ' ';
-  free(str);
   data_record(p);
 }
 
 
-unsigned long long rounding(unsigned long long frac, int prec,
+unsigned long long rounding(t_printf *p, unsigned long long frac, int prec,
                               unsigned long long *whol)
 {
-  int i;
-  int j;
   int extra;
-  int count;
   int digit;
-  int digit1;
   int zero;
 
-
-  int test;
-  //  printf("\n%llu\n", frac);
-  if (prec >= PREC)
-    prec = PREC;
-  else 
-    prec += 1;
-
-  count = ft_count_p(frac, 10);
-  zero = ft_abs(count - PREC);
-  extra = ft_abs(prec - (zero + count));
-  while (extra--)
+  prec = (prec >= PREC) ? PREC : prec + 1;
+  zero = ft_abs(ft_count_p(frac, 10) - PREC);
+  extra = ft_abs(prec - (zero + ft_count_p(frac, 10)));
+  extra = ('f' == p->format[p->fi]) ? extra : extra - 1; 
+  while (extra-- > 0)
     frac /= 10;
-
   digit = frac % 10;
-  digit1 = (frac % 100) / 10; 
   if (digit + 5 > 9)
   {
     frac -= digit;
@@ -272,26 +220,11 @@ unsigned long long rounding(unsigned long long frac, int prec,
     else
       frac += 10;
   }
-  else if (digit1 + 5 > 9)
-  {
-    // frac /= 10;
-    // frac -= digit1;
-    // if ((ft_count_p(frac + 10, 10) > ft_count_p(frac, 10)) && (0 == zero))
-    // {
-    //   *whol += 1;
-    //   frac = 0;
-    // }
-    // else
-      frac += 1;
-  }
-  // printf("\n%ull\n", frac);
   return(frac);
 }
 
 void print_f(t_printf *p)
  {
-  char *whole;
-  char *fract;
   int whole_l;
   int fract_l;
   unsigned long long whol;
@@ -307,7 +240,7 @@ void print_f(t_printf *p)
   int dot;
 
   p->f_zero = (p->f_minus) ? false : p->f_zero;
-  n = va_arg(p->argptr,   double);
+  n = (long double)va_arg(p->argptr,   double);
   flag = n < 0 ? 1 : 0;
   n = (n < 0) ? -n : n;
   p->f_space = (p->f_plus || flag) ? false : p->f_space;
@@ -317,31 +250,17 @@ void print_f(t_printf *p)
   unsigned long long temp = n;
   // i = PREC;
   // while ()
-    frac = (n - temp) * pow(10.0, PREC);
+    frac = (n - temp) * ft_pow(10, PREC);
     // zero = ft_abs(ft_count_p(frac, 10) - PREC);
     whol = n;
-    // printf("\n%llu\n", frac);
 
-
-
-  frac = rounding(frac, prec + 1, &whol);
-
-  zero = ft_abs(ft_count_p(frac, 10) - ((prec > PREC) ? PREC : prec + 1));
-
-fract = ft_ulltoa(frac);
-  //  printf("fract = %s\n", fract);
-  //fract_l = ft_strlen(fract);
-
-  whole = ft_ulltoa(whol);
-  
-  // printf("whole = %s\n", whole);
-   whole_l = ft_strlen(whole);
-
+  frac = rounding(p, frac, prec, &whol);
+  frac /= 10;
+  zero = ft_abs(ft_count_p(frac, 10) - ((prec > PREC) ? PREC : prec));
+ whole_l = ft_count_p(whol, 10);
   dot = (((p->f_prec) && (prec != 0)) || !(p->f_prec) || p->f_lattice) ? 1 : 0;
   sign = (flag || p->f_plus) ? 1 : 0;
   buf = (p->f_zero) ? '0' : ' ';
-
-
 
   width = (p->f_width) ? p->width - (dot + sign + whole_l + 
                         ((p->f_space) ? 1 : 0)) : 0 ;
@@ -361,30 +280,19 @@ fract = ft_ulltoa(frac);
   if (sign && (!p->f_zero))
     p->temp[p->ti++] = flag ? '-' : '+';
 
-  // i = prec;
-  // while (i-- > 0)
-  // p->temp[p->ti++] = '0';
-  // if (!(p->f_prec) ||
-  // (!((0 == n) && p->f_prec && (0 == prec))))
-  // {
-    ft_strncpy(p->temp + p->ti, whole, whole_l);
-    p->ti += whole_l;
-  // }
+  ull_to_p_base(p, whol, 10);
   if (dot)
     p->temp[p->ti++] = '.';
-
-  //  printf("\nfract = %s\n", fract);
-  if (ft_atoull(fract) != 0)
+  if (frac != 0)
   {
     // zero = ft_count_p(frac, 10) - 19;
     //zero = ft_abs(ft_count_p(frac, 10) - prec);
-    // printf("\nzero = %d\n", zero);
      int z; // = prec - (ft_count_p(frac, 10) - 1);
     z = zero;
     while (z-- > 0)
      p->temp[p->ti++] = '0';
-    ft_strncpy(p->temp + p->ti, fract, ((prec > PREC) ? PREC : prec) - zero);
-    p->ti += ((prec > PREC) ? PREC : prec) - zero;
+
+    ull_to_p_base(p, frac, 10);
     i = ((prec > PREC) ? prec - PREC : 0);
   
     while (i--)
@@ -407,66 +315,9 @@ fract = ft_ulltoa(frac);
   data_record(p);
 }
 
-unsigned long long ft_pow(int number, int grade)
-{
-  unsigned long long rezult;
-
-  if (0 == grade)
-    return (1);
-  rezult = number;
-  while (--grade)
-    rezult *= number;
-  return (rezult);
-}
-
-unsigned long long rounding1(unsigned long long frac, int prec,
-                              unsigned long long *whol)
-{
-  int i;
-  int j;
-  int extra;
-  int count;
-  int digit;
-  int digit1;
-  int zero;
-  int test;
-
-  if (prec >= PREC)
-    prec = PREC;
-  else 
-    prec += 1;
-
-  count = ft_count_p(frac, 10);
-  zero = ft_abs(count - PREC);
-  extra = ft_abs(prec - (zero + count));
-  extra--;
-  while (extra-- > 0)
-    frac /= 10;
-
-  digit = frac % 10;
-  digit1 = (frac % 100) / 10; 
-  if (digit + 5 > 9)
-  {
-    frac -= digit;
-    if ((ft_count_p(frac + 10, 10) > ft_count_p(frac, 10)) && (0 == zero))
-    {
-      *whol += 1;
-      frac = 0;
-    }
-    else
-      frac += 10;
-  }
-  else if (digit1 + 5 > 9)
-      frac += 1;
-
-  return(frac);
-}
-
 
 void print_e(t_printf *p)
  {
-  char *whole;
-  char *fract;
   int whole_l;
   int fract_l;
   unsigned long long whol;
@@ -475,69 +326,71 @@ void print_e(t_printf *p)
   char buf;
   char  flag;
   char  sign;
+  int exp;
   int zero;
   int prec;
   int width;
   int i;
   int dot;
   int count;
-  int digit;
+  int length;
 
   p->f_zero = (p->f_minus) ? false : p->f_zero;
-  n = va_arg(p->argptr,   double);
+  n = (long double)va_arg(p->argptr,   double);
   flag = n < 0 ? 1 : 0;
   n = (n < 0) ? -n : n;
   p->f_space = (p->f_plus || flag) ? false : p->f_space;
-    prec = (p->f_prec) ?  p->prec : 6;
+  prec = (p->f_prec) ?  p->prec : 6;
   prec = (prec > 0) ? prec : 0;
-  
+
   unsigned long long temp = n;
-    frac = (n - temp) * pow(10.0, PREC);
-    whol = n;
-    // printf("\n%llu\n", frac);
+  frac = (n - temp) * ft_pow(10, PREC);
+  whol = n;
 
-    count = 0;
-
+  count = 0;
+  exp = 1;
   zero = (frac > 0) ? ft_abs(ft_count_p(frac, 10) - PREC) : 0;
-frac = (frac > 0) ? rounding1(frac, prec, &whol) : 0;
+  frac = (frac > 0) ? rounding(p, frac, prec, &whol) : 0;
   if (whol > 9)
     {
       count += (ft_count_p(whol, 10) - 1);
-      temp = whol % (unsigned long long)pow(10, ft_count_p(whol, 10) - 1);
-      whol = whol / (unsigned long long)pow(10, ft_count_p(whol, 10) - 1);
+      temp = whol % ft_pow(10, ft_count_p(whol, 10) - 1);
+      whol = whol / ft_pow(10, ft_count_p(whol, 10) - 1);
       i = ft_count_p(temp, 10);
       while (i < PREC)
       {
-        temp = (temp * 10) + (frac / pow(ft_count_p(frac, 10), 10));
+        temp = (temp * 10) + (frac / ft_pow(ft_count_p(frac, 10), 10));
         frac /= 10;
         ++i;
       }
       frac = temp;
+
     }
   else if (0 == whol)
   { 
+    count += ((n != 0) && !(zero > 0)) ? 1 : 0;
     while (zero > 0)
     {
       frac *= 10;
       ++count;
       --zero;
     }
-    whol = frac / pow(10, ft_count_p(frac, 10) - 1);
-    frac = frac % (unsigned long long)pow(10, ft_count_p(frac, 10) - 1);
-    ++count;
+    whol = frac / ft_pow(10, ft_count_p(frac, 10) - 1);
+    frac = frac % ft_pow(10, ft_count_p(frac, 10) - 1);
+
+    exp = (n != 0) ? 0 : 1;
   }
   //zero = ft_abs(ft_count_p(frac, 10) - ((prec > 19) ? 19 : prec + 1));
-  fract = ft_ulltoa(frac);
-  fract_l = ft_strlen(fract);
-  whole = ft_ulltoa(whol);
-   whole_l = ft_strlen(whole);
+  
+  fract_l = ft_count_p(frac, 10);
+  whole_l = ft_count_p(whol, 10);
 
   dot = (((p->f_prec) && (prec != 0)) || !(p->f_prec) || p->f_lattice) ? 1 : 0;
   sign = (flag || p->f_plus) ? 1 : 0;
   buf = (p->f_zero) ? '0' : ' ';
 
   width = (p->f_width) ? p->width - (dot + sign + whole_l + 
-                        ((p->f_space) ? 1 : 0)) : 0 ;
+                    ((p->f_space) ? 1 : 0)) : 0 ;
   width = (prec > 0) ? width - prec : width;
   width = !(p->f_minus) ? width : 0;
   width = (width > 0) ? width : 0;
@@ -552,48 +405,37 @@ frac = (frac > 0) ? rounding1(frac, prec, &whol) : 0;
   if (sign && (!p->f_zero))
     p->temp[p->ti++] = flag ? '-' : '+';
 
-  ft_strncpy(p->temp + p->ti, whole, whole_l);
-    p->ti += whole_l;
+  ull_to_p_base(p, whol, 10);
   if (dot)
     p->temp[p->ti++] = '.';
 
-  if (ft_atoull(fract) != 0)
+  if (frac != 0)
   {
-    // printf("\nzero = %d\n", zero);
-    //  int z; 
-    // z = zero;
-    // while (z-- > 0)
-    //  p->temp[p->ti++] = '0';
-    ft_strncpy(p->temp + p->ti, fract, ((prec > PREC) ? PREC : prec)); //- zero);
-    p->ti += ((prec > PREC) ? PREC : prec); //- zero;
-    i = ((prec > PREC) ? prec - PREC : 0);
-   // count += i;
-    while (i--)
+    length = (prec > PREC) ? PREC : prec;
+    length = (prec > fract_l) ? fract_l : prec;
+
+    ull_to_p_base(p, frac, 10);
+    i = prec - length;
+    while (i-- > 0)
       p->temp[p->ti++] = '0';
   }
   else
   {
     i = prec;
     while (i--)
-    {
-      ft_strncpy(p->temp + p->ti, "0", 1);
-      p->ti += 1;
-    }
-  }
-      
-      //count = (count < 0) ? 0 : count;
-    p->temp[p->ti++] = 'e'; // E?
-    p->temp[p->ti++] = (n < 0) ? '-' : '+';
-    if (count > 9)
-    {
-      ft_itoa_base(p, count, 10);
-    }
-    else 
-    {
       p->temp[p->ti++] = '0';
-      ft_itoa_base(p, count, 10);
-    }
-
+  }
+  p->temp[p->ti++] = ('e' == p->format[p->fi]) ? 'e' : 'E';
+  p->temp[p->ti++] =  (1 == exp) ? '+' : '-';
+  if (count > 9)
+  {
+    ull_to_p_base(p, count, 10);
+  }
+  else 
+  {
+    p->temp[p->ti++] = '0';
+    ull_to_p_base(p, count, 10);
+  }
   if ((p->f_width) && (p->width > whole_l) && (p->f_minus)) //ti
     while(p->width > p->ti)
      p->temp[p->ti++] = ' ';
@@ -608,12 +450,10 @@ void print_x(t_printf *p)
   int width;
   int prec;
   int length;
-  int i;
   int crutch;
   int lattice;
 
   p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
-
   n = va_arg(p->argptr, unsigned long long);
   length = ft_count_p(n, 16);
   buf = (p->f_zero) ? '0' : ' ';
@@ -621,83 +461,57 @@ void print_x(t_printf *p)
   prec = ((p->f_prec) && ((p->prec - length) > 0)) ? p->prec - length : 0;
   crutch = (p->f_prec && (0 == n) && (0 == p->prec) ) ? 1 : 0;
   width = (p->f_width) ? p->width - (length + lattice) - prec + crutch : 0;
-
-  i = width;
-  while (!p->f_minus && !p->f_zero && (i-- > 0))
+  while (!p->f_minus && !p->f_zero && (width-- > 0))
     p->temp[p->ti++] = buf;
-
   if (2 == lattice)
   {
     p->temp[p->ti++] = '0';
     p->temp[p->ti++] = ('x' == p->format[p->fi]) ? 'x' : 'X';
   }
-
-  while ((p->f_zero) &&  (i-- > 0))
+  while (p->f_zero &&  (width-- > 0))
     p->temp[p->ti++] = buf;
-  
-  i = prec;
-  while (i-- > 0)
+  while (prec-- > 0)
     p->temp[p->ti++] = '0';
-
  if (!crutch)
-    ft_itoa_base(p, n, 16);
- 
-  i = width;
-  while (p->f_minus && (i-- > 0))
+    ull_to_p_base(p, n, 16);
+  while (p->f_minus && (width-- > 0))
     p->temp[p->ti++] = ' ';
-
   data_record(p);
 }
 
-
-
 void print_o(t_printf *p)
 {
-  long long n;
+  unsigned long long n;
   int  buf;
   int width;
   int prec;
   int length;
-  int i;
   int lattice;
   int crutch;
   int crutch1;
   int prec_nul;
 
   p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
-
-  n = va_arg(p->argptr, long long);
+  n = va_arg(p->argptr, unsigned long long);
   length =  ft_count_p(n, 8) ;
-   
   buf = (p->f_zero) ? '0' : ' ';
   lattice = (p->f_lattice && (n != 0)) ? 1 : 0;
-
   prec = (p->f_prec) ? p->prec - (length + lattice) : 0;
   prec = (prec > 0) ? prec : 0;
   prec_nul = (p->f_prec && (0 == p->prec)) ? 1 : 0;
   crutch = (p->f_lattice && prec_nul) ? 1 : 0;
   crutch1 = ((0 == n) && prec_nul ) ? 1 : 0;
-
   width = (p->f_width) ? p->width - crutch + crutch1 - (length + lattice) - prec: 0;
- 
-  i = width;
-  while ((i-- > 0) && !p->f_minus)
+  while (!p->f_minus && (width-- > 0))
     p->temp[p->ti++] = buf;
-  
-  i = prec;
-  while (i-- > 0)
+  while (prec-- > 0)
     p->temp[p->ti++] = '0';
-
   if (lattice )
     p->temp[p->ti++] = '0';
-  
   if (!(crutch1) || crutch)
-    ft_itoa_base(p, n, 8);
-    
-  i = width;
-  while ((i-- > 0) && p->f_minus)
+    ull_to_p_base(p, n, 8);
+  while ( p->f_minus && (width-- > 0))
     p->temp[p->ti++] = ' ';
-
   data_record(p);
 }
 
@@ -708,44 +522,25 @@ void print_b(t_printf *p)
   int width;
   int prec;
   int length;
-  int i;
   int crutch;
-  int lattice;
 
   p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
-
   n = va_arg(p->argptr, unsigned long long);
   length = ft_count_p(n, 2);
   buf = (p->f_zero) ? '0' : ' ';
-  //lattice = (p->f_lattice && n != 0) ? 2 : 0;
   prec = ((p->f_prec) && ((p->prec - length) > 0)) ? p->prec - length : 0;
   crutch = (p->f_prec && (0 == n) && (0 == p->prec) ) ? 1 : 0;
-  width = (p->f_width) ? p->width - (length) - prec + crutch : 0;
-
-  i = width;
-  while (!p->f_minus && !p->f_zero && (i-- > 0))
+  width = (p->f_width) ? p->width - length - prec + crutch : 0;
+  while (!p->f_minus && !p->f_zero && (width-- > 0))
     p->temp[p->ti++] = buf;
-
-  // if (2 == lattice)
-  // {
-  //   p->temp[p->ti++] = '0';
-  //   p->temp[p->ti++] = ('x' == p->format[p->fi]) ? 'x' : 'X';
-  // }
-
-  while ((p->f_zero) &&  (i-- > 0))
+  while ((p->f_zero) &&  (width-- > 0))
     p->temp[p->ti++] = buf;
-  
-  i = prec;
-  while (i-- > 0)
+  while (prec-- > 0)
     p->temp[p->ti++] = '0';
-
  if (!crutch)
-    ft_itoa_base(p, n, 2);
- 
-  i = width;
-  while (p->f_minus && (i-- > 0))
+    ull_to_p_base(p, n, 2);
+  while (p->f_minus && (width-- > 0))
     p->temp[p->ti++] = ' ';
-
   data_record(p);
 }
 
@@ -762,7 +557,7 @@ void print_p(t_printf *p)
     p->temp[p->ti++] = ' ';
   p->temp[p->ti++] = '0';
   p->temp[p->ti++] = 'x';
-  ft_itoa_base(p, n, 16);
+  ull_to_p_base(p, n, 16);
   while(p->f_minus && (space-- > 0))
     p->temp[p->ti++] = ' ';
   data_record(p);
@@ -787,68 +582,27 @@ void print_per(t_printf *p)
   // }
 
   char  buf;
-  int   custom;
+  int   width;
 
   buf = (p->f_zero && !p->f_minus) ? '0' : ' ';
-  custom = (p->f_width) ? p->width - 1 : 0;
-  custom = (custom < 0) ? 0 : custom;
-  while ((!p->f_minus) && (custom-- > 0))
+  width = (p->f_width) ? p->width - 1 : 0;
+  width = (width < 0) ? 0 : width;
+  while ((!p->f_minus) && (width-- > 0))
     p->temp[p->ti++] = buf;
   p->temp[p->ti++] = '%';
-  while ((p->f_minus) && (custom-- > 0))
+  while ((p->f_minus) && (width-- > 0))
     p->temp[p->ti++] = buf;
   data_record(p);
 }
 
-// char				*ft_itoa_p(int n)
-// {
-// 	int				len;
-// 	unsigned int	q;
-// 	char			*res;
-
-// 	len = ft_count_p(n);
-// 	len = (n < 0 ? len + 1 : len);
-// 	q = (n < 0 ? -n : n);
-// 	if (!(res = (char *)malloc(sizeof(char) * len + 1)))
-// 		return (NULL);
-// 	res[len--] = '\0';
-// 	while (len >= 0)
-// 	{
-// 		res[len--] = (q % 10) + '0';
-// 		q /= 10;
-// 	}
-// 	if (res[0] == '0' && res[1] != '\0')
-// 		res[0] = '-';
-// 	return (res);
-// }
-
-
-int	ft_atoi_base(const char *nbr, unsigned int base)
+void printf_init(t_printf *p, int start)
 {
-	int		n;
-	int 	i;
-	int 	length;
-	int 	sign;
-
-	length = 0;
-	while (nbr[length])
-		++length;
-	sign = ('-' == nbr[0]) ? 1 : 0;
-	i = ('-' == nbr[0]) ? 1 : 0;
-	n = 0;
-	while (i < length)
-	{
-		n += ft_ret(nbr[i]) * ft_power(base, length - i - 1);
-		++i;
-	}
-	n = (1 == sign) ? -n : n;
-	return (n);
-}
-
-
-
-void printf_init(t_printf *p)
-{
+  if (start)
+  {
+    p->fi = 0;
+    p->di = 0;
+    ft_bzero(p->data, BUFF);
+  }
   p->f_minus = false;
   p->f_plus = false;
   p->f_space = false;
@@ -858,9 +612,9 @@ void printf_init(t_printf *p)
   p->f_width = false;
   p->f_prec = false;
   p->ti = 0;
+  p->width = 0;
+  p->prec = 0;
   ft_bzero(p->temp, BUFF);
-
-  //      format;
   p->f_h = false;
   p->f_hh = false;
   p->f_l = false;
@@ -886,35 +640,11 @@ void print_c(t_printf *p)
   data_record(p);
 }
 
-int ft_cinstr(char const *const storage, char const *const desire)
-{
-  int i;
-  int j;
-
-  i = 0;
-  while(storage[i])
-  {
-    j = 0;
-    while(desire[j])
-    {
-      if (storage[i] == desire[j])
-        return (1);
-      ++j;
-    }
-    ++i;
-  }
-  return (0);
-}
 int print_ub(t_printf *p)
 {
-  // char *conversions; // cp%sdioxXfF
-  // p->temp[p->ti++] = 'U';
-  // p->temp[p->ti++] = 'B';
-
   if (('\0' == p->format[p->fi + 1]) ||
       !(ft_cinstr(&(p->format[p->fi + 1]), FLAGS)))
   {
-    //ft_strncpy(p->temp, p->format[p->fi + 1], ft_strlen(&(p->format[p->fi + 1])));
     p->temp[p->ti++] = 'U';
     p->temp[p->ti++] = 'B';
     data_record(p);
@@ -953,7 +683,7 @@ void modif_check(t_printf *p)
   }
 }
 
-void flags_check(t_printf *p)
+void flags_and_wid_check(t_printf *p)
 {
   while (('-' == p->format[p->fi]) || ('+' == p->format[p->fi]) ||
     (' ' == p->format[p->fi]) || ('#' == p->format[p->fi]) || ('0' == p->format[p->fi]))
@@ -965,10 +695,6 @@ void flags_check(t_printf *p)
     p->f_zero = ('0' == p->format[p->fi]) ? true : p->f_zero;
     ++p->fi;
   }
-}
-
-void wid_and_prec_check(t_printf *p)
-{
   if (('0' <= *(p->format + p->fi)) && (*(p->format + p->fi) <= '9'))
   {
     p->width = ft_atoi(p->format + p->fi); // как обработать? 
@@ -982,6 +708,10 @@ void wid_and_prec_check(t_printf *p)
     p->width = va_arg(p->argptr, int);
     ++p->fi;
   }
+}
+
+void prec_check(t_printf *p)
+{
   if ('.' == p->format[p->fi])
   {
     ++p->fi;
@@ -1003,7 +733,6 @@ void wid_and_prec_check(t_printf *p)
 
 int  distribution(t_printf *p, char c)
 {
-  // c = \0 ? cp%sdioxXfF
   if ('c' == c)
     print_c(p);
   else if ('p' == c)
@@ -1024,8 +753,6 @@ int  distribution(t_printf *p, char c)
     print_e(p);
   else if ('b' == c)
     print_b(p);
-  // else
-  //   print_ub(p);
   return 1;
 }
 
@@ -1033,8 +760,6 @@ void parser(t_printf *p)
 {
   size_t i;
 
-  p->fi = 0;
-  p->di = 0;
   while (p->format[p->fi])
   {
     if ('%' == p->format[p->fi])
@@ -1042,12 +767,12 @@ void parser(t_printf *p)
       if (1 == print_ub(p))
         return ;
       ++p->fi;
-      flags_check(p);
-      wid_and_prec_check(p);
+      flags_and_wid_check(p);
+      prec_check(p);
       modif_check(p);
       p->flag = true;
       distribution(p, p->format[p->fi]);
-      printf_init(p);
+      printf_init(p, 0);
     }
     else
     {
@@ -1059,19 +784,14 @@ void parser(t_printf *p)
   }
 }
 
-
-
-
 int ft_printf(char * format, ...)
 {
   t_printf p;
-
-
   /* инициализация argptr */
   va_start (p.argptr, format);
 
   p.print_size = 0;
-  printf_init(&p);
+  printf_init(&p, 1);
   ft_bzero(p.data, BUFF);
   p.di = 0;
   p.format = format;
