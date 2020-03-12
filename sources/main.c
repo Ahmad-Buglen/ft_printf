@@ -5,9 +5,12 @@ int ft_printf(char * format, ...);
 
 int main()//int ac, char **av)
 {
+  // printf("%-5c\n", ' ');
+  // ft_printf("%-5c", ' ');
+
   // char c = 't';
   // int l[100];
-  //ft_printf("%c %s %% ", 't', "strint");
+  ft_printf("%% 4.5i 42 == |% 4.5i| ", 42);
 //   printf("%10.10000d\n", 10);
 //    printf("%10.10f\n", 10.10);
 //     printf("%10.10ld\n", 99999999999);
@@ -134,18 +137,19 @@ int main()//int ac, char **av)
   // ft_printf("%+5c\n", c);
   //ft_printf(%-5c);("%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c", c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c);
   //ft_printf("c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c);
-  ft_printf("1 %10b\n", 1);
-  ft_printf("2 %09b\n", 2);
-  ft_printf("3 %7b\n", 3);
-  ft_printf("4 %3b\n", 4);
-  ft_printf("5 %12b\n", 5);
-  ft_printf("6 %#13b\n", 6);
-  ft_printf("7 %.3b\n", 7);
-  ft_printf("8 %6b\n", 8);
-  ft_printf("9 %9b\n", 9);
-  ft_printf("10 %10b\n", 10);
-  ft_printf("11 %.21b\n", 11);
-  ft_printf("12 %.23b\n", 12);
-
+  // ft_printf("1 %10b\n", 1);
+  // ft_printf("2 %09b\n", 2);
+  // ft_printf("3 %7b\n", 3);
+  // ft_printf("4 %3b\n", 4);
+  // ft_printf("5 %12b\n", 5);
+  // ft_printf("6 %#13b\n", 6);
+  // ft_printf("7 %.3b\n", 7);
+  // ft_printf("8 %6b\n", 8);
+  // ft_printf("9 %9b\n", 9);
+  // ft_printf("10 %10b\n", 10);
+  // ft_printf("11 %.21b\n", 11);
+  // ft_printf("12 %.23b\n", 12);
+  // printf(" %o\n", 18446744073709551611l);
+  // ft_printf(" %o\n", 18446744073709551611l);
   return 0;
 }

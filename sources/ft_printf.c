@@ -29,24 +29,6 @@ void		ft_putnstr(char const *str, size_t length)
     write(1, str, length);
 }
 
-int ft_power(int n, int power)
-{
-	int rez;
-
-	rez = n;
-	if (0 == power)
-		return (1);
-	else if (1 == power)
-		return (rez);
-	else
-		while (power > 1 )
-		{
-			rez *= n;
-			--power;
-		}
-	return (rez);
-}
-
 unsigned long long ft_pow(int number, int grade)
 {
   unsigned long long rezult;
@@ -59,41 +41,30 @@ unsigned long long ft_pow(int number, int grade)
   return (rezult);
 }
 
-int ft_ret(char c)
+static int			ft_count_p(unsigned long long number, int base)
 {
-	if ((c >= '0') && ('9' >= c))
-		return (c - 48);
-	else if ((c >= 'a') && ('f' >= c))
-		return (c - 87);
-	else if ((c >= 'A') && ('F' >= c))
-		return (c - 55);
-	return(0);
-}
+	int				count;
 
-static int			ft_count_p(unsigned long long c, int base)
-{
-	int				q;
-
-	q = 1;
-	while (c / base)
+	count = 1;
+	while (number / base)
 	{
-		c = c / base;
-		q++;
+		number /= base;
+		count++;
 	}
-	return (q);
+	return (count);
 }
 
-void ull_to_p_base(t_printf *p, long long n, int base)
+void ull_to_p_base(t_printf *p, unsigned long long number, int base)
 {
   int length;
   int buf;
-  length = ft_count_p(n, base);
+  length = ft_count_p(number, base);
   buf = length--;
   while (length >= 0)
 	{
 		p->temp[p->ti + length--] = ('X' == p->format[p->fi]) ?
-                                        A[(n % base)] : a[(n % base)];
-		n /= base;
+                  UPPERCASE[(number % base)] : LOWERCASE[(number % base)];
+		number /= base;
 	}
   p->ti += buf;
 }
@@ -154,24 +125,22 @@ void  data_record(t_printf *p)
   data_record(p);
  }
 
-void print_d(t_printf *p)
+void print_d(t_printf *p,  long long number)
 {
   int length;
-  int n;
   char buf;
   int  flag;
   int prec;
   int width;
   int sign;
 
-  p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;  
-  n = va_arg(p->argptr, int);
-  flag = (n < 0) ? 1 : 0;
-  n = (n < 0) ? -n : n;
+  p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
+  flag = (number < 0) ? 1 : 0;
+  number = (number < 0) ? -number : number;
   sign = (p->f_plus || flag) ? 1 : 0;
   p->f_space = sign ? false : p->f_space;
-  length = ft_count_p(n, 10);
-  length = ((0 == n) && p->f_prec && (0 == p->prec)) ? 0 : length;
+  length = ft_count_p(number, 10);
+  length = ((0 == number) && p->f_prec && (0 == p->prec)) ? 0 : length;
   buf = (p->f_zero) ? '0' : ' ';
   prec = ((p->f_prec) && ((p->prec - length) > 0)) ?  p->prec - length : 0;
   width = (p->f_width) ? p->width - (length + sign + ((p->f_space) ? 1 : 0)): 0;
@@ -187,12 +156,11 @@ void print_d(t_printf *p)
   while (prec-- > 0)
     p->temp[p->ti++] = '0';
   if (length > 0)
-    ull_to_p_base(p, n, 10);
+    ull_to_p_base(p, number, 10);
   while(p->f_minus && (width-- > 0))
     p->temp[p->ti++] = ' ';
   data_record(p);
 }
-
 
 unsigned long long rounding(t_printf *p, unsigned long long frac, int prec,
                               unsigned long long *whol)
@@ -222,13 +190,12 @@ unsigned long long rounding(t_printf *p, unsigned long long frac, int prec,
   return(frac);
 }
 
-void print_f(t_printf *p)
+void print_f(t_printf *p, long double number)
  {
   int whole_l;
   int fract_l;
   unsigned long long whol;
   unsigned long long frac;
-  long double n;
   char buf;
   char  flag;
   char  sign;
@@ -239,24 +206,24 @@ void print_f(t_printf *p)
   int dot;
 
   p->f_zero = (p->f_minus) ? false : p->f_zero;
-  n = (long double)va_arg(p->argptr,   double);
-  flag = n < 0 ? 1 : 0;
-  n = (n < 0) ? -n : n;
+  flag = number < 0 ? 1 : 0;
+  number = (number < 0) ? -number : number;
   p->f_space = (p->f_plus || flag) ? false : p->f_space;
     prec = (p->f_prec) ?  p->prec : 6;
   prec = (prec > 0) ? prec : 0;
   
-  unsigned long long temp = n;
+  unsigned long long temp = number;
   // i = PREC;
   // while ()
-    frac = (n - temp) * ft_pow(10, PREC);
+    frac = (number - temp) * ft_pow(10, PREC);
     // zero = ft_abs(ft_count_p(frac, 10) - PREC);
-    whol = n;
+    whol = number;
 
-  frac = rounding(p, frac, prec, &whol);
-  frac /= 10;
+  frac = (prec >= PREC) ? frac : rounding(p, frac, prec, &whol);
+  frac = (prec >= PREC) ? frac : frac / 10;
   zero = ft_abs(ft_count_p(frac, 10) - ((prec > PREC) ? PREC : prec));
- whole_l = ft_count_p(whol, 10);
+  // zero = (prec >= PREC) ? zero - 1: zero; 
+  whole_l = ft_count_p(whol, 10);
   dot = (((p->f_prec) && (prec != 0)) || !(p->f_prec) || p->f_lattice) ? 1 : 0;
   sign = (flag || p->f_plus) ? 1 : 0;
   buf = (p->f_zero) ? '0' : ' ';
@@ -293,7 +260,8 @@ void print_f(t_printf *p)
 
     ull_to_p_base(p, frac, 10);
     i = ((prec > PREC) ? prec - PREC : 0);
-  
+    // i = (prec >= PREC) ? i + 1 : i;
+
     while (i--)
       p->temp[p->ti++] = '0';
   }
@@ -442,9 +410,8 @@ void print_e(t_printf *p)
 }
 
 
-void print_x(t_printf *p)
+void print_x(t_printf *p,  unsigned long long number)
 {
-  unsigned long long n;
   int  buf;
   int width;
   int prec;
@@ -453,12 +420,11 @@ void print_x(t_printf *p)
   int lattice;
 
   p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
-  n = va_arg(p->argptr, unsigned long long);
-  length = ft_count_p(n, 16);
+  length = ft_count_p(number, 16);
   buf = (p->f_zero) ? '0' : ' ';
-  lattice = (p->f_lattice && n != 0) ? 2 : 0;
+  lattice = (p->f_lattice && number != 0) ? 2 : 0;
   prec = ((p->f_prec) && ((p->prec - length) > 0)) ? p->prec - length : 0;
-  crutch = (p->f_prec && (0 == n) && (0 == p->prec) ) ? 1 : 0;
+  crutch = (p->f_prec && (0 == number) && (0 == p->prec) ) ? 1 : 0;
   width = (p->f_width) ? p->width - (length + lattice) - prec + crutch : 0;
   while (!p->f_minus && !p->f_zero && (width-- > 0))
     p->temp[p->ti++] = buf;
@@ -472,15 +438,14 @@ void print_x(t_printf *p)
   while (prec-- > 0)
     p->temp[p->ti++] = '0';
  if (!crutch)
-    ull_to_p_base(p, n, 16);
+    ull_to_p_base(p, number, 16);
   while (p->f_minus && (width-- > 0))
     p->temp[p->ti++] = ' ';
   data_record(p);
 }
 
-void print_o(t_printf *p)
+void print_o(t_printf *p, unsigned long long number)
 {
-  unsigned long long n;
   int  buf;
   int width;
   int prec;
@@ -491,15 +456,14 @@ void print_o(t_printf *p)
   int prec_nul;
 
   p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
-  n = va_arg(p->argptr, unsigned long long);
-  length =  ft_count_p(n, 8) ;
+  length =  ft_count_p(number, 8) ;
   buf = (p->f_zero) ? '0' : ' ';
-  lattice = (p->f_lattice && (n != 0)) ? 1 : 0;
+  lattice = (p->f_lattice && (number != 0)) ? 1 : 0;
   prec = (p->f_prec) ? p->prec - (length + lattice) : 0;
   prec = (prec > 0) ? prec : 0;
   prec_nul = (p->f_prec && (0 == p->prec)) ? 1 : 0;
   crutch = (p->f_lattice && prec_nul) ? 1 : 0;
-  crutch1 = ((0 == n) && prec_nul ) ? 1 : 0;
+  crutch1 = ((0 == number) && prec_nul ) ? 1 : 0;
   width = (p->f_width) ? p->width - crutch + crutch1 - (length + lattice) - prec: 0;
   while (!p->f_minus && (width-- > 0))
     p->temp[p->ti++] = buf;
@@ -508,15 +472,14 @@ void print_o(t_printf *p)
   if (lattice )
     p->temp[p->ti++] = '0';
   if (!(crutch1) || crutch)
-    ull_to_p_base(p, n, 8);
+    ull_to_p_base(p, number, 8);
   while ( p->f_minus && (width-- > 0))
     p->temp[p->ti++] = ' ';
   data_record(p);
 }
 
-void print_b(t_printf *p)
+void print_b(t_printf *p, unsigned long long number)
 {
-  unsigned long long n;
   int  buf;
   int width;
   int prec;
@@ -524,11 +487,10 @@ void print_b(t_printf *p)
   int crutch;
 
   p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
-  n = va_arg(p->argptr, unsigned long long);
-  length = ft_count_p(n, 2);
+  length = ft_count_p(number, 2);
   buf = (p->f_zero) ? '0' : ' ';
   prec = ((p->f_prec) && ((p->prec - length) > 0)) ? p->prec - length : 0;
-  crutch = (p->f_prec && (0 == n) && (0 == p->prec) ) ? 1 : 0;
+  crutch = (p->f_prec && (0 == number) && (0 == p->prec) ) ? 1 : 0;
   width = (p->f_width) ? p->width - length - prec + crutch : 0;
   while (!p->f_minus && !p->f_zero && (width-- > 0))
     p->temp[p->ti++] = buf;
@@ -537,7 +499,7 @@ void print_b(t_printf *p)
   while (prec-- > 0)
     p->temp[p->ti++] = '0';
  if (!crutch)
-    ull_to_p_base(p, n, 2);
+    ull_to_p_base(p, number, 2);
   while (p->f_minus && (width-- > 0))
     p->temp[p->ti++] = ' ';
   data_record(p);
@@ -564,22 +526,6 @@ void print_p(t_printf *p)
 
 void print_per(t_printf *p)
 {
-  // char  buf;
-
-  // buf = (p->f_zero && !p->f_minus) ? '0' : ' ';
-  // p->width = (p->f_width) ? p->width : 1;
-  // if (1 == p->width)
-  //   p->temp[p->ti++] = c;
-  // else
-  //   p->temp[p->ti++] = (p->f_minus) ? c : buf;
-  // if (p->width > 1)
-  // {
-  //   --p->width;
-  //   while (--p->width)
-  //     p->temp[p->ti++] = buf;
-  //   p->temp[p->ti++] = (p->f_minus) ? buf : c;
-  // }
-
   char  buf;
   int   width;
 
@@ -628,7 +574,7 @@ void print_c(t_printf *p)
   int   custom;
 
   c = (char)va_arg(p->argptr, int);
-  buf = (p->f_zero && !p->f_minus) ? '0' : ' ';
+  buf = (p->f_zero && !p->f_minus) ? '0' : 32;
   custom = (p->f_width) ? p->width -1 : 0;
   custom = (custom < 0) ? 0 : custom;
   while ((!p->f_minus) && (custom-- > 0))
@@ -677,7 +623,7 @@ void modif_check(t_printf *p)
   }
   else if ('L' == p->format[p->fi])
   {
-    p->f_l = true;
+    p->f_L = true;
     ++p->fi;
   }
 }
@@ -741,17 +687,29 @@ int  distribution(t_printf *p, char c)
   else if ('s' == c)
     print_s(p);
   else if (('d' == c) || ('i' == c) || ('u' == c))
-    print_d(p);
+  {
+    if (p->f_l)
+      print_d(p, va_arg(p->argptr, long ));
+    else if ((p->f_ll) || ('u' == c))
+      print_d(p, va_arg(p->argptr, long long));
+    else
+      print_d(p, va_arg(p->argptr, int));
+  }
   else if ('o' == c)
-    print_o(p);
+    print_o(p, (unsigned long)va_arg(p->argptr, unsigned long long));
   else if (('x' == c) || ('X' == c))
-    print_x(p);
+    print_x(p, (unsigned long)va_arg(p->argptr, unsigned long long));
   else if (('f' == c) || ('F' == c))
-    print_f(p);
+  {
+    if (p->f_L)
+      print_f(p, (long double)va_arg(p->argptr, long double));
+    else
+      print_f(p, va_arg(p->argptr, double));
+  }
   else if (('e' == c) || ('E' == c))
     print_e(p);
   else if ('b' == c)
-    print_b(p);
+    print_b(p, (unsigned long)va_arg(p->argptr, unsigned long long));
   return 1;
 }
 
