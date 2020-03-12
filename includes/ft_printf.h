@@ -4,10 +4,10 @@
 # include <stdarg.h>
 # include "../libft/libft.h"
 
-# define BUFF 65536
-# define FLAGS "cp%sdiouxXfFeEb"
-# define  a  "0123456789abcdef"
-# define  A  "0123456789ABCDEF"
+# define BUFF       65536
+# define FLAGS      "cp%sdiouxXfFeEb"
+# define LOWERCASE  "0123456789abcdef"
+# define UPPERCASE  "0123456789ABCDEF"
 # define PREC 19
 
 /*

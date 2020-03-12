@@ -27,7 +27,6 @@ void		ft_putnstr(char const *str, size_t length)
 {
 	if (str)
     write(1, str, length);
-    // if n == 0 ?
 }
 
 int ft_power(int n, int power)
