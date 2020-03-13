@@ -10,10 +10,10 @@ int main()//int ac, char **av)
 
   // char c = 't';
   // int l[100];
-  ft_printf("%% 4.5i 42 == |% 4.5i| ", 42);
+  ft_printf("%.24lu%llu%u%.2s%li", 0ull, 878023, "notall", 22337203685477);
 //   printf("%10.10000d\n", 10);
 //    printf("%10.10f\n", 10.10);
-//     printf("%10.10ld\n", 99999999999);
+//     printf("%10.10ld\n", 99999999999);f
 //      printf("%10.10s\n", "asdfasfasfasfasfasdfasdf");
 //  ft_printf("%1000000c\n", &c);
 

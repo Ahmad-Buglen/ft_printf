@@ -113,14 +113,14 @@ void  data_record(t_printf *p)
   if (NULL == str)
     str = "(null)";
   length = ft_strlen(str);
-  length = ((p->f_prec) && (p->prec < length)) ? p->prec : length;
+  length = p->f_prec && p->prec < length ? p->prec : length;
   space = (p->f_width) ? p->width - length : 0;
-  space = (space < 0) ? 0 : space;
-  while ((!p->f_minus) && (space-- > 0))
+  space = space < 0 ? 0 : space;
+  while (!p->f_minus && (space-- > 0))
     p->temp[p->ti++] = ' ';
   ft_strncpy(p->temp + p->ti, str, length);
   p->ti += length;
-  while ((p->f_minus) && (space-- > 0))
+  while (p->f_minus && (space-- > 0))
     p->temp[p->ti++] = ' ';
   data_record(p);
  }
@@ -134,17 +134,53 @@ void print_d(t_printf *p,  long long number)
   int width;
   int sign;
 
-  p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
-  flag = (number < 0) ? 1 : 0;
-  number = (number < 0) ? -number : number;
-  sign = (p->f_plus || flag) ? 1 : 0;
+  p->f_zero = p->f_minus || p->f_prec ? false : p->f_zero;
+  flag = number < 0 ? 1 : 0;
+  number = number < 0 ? -number : number;
+  sign = p->f_plus || flag ? 1 : 0;
   p->f_space = sign ? false : p->f_space;
   length = ft_count_p(number, 10);
-  length = ((0 == number) && p->f_prec && (0 == p->prec)) ? 0 : length;
-  buf = (p->f_zero) ? '0' : ' ';
-  prec = ((p->f_prec) && ((p->prec - length) > 0)) ?  p->prec - length : 0;
-  width = (p->f_width) ? p->width - (length + sign + ((p->f_space) ? 1 : 0)): 0;
-  width = ((prec > 0) && ((width - prec) > 0)) ? width - prec : width;
+  length = 0 == number && p->f_prec && 0 == p->prec ? 0 : length;
+  buf = p->f_zero ? '0' : ' ';
+  prec = (p->f_prec && (p->prec - length > 0)) ?  p->prec - length : 0;
+  width = p->f_width ? p->width - (length + sign + p->f_space + prec): 0;
+  width = width > 0 ? width :0 ;
+  if (sign && (p->f_minus || p->f_zero))
+    p->temp[p->ti++] = flag ? '-' : '+';
+  if (p->f_space)
+    p->temp[p->ti++] = ' ';
+  while (!(p->f_minus) && width-- > 0)
+    p->temp[p->ti++] = buf;
+  if (sign && !(p->f_minus || p->f_zero))
+    p->temp[p->ti++] = flag ? '-' : '+';
+  while (prec-- > 0)
+    p->temp[p->ti++] = '0';
+  if (length > 0)
+    ull_to_p_base(p, number, 10);
+  while(p->f_minus && (width-- > 0))
+    p->temp[p->ti++] = ' ';
+  data_record(p);
+}
+
+void print_u(t_printf *p, unsigned long long number)
+{
+  int length;
+  char buf;
+  int  flag;
+  int prec;
+  int width;
+  int sign;
+
+  p->f_zero = p->f_minus || p->f_prec ? false : p->f_zero;
+  flag = 0;
+  sign = p->f_plus || flag ? 1 : 0;
+  p->f_space = sign ? false : p->f_space;
+  length = ft_count_p(number, 10);
+  length = 0 == number && p->f_prec && 0 == p->prec ? 0 : length;
+  buf = p->f_zero ? '0' : ' ';
+  prec = (p->f_prec && (p->prec - length > 0)) ?  p->prec - length : 0;
+  width = p->f_width ? p->width - (length + sign + p->f_space + prec): 0;
+  width = width > 0 ? width :0 ;
   if (sign && (p->f_minus || p->f_zero))
     p->temp[p->ti++] = flag ? '-' : '+';
   if (p->f_space)
@@ -172,7 +208,7 @@ unsigned long long rounding(t_printf *p, unsigned long long frac, int prec,
   prec = (prec >= PREC) ? PREC : prec + 1;
   zero = ft_abs(ft_count_p(frac, 10) - PREC);
   extra = ft_abs(prec - (zero + ft_count_p(frac, 10)));
-  extra = ('f' == p->format[p->fi]) ? extra : extra - 1; 
+  extra = 'f' == p->format[p->fi] ? extra : extra - 1; 
   while (extra-- > 0)
     frac /= 10;
   digit = frac % 10;
@@ -419,13 +455,13 @@ void print_x(t_printf *p,  unsigned long long number)
   int crutch;
   int lattice;
 
-  p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
+  p->f_zero = p->f_minus || p->f_prec ? false : p->f_zero;
   length = ft_count_p(number, 16);
-  buf = (p->f_zero) ? '0' : ' ';
-  lattice = (p->f_lattice && number != 0) ? 2 : 0;
-  prec = ((p->f_prec) && ((p->prec - length) > 0)) ? p->prec - length : 0;
-  crutch = (p->f_prec && (0 == number) && (0 == p->prec) ) ? 1 : 0;
-  width = (p->f_width) ? p->width - (length + lattice) - prec + crutch : 0;
+  buf = p->f_zero ? '0' : ' ';
+  lattice = p->f_lattice && number != 0 ? 2 : 0;
+  prec = p->f_prec && (p->prec - length > 0) ? p->prec - length : 0;
+  crutch = p->f_prec && 0 == number && 0 == p->prec ? 1 : 0;
+  width = p->f_width ? p->width - (length + lattice) - prec + crutch : 0;
   while (!p->f_minus && !p->f_zero && (width-- > 0))
     p->temp[p->ti++] = buf;
   if (2 == lattice)
@@ -455,25 +491,25 @@ void print_o(t_printf *p, unsigned long long number)
   int crutch1;
   int prec_nul;
 
-  p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
+  p->f_zero = p->f_minus || p->f_prec ? false : p->f_zero;
   length =  ft_count_p(number, 8) ;
-  buf = (p->f_zero) ? '0' : ' ';
-  lattice = (p->f_lattice && (number != 0)) ? 1 : 0;
-  prec = (p->f_prec) ? p->prec - (length + lattice) : 0;
-  prec = (prec > 0) ? prec : 0;
-  prec_nul = (p->f_prec && (0 == p->prec)) ? 1 : 0;
-  crutch = (p->f_lattice && prec_nul) ? 1 : 0;
-  crutch1 = ((0 == number) && prec_nul ) ? 1 : 0;
-  width = (p->f_width) ? p->width - crutch + crutch1 - (length + lattice) - prec: 0;
+  buf = p->f_zero ? '0' : ' ';
+  lattice = p->f_lattice && number != 0 ? 1 : 0;
+  prec = p->f_prec ? p->prec - (length + lattice) : 0;
+  prec = prec > 0 ? prec : 0;
+  prec_nul = p->f_prec && 0 == p->prec ? 1 : 0;
+  crutch = p->f_lattice && prec_nul ? 1 : 0;
+  crutch1 = 0 == number && prec_nul ? 1 : 0;
+  width = p->f_width ? p->width - crutch + crutch1 - (length + lattice) - prec: 0;
   while (!p->f_minus && (width-- > 0))
     p->temp[p->ti++] = buf;
   while (prec-- > 0)
     p->temp[p->ti++] = '0';
-  if (lattice )
+  if (lattice)
     p->temp[p->ti++] = '0';
-  if (!(crutch1) || crutch)
+  if (!crutch1 || crutch)
     ull_to_p_base(p, number, 8);
-  while ( p->f_minus && (width-- > 0))
+  while (p->f_minus && (width-- > 0))
     p->temp[p->ti++] = ' ';
   data_record(p);
 }
@@ -486,15 +522,15 @@ void print_b(t_printf *p, unsigned long long number)
   int length;
   int crutch;
 
-  p->f_zero = ((p->f_minus) || (p->f_prec)) ? false : p->f_zero;
+  p->f_zero = p->f_minus || p->f_prec ? false : p->f_zero;
   length = ft_count_p(number, 2);
-  buf = (p->f_zero) ? '0' : ' ';
-  prec = ((p->f_prec) && ((p->prec - length) > 0)) ? p->prec - length : 0;
-  crutch = (p->f_prec && (0 == number) && (0 == p->prec) ) ? 1 : 0;
-  width = (p->f_width) ? p->width - length - prec + crutch : 0;
+  buf = p->f_zero ? '0' : ' ';
+  prec = p->f_prec && (p->prec - length > 0) ? p->prec - length : 0;
+  crutch = p->f_prec && 0 == number && 0 == p->prec ? 1 : 0;
+  width = p->f_width ? p->width - length - prec + crutch : 0;
   while (!p->f_minus && !p->f_zero && (width-- > 0))
     p->temp[p->ti++] = buf;
-  while ((p->f_zero) &&  (width-- > 0))
+  while (p->f_zero &&  (width-- > 0))
     p->temp[p->ti++] = buf;
   while (prec-- > 0)
     p->temp[p->ti++] = '0';
@@ -513,13 +549,13 @@ void print_p(t_printf *p)
 
   n = va_arg(p->argptr, long long);
   width = (0 == n) ? 3 : 11;
-  space = (p->f_width) ? ((p->width) - width) : 0;
-  while((!p->f_minus) && (space-- > 0))
+  space = p->f_width ? p->width - width : 0;
+  while (!p->f_minus && (space-- > 0))
     p->temp[p->ti++] = ' ';
   p->temp[p->ti++] = '0';
   p->temp[p->ti++] = 'x';
   ull_to_p_base(p, n, 16);
-  while(p->f_minus && (space-- > 0))
+  while (p->f_minus && (space-- > 0))
     p->temp[p->ti++] = ' ';
   data_record(p);
 }
@@ -529,13 +565,13 @@ void print_per(t_printf *p)
   char  buf;
   int   width;
 
-  buf = (p->f_zero && !p->f_minus) ? '0' : ' ';
-  width = (p->f_width) ? p->width - 1 : 0;
+  buf = p->f_zero && !p->f_minus ? '0' : ' ';
+  width = p->f_width ? p->width - 1 : 0;
   width = (width < 0) ? 0 : width;
-  while ((!p->f_minus) && (width-- > 0))
+  while (!p->f_minus && (width-- > 0))
     p->temp[p->ti++] = buf;
   p->temp[p->ti++] = '%';
-  while ((p->f_minus) && (width-- > 0))
+  while (p->f_minus && (width-- > 0))
     p->temp[p->ti++] = buf;
   data_record(p);
 }
@@ -571,16 +607,16 @@ void print_c(t_printf *p)
 {
   char  c;
   char  buf;
-  int   custom;
+  int   width;
 
   c = (char)va_arg(p->argptr, int);
-  buf = (p->f_zero && !p->f_minus) ? '0' : 32;
-  custom = (p->f_width) ? p->width -1 : 0;
-  custom = (custom < 0) ? 0 : custom;
-  while ((!p->f_minus) && (custom-- > 0))
+  buf = p->f_zero && !p->f_minus ? '0' : ' ';
+  width = p->f_width ? p->width - 1 : 0;
+  width = width < 0 ? 0 : width;
+  while (!p->f_minus && (width-- > 0))
     p->temp[p->ti++] = buf;
   p->temp[p->ti++] = c;
-  while ((p->f_minus) && (custom-- > 0))
+  while (p->f_minus && (width-- > 0))
     p->temp[p->ti++] = buf;
   data_record(p);
 }
@@ -686,15 +722,17 @@ int  distribution(t_printf *p, char c)
     print_per(p);
   else if ('s' == c)
     print_s(p);
-  else if (('d' == c) || ('i' == c) || ('u' == c))
+  else if (('d' == c) || ('i' == c))
   {
     if (p->f_l)
       print_d(p, va_arg(p->argptr, long ));
-    else if ((p->f_ll) || ('u' == c))
+    else if (p->f_ll)
       print_d(p, va_arg(p->argptr, long long));
     else
       print_d(p, va_arg(p->argptr, int));
   }
+  else if ('u' == c)
+    print_u(p, (unsigned long)va_arg(p->argptr, unsigned long long));
   else if ('o' == c)
     print_o(p, (unsigned long)va_arg(p->argptr, unsigned long long));
   else if (('x' == c) || ('X' == c))
