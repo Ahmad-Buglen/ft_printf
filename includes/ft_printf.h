@@ -4,10 +4,11 @@
 # include <stdarg.h>
 # include "../libft/libft.h"
 
-# define BUFF       65536
+# define BUFF       64
 # define FLAGS      "cp%sdiouxXfFeEb"
 # define LOWERCASE  "0123456789abcdef"
 # define UPPERCASE  "0123456789ABCDEF"
+# define WHOLE_LEN   1
 # define PREC 19
 
 /*
@@ -48,7 +49,7 @@
 
 typedef enum  s_bool
 {
-              false = 0, 
+              false = 0,
               true = 1
 }             t_bool;
 
@@ -92,13 +93,22 @@ typedef struct s_printf
 
 typedef struct s_option
 {
-  int         width;
-  int         prec;
-  int         buf;
+  unsigned long long whol;
+  unsigned long long frac;
+  unsigned long long temp;
+  int			width;
+  int			prec;
+  int			buf;
   int         crutch;
   int         short_note;
   int         flag;
   int         sign;
+  int         length;
+  int         dot;
+  int         zero;
+  int         exp;
+  int         count;
+  int         lattice;
 }             t_option;
 
 
