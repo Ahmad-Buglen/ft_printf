@@ -6,7 +6,7 @@
 #    By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/09 12:34:53 by dphyliss          #+#    #+#              #
-#    Updated: 2020/03/09 16:39:02 by dphyliss         ###   ########.fr        #
+#    Updated: 2020/03/17 11:07:40 by dphyliss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ all: $(LIB) $(NAME) $(MAIN)
 
 $(LIB):
 	make -C ./libft
-$(NAME): $(OBJ) $(LIB) 
+$(NAME): $(OBJ) $(LIB)
 	ar rc $(NAME) $(OBJ) libft/*.o
 	make -C ./pft
 #libft/*.o
@@ -40,7 +40,7 @@ $(MAIN): $(NAME) $(OBJ1)
 	#./pft/test f
 #-Wall -Wextra -Werror
 %.o: sources/%.c $(HEADER)
-	gcc -c $<
+	gcc -c -O2 $<
 clean:
 	make clean -C ./libft
 	rm -rf $(OBJ) $(OBJ1) ft_printf

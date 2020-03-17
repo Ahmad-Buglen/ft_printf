@@ -5,6 +5,9 @@ int ft_printf(char * format, ...);
 
 int main()//int ac, char **av)
 {
+  // int i = 0;
+  // while(++i < 1000)
+  //   printf("%llu ", ft_pow(10, i));
   // printf("this %f float", 1.5);
   // ft_printf("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42l);
   // ft_printf("{%f}{%lf}{%Lf}", -1.42, -1.42, -1.42l);
@@ -27,28 +30,28 @@ int main()//int ac, char **av)
 //  ush_pos_1 = 3047;
     // ul_pos_1 = 22337203685477;
 
-static char 		ch_pos_1 = 100, ch_neg_1 = -87;
-static short		sh_pos_1 = 3047, sh_neg_1 = -8875;
-static int			i_pos_1 = 878023;
-static long		l_pos_1 = 22337203685477, l_neg_1 = -22337203685477;
-static long long	ll_pos_1 = 22337203685477, ll_neg_1 = -22337203685477;
-static long		lmax	= 9223372036854775807;
-static long		lmin	= -9223372036854775807;
-static long long llmax = 9223372036854775807;
-static long long	llmin = -9223372036854775807ll;
-static unsigned char 		uch_pos_1 = 100;
-static unsigned short		ush_pos_1 = 3047;
-static unsigned int		ui_pos_1 = 878023;
-static unsigned long		ul_pos_1 = 22337203685477;
-static unsigned long long	ull_pos_1 = 22337203685477;
-static unsigned long long  ullmax = 9223372036854775807;
-static unsigned long  		ulmax = 9223372036854775807;
-    printf("%s%hihello%-17.14llu%lli%08hu%s%17ssomestuff%s%hi%i%.24lu%llu%u%.2s%li\n",
-    "abc",sh_neg_1,ull_pos_1,ll_neg_1,ush_pos_1,"wassup","nope","",(short)32767,0,
-    ul_pos_1,0ull,ui_pos_1,"notall",l_pos_1);
- ft_printf("%s%hihello%-17.14llu%lli%08hu%s%17ssomestuff%s%hi%i%.24lu%llu%u%.2s%li\n",
-    "abc",sh_neg_1,ull_pos_1,ll_neg_1,ush_pos_1,"wassup","nope","",(short)32767,0,
-    ul_pos_1,0ull,ui_pos_1,"notall",l_pos_1);
+// static char 		ch_pos_1 = 100, ch_neg_1 = -87;
+// static short		sh_pos_1 = 3047, sh_neg_1 = -8875;
+// static int			i_pos_1 = 878023;
+// static long		l_pos_1 = 22337203685477, l_neg_1 = -22337203685477;
+// static long long	ll_pos_1 = 22337203685477, ll_neg_1 = -22337203685477;
+// static long		lmax	= 9223372036854775807;
+// static long		lmin	= -9223372036854775807;
+// static long long llmax = 9223372036854775807;
+// static long long	llmin = -9223372036854775807ll;
+// static unsigned char 		uch_pos_1 = 100;
+// static unsigned short		ush_pos_1 = 3047;
+// static unsigned int		ui_pos_1 = 878023;
+// static unsigned long		ul_pos_1 = 22337203685477;
+// static unsigned long long	ull_pos_1 = 22337203685477;
+// static unsigned long long  ullmax = 9223372036854775807;
+// static unsigned long  		ulmax = 9223372036854775807;
+//     printf("%s%hihello%-17.14llu%lli%08hu%s%17ssomestuff%s%hi%i%.24lu%llu%u%.2s%li\n",
+//     "abc",sh_neg_1,ull_pos_1,ll_neg_1,ush_pos_1,"wassup","nope","",(short)32767,0,
+//     ul_pos_1,0ull,ui_pos_1,"notall",l_pos_1);
+//  ft_printf("%s%hihello%-17.14llu%lli%08hu%s%17ssomestuff%s%hi%i%.24lu%llu%u%.2s%li\n",
+//     "abc",sh_neg_1,ull_pos_1,ll_neg_1,ush_pos_1,"wassup","nope","",(short)32767,0,
+//     ul_pos_1,0ull,ui_pos_1,"notall",l_pos_1);
 
     // ft_printf("%7i", -14);
     // printf("%s%hihello%-17.14llu%lli%08hu%s%17ssomestuff%s%hi%i%.24lu%llu%u%.2s%li\n",

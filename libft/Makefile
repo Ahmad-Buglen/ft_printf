@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dphyliss <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/13 23:03:53 by dphyliss          #+#    #+#              #
-#    Updated: 2019/11/30 16:30:22 by dphyliss         ###   ########.fr        #
+#    Updated: 2020/03/17 11:07:53 by dphyliss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,12 +31,12 @@ OBJECTS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) 
+$(NAME): $(OBJECTS)
 	ar rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
 
 %.o: %.c $(HEADER)
-	gcc -Wall -Wextra -Werror -c $< 
+	gcc -Wall -Wextra -Werror -c -O2 $<
 
 .PHONY: clean fclean re
 
