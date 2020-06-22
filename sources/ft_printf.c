@@ -590,6 +590,11 @@ void flags_and_wid_check(t_printf *const p)
 	{
 		p->f_width = true;
 		p->width = va_arg(p->argptr, int);
+		if (p->width < 0)
+		{
+			p->f_minus = true;
+			p->width = ft_abs(p->width);
+		}
 		++p->fi;
 	}
 }
@@ -600,11 +605,16 @@ void prec_check(t_printf *const p)
 	{
 		++p->fi;
 		p->f_prec = true;
-	if ('*' == *(p->format + p->fi))
-	{
-		p->prec = va_arg(p->argptr, int);
-		++p->fi;
-	}
+		if ('*' == *(p->format + p->fi))
+		{
+			p->prec = va_arg(p->argptr, int);
+			if (p->prec < 0)
+			// {
+				p->f_prec = false;
+				// p->prec = ft_abs(p->prec);
+			// }
+			++p->fi;
+		}
 	else
 	{
 		p->prec = ft_atoi(p->format + p->fi); // как обработать?
