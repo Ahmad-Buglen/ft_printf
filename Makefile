@@ -6,13 +6,13 @@
 #    By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/09 12:34:53 by dphyliss          #+#    #+#              #
-#    Updated: 2020/03/17 11:07:40 by dphyliss         ###   ########.fr        #
+#    Updated: 2020/06/23 19:21:14 by dphyliss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: all clean fclean re
 
-SRC = ft_printf.c
+SRC = ft_printf.c print_e.c print_f.c numb_sys.c parser.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -32,12 +32,12 @@ $(LIB):
 	make -C ./libft
 $(NAME): $(OBJ) $(LIB)
 	ar rc $(NAME) $(OBJ) libft/*.o
-	make -C ./pft
+	# make -C ./pft
 #libft/*.o
 $(MAIN): $(NAME) $(OBJ1)
 	gcc -g sources/main.c sources/ft_printf.c -o ft_printf  libftprintf.a
 	gcc sources/main.c -o $(MAIN) -lmlx $(NAME)
-	#./pft/test f
+	# ./pft/test
 #-Wall -Wextra -Werror
 %.o: sources/%.c $(HEADER)
 	gcc -c -O2 $<

@@ -5,6 +5,16 @@ int ft_printf(char * format, ...);
 
 int main()//int ac, char **av)
 {
+  // char a = 0;
+  // while (a < 41)
+   // printf("%.0p, %.p\n", 0, 0);
+  // printf("%.p, %.0p\n", 0, 0);
+  // ft_printf("%.0p, %.p\n", 0, 0);
+  // ft_printf("%.p, %.0p\n", 0, 0);
+  //  printf("%d", SHRT_MAX );
+  // printf("%hhu / %hhu\n", SHRT_MAX - 42, SHRT_MAX - 4200);
+  // ft_printf("%hhu / %hhu", SHRT_MAX - 42, SHRT_MAX - 4200);
+  
   // int i = 0;
   // while(++i < 1000)
   //   printf("%llu ", ft_pow(10, i));
@@ -183,12 +193,12 @@ int main()//int ac, char **av)
   // // }
   //   printf("%p\n", &c);
 
-  //ft_printf("%-2c%-3c%-4c%-1c%-2c%-3c", c, c, c, c, c, c);
+  // ft_printf("%-2c%-3c%-4c%-1c%-2c%-3c", c, c, c, c, c, c);
   // printf("%+5c\n", c);
   // ft_printf("%-5c\n", c);
   // ft_printf("%+5c\n", c);
-  //ft_printf(%-5c);("%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c", c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c);
-  //ft_printf("c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c);
+  // ft_printf(%-5c);("%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c", c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c);
+  // ft_printf("c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c);
   // ft_printf("1 %10b\n", 1);
   // ft_printf("2 %09b\n", 2);
   // ft_printf("3 %7b\n", 3);

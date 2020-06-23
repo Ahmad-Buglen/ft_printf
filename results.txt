@@ -1,0 +1,28 @@
+Test 1921 (f_L_stress_prec19_limits_tiny) : FAILED.
+    First line of code: {return test("%.19f", 0.000000000000000000100);}
+      expected output : "0.0000000000000000001"
+      your output     : "0.0000000000000000000"
+      expected (nonprintable as hex) : "0.0000000000000000001"
+      actual   (nonprintable as hex) : "0.0000000000000000000"
+
+Test 1923 (f_L_stress_prec20_rndu) : FAILED.
+    First line of code: {return test("%.20f",        1.025978542436587568678);}
+      expected output : "1.02597854243658748175"
+      your output     : "1.02597854243658748170"
+      expected (nonprintable as hex) : "1.02597854243658748175"
+      actual   (nonprintable as hex) : "1.02597854243658748170"
+
+Test 1924 (f_L_stress_prec20_rndd) : FAILED.
+    First line of code: {return test("%.20f",        1.025978548534310422034);}
+      expected output : "1.02597854853431047495"
+      your output     : "1.02597854853431047490"
+      expected (nonprintable as hex) : "1.02597854853431047495"
+      actual   (nonprintable as hex) : "1.02597854853431047490"
+
+Test 1925 (f_L_stress_prec20_limits_tiny) : FAILED.
+    First line of code: {return test("%.20f", 0.000000000000000000010);}
+      expected output : "0.00000000000000000001"
+      your output     : "0.00000000000000000000"
+      expected (nonprintable as hex) : "0.00000000000000000001"
+      actual   (nonprintable as hex) : "0.00000000000000000000"
+

@@ -1,58 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/23 18:12:34 by dphyliss          #+#    #+#             */
+/*   Updated: 2020/06/23 19:18:41 by dphyliss         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-int		ft_cinstr(char const *const storage, char const *const desire)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while(storage[i])
-	{
-	j = 0;
-	while(desire[j])
-	{
-		if (storage[i] == desire[j])
-		return (1);
-		++j;
-	}
-	++i;
-	}
-	return (0);
-}
-
-void	ft_putnstr(char const *const str, const size_t length)
-{
-	if	(str)
-	write(1, str, length);
-}
-
-unsigned long long ft_pow(unsigned long long number, int grade)
-{
-	unsigned long long	rezult;
-
-	rezult = 1;
-	while (grade) {
-		if (grade & 1)
-			rezult *= number;
-		number *= number;
-		grade >>= 1;
-	}
-	return (rezult);
-}
-
-unsigned long long ft_count_p(unsigned long long number, const int base)
-{
-	int	count;
-
-	count = 1;
-	while (number / base)
-	{
-		number /= base;
-		count++;
-	}
-	return (count);
-}
 
 void	ull_to_p_base(t_printf *const p, unsigned long long number,
 														const int base)
@@ -134,7 +92,7 @@ void	data_record(t_printf *const p)
 	data_record(p);
  }
 
-void	init_d_options(t_printf *const p, long long *number, t_option *const o)
+void	init_d_options(t_printf *const p, long long *const number, t_option *const o)
 {
 	p->f_zero = p->f_minus || p->f_prec ? false : p->f_zero;
 	o->flag = *number < 0 ? 1 : 0;
@@ -173,7 +131,7 @@ void print_d(t_printf *const p, long long number)
 	data_record(p);
 }
 
-void		print_u(t_printf *const p, unsigned long long number)
+void		print_u(t_printf *const p, const unsigned long long number)
 {
 	int		length;
 	char	buf;
@@ -198,176 +156,7 @@ void		print_u(t_printf *const p, unsigned long long number)
 	data_record(p);
 }
 
-unsigned long long rounding(t_printf *const p, t_option *const o)
-{
-	int		extra;
-	int		digit;
-	int		zero;
-
-	zero = ft_abs(ft_count_p(o->frac, 10) - PREC);
-	extra = ft_abs(((o->prec >= PREC) ? PREC : o->prec + 1) -
-			(zero + ft_count_p(o->frac, 10)));
-	extra = 'f' == p->format[p->fi] ? extra : extra - 1;
-	while (extra-- > 0)
-		o->frac /= 10;
-	digit = o->frac % 10;
-	if (digit + 5 > 9)
-	{
-		o->frac -= digit;
-		if ((ft_count_p(o->frac + 10, 10) >
-					ft_count_p(o->frac, 10)) && (0 == zero))
-		{
-			o->whol += 1;
-			o->frac = 0;
-		}
-		else
-			o->frac += 10;
-	}
-	return(o->frac);
-}
-
-void init_f_options(t_printf *const p, long double number, t_option *const o)
-{
-	p->f_zero = p->f_minus ? false : p->f_zero;
-	o->flag = number < 0 ? 1 : 0;
-	number = number < 0 ? -(number) : number;
-	p->f_space = p->f_plus || o->flag ? false : p->f_space;
-	o->prec = p->f_prec ? p->prec : 6;
-	o->frac = (number - (unsigned long long)number) * ft_pow(10, PREC);
-	o->whol = number;
-	o->frac = (o->prec >= PREC) ? o->frac : rounding(p, o); //&
-	o->frac = (o->prec >= PREC) ? o->frac : o->frac / 10;
-	o->zero = ft_abs(ft_count_p(o->frac, 10) -
-										((o->prec > PREC) ? PREC : o->prec));
-	o->dot = ((p->f_prec && o->prec != 0) || !p->f_prec || p->f_lattice) ?
-																	1 : 0;
-	o->sign = o->flag || p->f_plus ? 1 : 0;
-	o->buf = p->f_zero ? '0' : ' ';
-	o->width = p->width - (o->dot + o->sign +
-							ft_count_p(o->whol, 10) + p->f_space + o->prec);
-	if (o->sign && p->f_zero)
-	p->temp[p->ti++] = o->flag ? '-' : '+';
-	if (p->f_space)
-	p->temp[p->ti++] = ' ';
-	while (!p->f_minus && (o->width-- > 0))
-	p->temp[p->ti++] = o->buf;
-}
-
-void print_f(t_printf *const p, long double number)
- {
-	t_option o;
-
-	init_f_options(p, number, &o);
-	if (o.sign && (!p->f_zero))
-		p->temp[p->ti++] = o.flag ? '-' : '+';
-	ull_to_p_base(p, o.whol, 10);
-	if (o.dot)
-		p->temp[p->ti++] = '.';
-	if (o.frac != 0)
-	{
-		while ((o.zero)-- > 0)
-			p->temp[p->ti++] = '0';
-		ull_to_p_base(p, o.frac, 10);
-		o.prec = ((o.prec > PREC) ? o.prec - PREC : 0);
-		while (o.prec-- > 0)
-			p->temp[p->ti++] = '0';
-	}
-	while (o.prec-- > 0)
-		p->temp[p->ti++] = '0';
-	while(p->f_minus && (o.width-- > 0))
-		p->temp[p->ti++] = ' ';
-	data_record(p);
-}
-
-void init_e_options(t_printf *const p, long double number, t_option *const o)
-{
-	p->f_zero = p->f_minus ? false : p->f_zero;
-	o->flag = number < 0 ? 1 : 0;
-	number = number < 0 ? -number : number;
-	p->f_space = p->f_plus || o->flag ? false : p->f_space;
-	o->prec = p->f_prec ? p->prec : 6;
-	o->temp = number;
-	o->frac = (number - o->temp) * ft_pow(10, PREC);
-	o->whol = number;
-	o->count = 0;
-	o->exp = 1;
-	o->zero = (o->frac > 0) ? ft_abs(ft_count_p(o->frac, 10) - PREC) : 0;
-	o->frac = (o->frac > 0) ? rounding(p, o) : 0;
-	o->dot = (p->f_prec && o->prec != 0) || !p->f_prec || p->f_lattice ? 1 : 0;
-	o->sign = o->flag || p->f_plus ? 1 : 0;
-	o->width = p->f_width ? p->width - (o->dot + o->sign + WHOLE_LEN +
-													p->f_space - o->prec) : 0;
-	if (o->sign && p->f_zero)
-		p->temp[p->ti++] = o->flag ? '-' : '+';
-	if (p->f_space)
-		p->temp[p->ti++] = ' ';
-	while (!p->f_minus && (o->width-- > 0))
-		p->temp[p->ti++] = p->f_zero ? '0' : ' ';
-	if (o->sign && !p->f_zero)
-		p->temp[p->ti++] = o->flag ? '-' : '+';
-}
-
-void fract_conv(t_printf *const p, long double number, t_option *const o)
-{
-	if (o->whol > 9)
-	{
-		o->count += (ft_count_p(o->whol, 10) - 1);
-		o->temp = o->whol % ft_pow(10, ft_count_p(o->whol, 10) - 1);
-		o->whol = o->whol / ft_pow(10, ft_count_p(o->whol, 10) - 1);
-		o->crutch = ft_count_p(o->temp, 10);
-		while (o->crutch++ < PREC)
-		{
-			o->temp = (o->temp * 10) +
-						(o->frac / ft_pow(10, ft_count_p(o->frac, 10)));
-			o->frac /= 10;
-		}
-		o->frac = o->temp;
-	}
-	else if (0 == o->whol)
-	{
-		o->count += ((number != 0) && !(o->zero > 0)) ? 1 : 0;
-		while (o->zero-- > 0)
-		{
-			o->frac *= 10;
-			++o->count;
-		}
-		o->whol = o->frac / ft_pow(10, ft_count_p(o->frac, 10) - 1);
-		o->frac = o->frac % ft_pow(10, ft_count_p(o->frac, 10) - 1);
-		o->exp = (number != 0) ? 0 : 1;
-	}
-}
-
-void print_e(t_printf *const p, long double number)
- {
-	t_option o;
-
-	init_e_options(p, number, &o);
-	fract_conv(p, number, &o);
-	o.length = ft_count_p(o.frac, 10);
-	o.frac = o.length > o.prec ? o.frac / ft_pow(10, o.length - o.prec) : o.frac;
-	ull_to_p_base(p, o.whol, 10);
-	if (o.dot)
-		p->temp[p->ti++] = '.';
-	if (o.frac != 0)
-	{
-		ull_to_p_base(p, o.frac, 10);
-		o.prec -= o.length;
-		while (o.prec-- > 0)
-			p->temp[p->ti++] = '0';
-	}
-	while (o.prec-- > 0)
-		p->temp[p->ti++] = '0';
-	p->temp[p->ti++] = ('e' == p->format[p->fi]) ? 'e' : 'E';
-	p->temp[p->ti++] = (1 == o.exp) ? '+' : '-';
-	if (o.count <= 9)
-		p->temp[p->ti++] = '0';
-	ull_to_p_base(p, o.count, 10);
-	while(p->f_minus && (o.width-- > 0))
-		p->temp[p->ti++] = ' ';
-	data_record(p);
-}
-
-void print_x(t_printf *const p, unsigned long long number)
+void print_x(t_printf *const p, const unsigned long long number)
 {
 	t_option	o;
 
@@ -396,7 +185,7 @@ void print_x(t_printf *const p, unsigned long long number)
 	data_record(p);
 }
 
-void print_o(t_printf *const p, unsigned long long number)
+void print_o(t_printf *const p, const unsigned long long number)
 {
 	t_option o;
 
@@ -424,7 +213,7 @@ void print_o(t_printf *const p, unsigned long long number)
 	data_record(p);
 }
 
-void print_b(t_printf *const p, unsigned long long number)
+void print_b(t_printf *const p, const unsigned long long number)
 {
 	t_option o;
 
@@ -480,35 +269,7 @@ void	print_per(t_printf *const p)
 	data_record(p);
 }
 
-void	printf_init(t_printf *const p, const int start)
-{
-	if (start)
-	{
-		p->fi = 0;
-		p->di = 0;
-		p->print_size = 0;
-		ft_bzero(p->data, BUFF);
-	}
-	p->f_minus = false;
-	p->f_plus = false;
-	p->f_space = false;
-	p->f_lattice = false;
-	p->f_zero = false;
-	p->flag = false;
-	p->f_width = false;
-	p->f_prec = false;
-	p->ti = 0;
-	p->width = 0;
-	p->prec = 0;
-	ft_bzero(p->temp, BUFF);
-	p->f_h = false;
-	p->f_hh = false;
-	p->f_l = false;
-	p->f_ll = false;
-	p->f_L = false;
-}
-
-void print_c(t_printf *const p, const char	c)
+void print_c(t_printf *const p, const char c)
 {
 	char	buf;
 	int	 width;
@@ -524,105 +285,30 @@ void print_c(t_printf *const p, const char	c)
 	data_record(p);
 }
 
-int print_ub(t_printf *const p)
+void print_r(t_printf *const p, const char c)
 {
-	if (('\0' == p->format[p->fi + 1]) ||
-		!(ft_cinstr(&(p->format[p->fi + 1]), FLAGS)))
+	char	buf;
+	int	 width;
+	const char *mas[33] = {"nul", "soh", "stx", "etx", "eot", "enq", "ack",
+					"bel", "bs", "ht", "nl", "vt", "np", "cr", "so", "si",
+					"dle", "dc1", "dc2", "dc3", "dc4", "nak", "syn", "etb",
+					"can", "em", "sub", "esc", "fs", "gs", "rs", "us", "sp"};
+
+	buf = p->f_zero && !p->f_minus ? '0' : ' ';
+	width = p->f_width ? p->width - 1 : 0;
+	width = width < 0 ? 0 : width;
+	while (!p->f_minus && (width-- > 0))
+		p->temp[p->ti++] = buf;
+	if (c >= 0 && c <= 32)
 	{
-		p->temp[p->ti++] = 'U';
-		p->temp[p->ti++] = 'B';
-		data_record(p);
-		return (1);
+		ft_strncpy(p->temp + p->ti, mas[c], ft_strlen(mas[c]));
+		p->ti += ft_strlen(mas[c]);
 	}
-	return (0);
+	while (p->f_minus && (width-- > 0))
+		p->temp[p->ti++] = buf;
+	data_record(p);
 }
 
-
-void modif_check(t_printf *const p)
-{
-	if (('h' == p->format[p->fi]) && ('h' == p->format[p->fi + 1]))
-	{
-		p->f_hh = true;
-		p->fi += 2;
-	}
-	else if ('h' == p->format[p->fi])
-	{
-		p->f_h = true;
-		++p->fi;
-	}
-	else if (('l' == p->format[p->fi]) && ('l' == p->format[p->fi + 1]))
-	{
-		p->f_ll = true;
-		p->fi += 2;
-	}
-	else if ('l' == p->format[p->fi])
-	{
-		p->f_l = true;
-		++p->fi;
-	}
-	else if ('L' == p->format[p->fi])
-	{
-		p->f_L = true;
-		++p->fi;
-	}
-}
-
-void flags_and_wid_check(t_printf *const p)
-{
-	while (('-' == p->format[p->fi]) || ('+' == p->format[p->fi]) ||
-	(' ' == p->format[p->fi]) || ('#' == p->format[p->fi]) || ('0' == p->format[p->fi]))
-	{
-		p->f_minus = ('-' == p->format[p->fi]) ? true : p->f_minus;
-		p->f_plus = ('+' == p->format[p->fi]) ? true : p->f_plus;
-		p->f_space = (' ' == p->format[p->fi]) ? true : p->f_space;
-		p->f_lattice = ('#' == p->format[p->fi]) ? true : p->f_lattice;
-		p->f_zero = ('0' == p->format[p->fi]) ? true : p->f_zero;
-		++p->fi;
-	}
-	if (('0' <= *(p->format + p->fi)) && (*(p->format + p->fi) <= '9'))
-	{
-		p->width = ft_atoi(p->format + p->fi); // как обработать?
-		p->f_width = true;
-		while (('0' <= p->format[p->fi]) && (p->format[p->fi] <= '9'))
-			++p->fi;
-	}
-	else if ('*' == *(p->format + p->fi))
-	{
-		p->f_width = true;
-		p->width = va_arg(p->argptr, int);
-		if (p->width < 0)
-		{
-			p->f_minus = true;
-			p->width = ft_abs(p->width);
-		}
-		++p->fi;
-	}
-}
-
-void prec_check(t_printf *const p)
-{
-	if ('.' == p->format[p->fi])
-	{
-		++p->fi;
-		p->f_prec = true;
-		if ('*' == *(p->format + p->fi))
-		{
-			p->prec = va_arg(p->argptr, int);
-			if (p->prec < 0)
-			// {
-				p->f_prec = false;
-				// p->prec = ft_abs(p->prec);
-			// }
-			++p->fi;
-		}
-	else
-	{
-		p->prec = ft_atoi(p->format + p->fi); // как обработать?
-		while (('0' <= p->format[p->fi]) && (p->format[p->fi] <= '9'))
-			++p->fi;
-	}
-	}
-}
 
 int	distribution(t_printf *const p, const char c)
 {
@@ -665,8 +351,8 @@ int	distribution(t_printf *const p, const char c)
 	}
 	else if ('b' == c)
 		print_b(p, (unsigned long)va_arg(p->argptr, unsigned long long));
-	// else
-	//	 print_ub(p);
+	else if ('r' == c)
+		print_r(p, va_arg(p->argptr, int));
 	return 1;
 }
 

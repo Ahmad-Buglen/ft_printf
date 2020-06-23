@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/23 18:12:57 by dphyliss          #+#    #+#             */
+/*   Updated: 2020/06/23 19:19:50 by dphyliss         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
@@ -5,8 +18,9 @@
 # include <stdarg.h>
 # include "../libft/libft.h"
 
-# define BUFF		512
-# define FLAGS	   "cp%sdiouxXfFeEb"
+
+# define BUFF		1024
+# define FLAGS	   "cp%sdiouxXfFeEbr"
 # define LOWERCASE   "0123456789abcdef"
 # define UPPERCASE   "0123456789ABCDEF"
 # define WHOLE_LEN   1
@@ -113,4 +127,17 @@ typedef struct s_option
 }			 t_option;
 
 
+void 				print_e(t_printf *const p, const long double number);
+unsigned long long	rounding(t_printf *const p, t_option *const o);
+void 				print_f(t_printf *const p, const long double number);
+void				print_u(t_printf *const p, const unsigned long long number);
+void				print_p(t_printf *const p, const long long n);
+void				print_b(t_printf *const p, const unsigned long long number);
+void				print_o(t_printf *const p, const unsigned long long number);
+void				print_x(t_printf *const p, const unsigned long long number);
+void				prec_check(t_printf *const p);
+void				flags_and_wid_check(t_printf *const p);
+void				modif_check(t_printf *const p);
+int					print_ub(t_printf *const p);
+void				printf_init(t_printf *const p, const int start);
 #endif

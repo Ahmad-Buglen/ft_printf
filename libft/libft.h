@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dphyliss <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:43:44 by dphyliss          #+#    #+#             */
-/*   Updated: 2019/12/09 18:35:18 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/06/23 18:29:33 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ typedef struct		s_listg
 	struct s_listg	*next;
 }					t_list_gnl;
 
+int					ft_cinstr(char const *const storage,
+								char const *const desire);
+void				ft_putnstr(char const *const str, const size_t length);
+unsigned long long	ft_pow(unsigned long long number, int grade);
+unsigned long long	ft_count_p(unsigned long long number, const int base);
 int					ft_abs(int n);
 void				ft_free_dual_char(char ***str);
 int					get_next_line(const int fd, char **line);
