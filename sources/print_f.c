@@ -6,17 +6,17 @@
 /*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:12:02 by dphyliss          #+#    #+#             */
-/*   Updated: 2020/06/23 19:12:45 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/06/24 14:33:14 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-unsigned long long rounding(t_printf *const p, t_option *const o)
+unsigned long long	rounding(t_printf *const p, t_option *const o)
 {
-	int		extra;
-	int		digit;
-	int		zero;
+	int				extra;
+	int				digit;
+	int				zero;
 
 	zero = ft_abs(ft_count_p(o->frac, 10) - PREC);
 	extra = ft_abs(((o->prec >= PREC) ? PREC : o->prec + 1) -
@@ -37,10 +37,11 @@ unsigned long long rounding(t_printf *const p, t_option *const o)
 		else
 			o->frac += 10;
 	}
-	return(o->frac);
+	return (o->frac);
 }
 
-static void init_f_options(t_printf *const p, long double number, t_option *const o)
+static void			init_f_options(t_printf *const p, long double number,
+											t_option *const o)
 {
 	p->f_zero = p->f_minus ? false : p->f_zero;
 	o->flag = number < 0 ? 1 : 0;
@@ -49,7 +50,7 @@ static void init_f_options(t_printf *const p, long double number, t_option *cons
 	o->prec = p->f_prec ? p->prec : 6;
 	o->frac = (number - (unsigned long long)number) * ft_pow(10, PREC);
 	o->whol = number;
-	o->frac = (o->prec >= PREC) ? o->frac : rounding(p, o); //&
+	o->frac = (o->prec >= PREC) ? o->frac : rounding(p, o);
 	o->frac = (o->prec >= PREC) ? o->frac : o->frac / 10;
 	o->zero = ft_abs(ft_count_p(o->frac, 10) -
 										((o->prec > PREC) ? PREC : o->prec));
@@ -60,16 +61,16 @@ static void init_f_options(t_printf *const p, long double number, t_option *cons
 	o->width = p->width - (o->dot + o->sign +
 							ft_count_p(o->whol, 10) + p->f_space + o->prec);
 	if (o->sign && p->f_zero)
-	p->temp[p->ti++] = o->flag ? '-' : '+';
+		p->temp[p->ti++] = o->flag ? '-' : '+';
 	if (p->f_space)
-	p->temp[p->ti++] = ' ';
+		p->temp[p->ti++] = ' ';
 	while (!p->f_minus && (o->width-- > 0))
-	p->temp[p->ti++] = o->buf;
+		p->temp[p->ti++] = o->buf;
 }
 
-void print_f(t_printf *const p, const long double number)
- {
-	t_option o;
+void				print_f(t_printf *const p, const long double number)
+{
+	t_option		o;
 
 	init_f_options(p, number, &o);
 	if (o.sign && (!p->f_zero))
@@ -88,7 +89,7 @@ void print_f(t_printf *const p, const long double number)
 	}
 	while (o.prec-- > 0)
 		p->temp[p->ti++] = '0';
-	while(p->f_minus && (o.width-- > 0))
+	while (p->f_minus && (o.width-- > 0))
 		p->temp[p->ti++] = ' ';
 	data_record(p);
 }

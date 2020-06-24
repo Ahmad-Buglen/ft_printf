@@ -6,42 +6,13 @@
 /*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:17:52 by dphyliss          #+#    #+#             */
-/*   Updated: 2020/06/23 19:18:46 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/06/24 16:42:23 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	printf_init(t_printf *const p, const int start)
-{
-	if (start)
-	{
-		p->fi = 0;
-		p->di = 0;
-		p->print_size = 0;
-		ft_bzero(p->data, BUFF);
-	}
-	p->f_minus = false;
-	p->f_plus = false;
-	p->f_space = false;
-	p->f_lattice = false;
-	p->f_zero = false;
-	p->flag = false;
-	p->f_width = false;
-	p->f_prec = false;
-	p->ti = 0;
-	p->width = 0;
-	p->prec = 0;
-	ft_bzero(p->temp, BUFF);
-	p->f_h = false;
-	p->f_hh = false;
-	p->f_l = false;
-	p->f_ll = false;
-	p->f_L = false;
-}
-
-
-int print_ub(t_printf *const p)
+int		print_ub(t_printf *const p)
 {
 	if (('\0' == p->format[p->fi + 1]) ||
 		!(ft_cinstr(&(p->format[p->fi + 1]), FLAGS)))
@@ -54,8 +25,7 @@ int print_ub(t_printf *const p)
 	return (0);
 }
 
-
-void modif_check(t_printf *const p)
+void	modif_check(t_printf *const p)
 {
 	if (('h' == p->format[p->fi]) && ('h' == p->format[p->fi + 1]))
 	{
@@ -79,15 +49,15 @@ void modif_check(t_printf *const p)
 	}
 	else if ('L' == p->format[p->fi])
 	{
-		p->f_L = true;
+		p->f_lbig = true;
 		++p->fi;
 	}
 }
 
-void flags_and_wid_check(t_printf *const p)
+void	flags_and_wid_check(t_printf *const p)
 {
-	while (('-' == p->format[p->fi]) || ('+' == p->format[p->fi]) ||
-	(' ' == p->format[p->fi]) || ('#' == p->format[p->fi]) || ('0' == p->format[p->fi]))
+	while (('-' == p->format[p->fi]) || ('+' == p->format[p->fi]) || (' ' ==
+p->format[p->fi]) || ('#' == p->format[p->fi]) || ('0' == p->format[p->fi]))
 	{
 		p->f_minus = ('-' == p->format[p->fi]) ? true : p->f_minus;
 		p->f_plus = ('+' == p->format[p->fi]) ? true : p->f_plus;
@@ -98,7 +68,7 @@ void flags_and_wid_check(t_printf *const p)
 	}
 	if (('0' <= *(p->format + p->fi)) && (*(p->format + p->fi) <= '9'))
 	{
-		p->width = ft_atoi(p->format + p->fi); // как обработать?
+		p->width = ft_atoi(p->format + p->fi);
 		p->f_width = true;
 		while (('0' <= p->format[p->fi]) && (p->format[p->fi] <= '9'))
 			++p->fi;
@@ -107,16 +77,13 @@ void flags_and_wid_check(t_printf *const p)
 	{
 		p->f_width = true;
 		p->width = va_arg(p->argptr, int);
-		if (p->width < 0)
-		{
-			p->f_minus = true;
-			p->width = ft_abs(p->width);
-		}
+		p->f_minus = p->width < 0 ? true : p->f_minus;
+		p->width = p->width < 0 ? ft_abs(p->width) : p->width;
 		++p->fi;
 	}
 }
 
-void prec_check(t_printf *const p)
+void	prec_check(t_printf *const p)
 {
 	if ('.' == p->format[p->fi])
 	{
@@ -129,11 +96,37 @@ void prec_check(t_printf *const p)
 				p->f_prec = false;
 			++p->fi;
 		}
-	else
-	{
-		p->prec = ft_atoi(p->format + p->fi); // как обработать?
-		while (('0' <= p->format[p->fi]) && (p->format[p->fi] <= '9'))
-			++p->fi;
+		else
+		{
+			p->prec = ft_atoi(p->format + p->fi);
+			while (('0' <= p->format[p->fi]) && (p->format[p->fi] <= '9'))
+				++p->fi;
+		}
 	}
+}
+
+void	parser(t_printf *const p)
+{
+	while (p->format[p->fi])
+	{
+		if ('%' == p->format[p->fi])
+		{
+			if (1 == print_ub(p))
+				return ;
+			++p->fi;
+			flags_and_wid_check(p);
+			prec_check(p);
+			modif_check(p);
+			p->flag = true;
+			distribution(p, p->format[p->fi]);
+			printf_init(p, 0);
+		}
+		else
+		{
+			p->temp[0] = p->format[p->fi];
+			p->ti = 1;
+			data_record(p);
+		}
+		++p->fi;
 	}
 }
