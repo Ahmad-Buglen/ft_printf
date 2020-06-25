@@ -6,7 +6,7 @@
 /*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:41:06 by dphyliss          #+#    #+#             */
-/*   Updated: 2020/06/24 16:46:33 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/06/25 15:55:21 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void			print_r(t_printf *const p, const char c)
 		p->temp[p->ti++] = buf;
 	if (c >= 0 && c <= 32)
 	{
-		ft_strncpy(p->temp + p->ti, (char *)mas + c,
-							ft_strlen((char *)mas + c));
-		p->ti += ft_strlen((char *)mas + c);
+		ft_strncpy(p->temp + p->ti, (char *)(mas + c),
+							ft_strlen((char *)(mas + c)));
+		p->ti += ft_strlen((char *)(mas + c));
 	}
 	while (p->f_minus && (width-- > 0))
 		p->temp[p->ti++] = buf;
