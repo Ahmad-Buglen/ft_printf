@@ -6,13 +6,12 @@
 /*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:12:57 by dphyliss          #+#    #+#             */
-/*   Updated: 2020/06/24 17:11:05 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/06/27 12:37:36 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include <stdio.h>
 # include <stdarg.h>
 # include "../libft/libft.h"
 
